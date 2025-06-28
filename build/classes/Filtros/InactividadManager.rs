@@ -1,0 +1,3 @@
+filtros.InactividadManager$2
+filtros.InactividadManager$1
+filtros.InactividadManager

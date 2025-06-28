@@ -1,0 +1,253 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Controladores;
+
+import Conexion.clsConexion;
+import Modelos.Usuario;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+import java.sql.SQLException;
+
+import java.sql.ResultSet;
+/**
+ *
+ * @author JManu
+ */
+public class ctrlUsuarios extends Usuario{
+    
+    //Metodo Iniciar Sesion
+    public boolean loginUser(){
+        
+        boolean resp = false;
+        
+        Connection cn = clsConexion.conectar();
+        
+   
+        
+        String sql="select nombre, password from tb_usuario where idUsuario='"+idUsuario+"' and binary password= '"+contrasenia+"' and estado='Activo'";
+        Statement st;
+        
+        try {
+            
+            st=cn.createStatement();
+           ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {                
+                resp=true;
+            }
+            cn.close();
+        } catch (SQLException ex) {
+            
+            System.out.println("Error en iniciar Secion"+ex);
+            
+        }
+        
+        return resp;
+    }
+    
+    
+    
+    //CRUD
+    
+    public boolean guardar(){
+        boolean resp = false;
+        Connection cn = clsConexion.conectar();
+        final String SQL= "insert into tb_usuario (idUsuario,nombre,password,rol,estado) values (?,?,?,?,'Activo')";
+        try {
+            
+            PreparedStatement consulta = cn.prepareStatement(SQL);
+            consulta.setString(1, idUsuario);
+            consulta.setString(2, nombre);
+            consulta.setString(3, contrasenia);
+            consulta.setString(4, rol);
+            if (consulta.executeUpdate()>0) {
+                resp=true;
+            }
+            cn.close();
+            
+        } catch (SQLException ex) {
+            System.out.println("Error al guardar usuario: "+ex);
+            
+        }
+        
+        
+        return resp;
+    }
+    
+    
+    public boolean modificar(){
+        boolean resp = false;
+        Connection cn = clsConexion.conectar();
+        final String SQL="update tb_usuario set nombre=?,password=?, rol=?, estado=? where idUsuario=?";
+        try {
+            
+            PreparedStatement consulta = cn.prepareStatement(SQL);
+            System.out.println(""+idUsuario);
+            consulta.setString(1, nombre);
+            consulta.setString(2, contrasenia);
+            consulta.setString(3, rol);
+            consulta.setString(4, estado);
+            
+            consulta.setString(5, idUsuario);
+            if (consulta.executeUpdate()>0) {
+                resp=true;
+            }
+            cn.close();
+            
+        } catch (SQLException ex) {
+            System.out.println("Error al modificar categoria: "+ex);
+            
+        }
+        
+        System.out.println(estado);
+        return resp;
+    }
+    
+
+    
+    //Virifacar si hay mas de un Administrador
+     public boolean CantAdmin (){
+        boolean resp=false;
+        Connection cn = clsConexion.conectar();
+        ResultSet rs;
+        final String SQL="select count(rol) as cantidad from tb_usuario where rol = 'Gerente' and estado='activo'";
+        try {
+            
+           PreparedStatement consulta = cn.prepareStatement(SQL);
+            rs = consulta.executeQuery();
+            if (rs.next() && rs.getInt("cantidad")==1) {
+                resp=true;
+            }
+            cn.close();
+            
+        } catch (SQLException ex) {
+            System.out.println("Error al consultar administradores: "+ex);
+
+        }
+        
+        return resp;
+    }
+    
+    
+   public String IdentificadorRol() {
+    String permiso = "";
+
+    final String sql = "SELECT rol FROM tb_usuario WHERE idUsuario = '" + enUso + "'";
+    Connection cn = clsConexion.conectar();
+    Statement st = null;
+    ResultSet rs = null;
+
+    try {
+        st = cn.createStatement();
+        rs = st.executeQuery(sql);
+
+        if (rs.next()) {
+            permiso = rs.getString("rol");
+        }
+         cn.close();
+    } catch (SQLException ex) {
+        System.out.println("Error al buscar: " + ex.getMessage());
+    
+    }
+
+    return permiso;
+}
+   
+   public String IdentificadorNombre() {
+    String name = "";
+
+    final String sql = "SELECT nombre FROM tb_usuario WHERE idUsuario = '" + enUso + "'";
+    Connection cn = clsConexion.conectar();
+    Statement st = null;
+    ResultSet rs = null;
+
+    try {
+        st = cn.createStatement();
+        rs = st.executeQuery(sql);
+
+        if (rs.next()) {
+            name = rs.getString("nombre");
+        }
+         cn.close();
+    } catch (SQLException ex) {
+        System.out.println("Error al buscar nombre: " + ex.getMessage());
+    
+    }
+
+    return name;
+}
+   
+   public String obtenerPassword() {
+    String password = "";
+
+    final String sql = "SELECT password FROM tb_usuario WHERE idUsuario = ?";
+    Connection cn = clsConexion.conectar();
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+
+    try {
+        pst = cn.prepareStatement(sql);
+        pst.setString(1, enUso); 
+        rs = pst.executeQuery();
+
+        if (rs.next()) {
+            password = rs.getString("password");
+        }
+        cn.close();
+    } catch (SQLException ex) {
+        System.out.println("Error al buscar contraseña: " + ex.getMessage());
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (pst != null) pst.close();
+            if (cn != null) cn.close();
+        } catch (SQLException e) {
+            System.out.println("Error al cerrar recursos: " + e.getMessage());
+        }
+    }
+    
+    return password;
+}
+   
+    public String obtenerPasswordModif(String identidadModif) {
+    String password = "";
+
+    final String sql = "SELECT password FROM tb_usuario WHERE idUsuario = ?";
+    Connection cn = clsConexion.conectar();
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+
+    try {
+        pst = cn.prepareStatement(sql);
+        pst.setString(1, identidadModif); 
+        rs = pst.executeQuery();
+
+        if (rs.next()) {
+            password = rs.getString("password");
+        }
+        cn.close();
+    } catch (SQLException ex) {
+        System.out.println("Error al buscar contraseña: " + ex.getMessage());
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (pst != null) pst.close();
+            if (cn != null) cn.close();
+        } catch (SQLException e) {
+            System.out.println("Error al cerrar recursos: " + e.getMessage());
+        }
+    }
+
+    return password;
+}
+
+   
+ 
+
+    
+    
+    
+}
