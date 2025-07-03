@@ -20,9 +20,13 @@ import filtros.InactividadManager;
 import javax.swing.JFrame;
 
 
-
-
 import javax.swing.JOptionPane;
+
+// Instancia de la ventana de agregar usuario (JDialog)
+AgregarUsuario ventanaAgregar = new AgregarUsuario(this);
+
+// Abrirla de forma única y bloqueante
+clsCRUD.abrirVentanaModal(this, ventanaAgregar);
 
 
 public class Menu_Gerente extends javax.swing.JFrame {

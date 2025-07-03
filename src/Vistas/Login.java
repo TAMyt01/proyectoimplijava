@@ -51,6 +51,9 @@ public class Login extends javax.swing.JFrame {
         ErrorPassword = new javax.swing.JLabel();
         ErrorUser1 = new javax.swing.JLabel();
         chkMostrar = new javax.swing.JCheckBox();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setExtendedState(6);
@@ -78,18 +81,18 @@ public class Login extends javax.swing.JFrame {
         placeholderPassword.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         placeholderPassword.setForeground(new java.awt.Color(235, 234, 234));
         placeholderPassword.setText("Password");
-        PanelLogin.add(placeholderPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
+        PanelLogin.add(placeholderPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, -1));
 
         placeholderUser.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         placeholderUser.setForeground(new java.awt.Color(235, 234, 234));
         placeholderUser.setText("Identidad");
-        PanelLogin.add(placeholderUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, -1));
+        PanelLogin.add(placeholderUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, -1, -1));
 
         labelIngresarSistema.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         labelIngresarSistema.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelIngresarSistema.setText("Ingresar al sistema");
         labelIngresarSistema.setToolTipText("");
-        PanelLogin.add(labelIngresarSistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 613, -1));
+        PanelLogin.add(labelIngresarSistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 613, -1));
 
         txtIdentidad.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtIdentidad.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -113,7 +116,7 @@ public class Login extends javax.swing.JFrame {
                 txtIdentidadKeyReleased(evt);
             }
         });
-        PanelLogin.add(txtIdentidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 613, 39));
+        PanelLogin.add(txtIdentidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 613, 39));
 
         btnInicio.setBackground(new java.awt.Color(73, 142, 190));
         btnInicio.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -124,7 +127,7 @@ public class Login extends javax.swing.JFrame {
                 btnInicioActionPerformed(evt);
             }
         });
-        PanelLogin.add(btnInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 613, 38));
+        PanelLogin.add(btnInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 613, 38));
 
         txtPassword.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -145,7 +148,7 @@ public class Login extends javax.swing.JFrame {
                 txtPasswordKeyPressed(evt);
             }
         });
-        PanelLogin.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 613, 39));
+        PanelLogin.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 613, 39));
 
         ErrorPassword.setForeground(new java.awt.Color(255, 0, 0));
         ErrorPassword.setText(" ");
@@ -161,7 +164,18 @@ public class Login extends javax.swing.JFrame {
                 chkMostrarActionPerformed(evt);
             }
         });
-        PanelLogin.add(chkMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
+        PanelLogin.add(chkMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setText("Contraseña");
+        PanelLogin.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel3.setText("Identidad");
+        PanelLogin.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\kenne\\Desktop\\5_26_225\\5_26_225\\PuntoVenta\\img\\log.jpg")); // NOI18N
+        PanelLogin.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, -1, -1));
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -346,6 +360,9 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel PanelLogin;
     private javax.swing.JButton btnInicio;
     private javax.swing.JCheckBox chkMostrar;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel labelIngresarSistema;
     private javax.swing.JLabel placeholderPassword;

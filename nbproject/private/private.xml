@@ -3,13 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/kenne/Downloads/5_26_225/5_26_225/PuntoVenta/src/Vistas/Menu_Vendedor.java</file>
-            <file>file:/C:/Users/kenne/Downloads/5_26_225/5_26_225/PuntoVenta/src/Vistas/Menu_Gerente.java</file>
-            <file>file:/C:/Users/kenne/Downloads/5_26_225/5_26_225/PuntoVenta/src/Vistas/Paneles/jpanelProductos.java</file>
-            <file>file:/C:/Users/kenne/Downloads/5_26_225/5_26_225/PuntoVenta/src/Vistas/Paneles/jpanelUsuarios.java</file>
-            <file>file:/C:/Users/kenne/Downloads/5_26_225/5_26_225/PuntoVenta/src/Vistas/Paneles/jPanelHistorial.java</file>
-            <file>file:/C:/Users/kenne/Downloads/5_26_225/5_26_225/PuntoVenta/src/Vistas/Paneles/jPanelFacturacion2.java</file>
-            <file>file:/C:/Users/kenne/Downloads/5_26_225/5_26_225/PuntoVenta/src/Vistas/Paneles/jpanelClientes.java</file>
+            <file>file:/C:/Users/kenne/Desktop/5_26_225/5_26_225/PuntoVenta/src/Modelos/Usuario.java</file>
+            <file>file:/C:/Users/kenne/Desktop/5_26_225/5_26_225/PuntoVenta/src/Conexion/clsConexion.java</file>
+            <file>file:/C:/Users/kenne/Desktop/5_26_225/5_26_225/PuntoVenta/src/Vistas/Login.java</file>
+            <file>file:/C:/Users/kenne/Desktop/5_26_225/5_26_225/PuntoVenta/src/Controladores/clsCrud.java</file>
+            <file>file:/C:/Users/kenne/Desktop/5_26_225/5_26_225/PuntoVenta/src/Vistas/Menu_Gerente.java</file>
+            <file>file:/C:/Users/kenne/Desktop/5_26_225/5_26_225/PuntoVenta/src/Vistas/Paneles/jpanelClientes.java</file>
+            <file>file:/C:/Users/kenne/Desktop/5_26_225/5_26_225/PuntoVenta/src/Vistas/Paneles/jpanelUsuarios.java</file>
         </group>
     </open-files>
 </project-private>
