@@ -4,12 +4,12 @@
  */
 package Vistas.Paneles;
 
-import Controladores.Ctrl_RegistrarVenta;
-import Controladores.VentaPDF;
-import Modelos.CabeceraVenta;
-import Modelos.DetalleVenta;
+import Controladores.ctrl_RegistrarVenta;
+import Controladores.ctrl_VentaPDF;
+import Modelos.clsCabeceraVenta;
+import Modelos.clsDetalleVenta;
 import Conexion.clsConexion;
-import Filtros.FiltroPrecio;
+import Formatos.formato_Precio;
 
 
 import java.sql.Connection;
@@ -27,7 +27,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import javax.swing.text.AbstractDocument;
-import filtros.NumerosNaturalesFilter;
+import Formatos.formato_NumerosNaturales;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 
@@ -60,8 +60,8 @@ public class jPanelFacturacion2 extends javax.swing.JPanel {
         
         jlableNFact.setText(Nfact()+"");
         
-        ((AbstractDocument) txtCantidad.getDocument()).setDocumentFilter(new NumerosNaturalesFilter());
-         ((AbstractDocument) txt_efectivo.getDocument()).setDocumentFilter(new FiltroPrecio());
+        ((AbstractDocument) txtCantidad.getDocument()).setDocumentFilter(new formato_NumerosNaturales());
+         ((AbstractDocument) txt_efectivo.getDocument()).setDocumentFilter(new formato_Precio());
 
        
     }
@@ -69,8 +69,8 @@ public class jPanelFacturacion2 extends javax.swing.JPanel {
     //Modelo de los datos
     private DefaultTableModel modeloDatosProductos;
     //lista para el detalle de venta de los productos
-    ArrayList<DetalleVenta> listaProductos = new ArrayList<>();
-    private DetalleVenta producto;
+    ArrayList<clsDetalleVenta> listaProductos = new ArrayList<>();
+    private clsDetalleVenta producto;
 
     private String idCliente = "";//id del cliente sleccionado
 
@@ -102,7 +102,7 @@ public class jPanelFacturacion2 extends javax.swing.JPanel {
         this.jTable_productos.setModel(modeloDatosProductos);
     }
 
-    //metodo para presentar la informacion de la tavla DetalleVenta
+    //metodo para presentar la informacion de la tavla clsDetalleVenta
     private void listaTablaProductos() {
         this.modeloDatosProductos.setRowCount(listaProductos.size());
         for (int i = 0; i < listaProductos.size(); i++) {
@@ -343,9 +343,9 @@ public class jPanelFacturacion2 extends javax.swing.JPanel {
 
     private void jButton_RegistrarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RegistrarVentaActionPerformed
 
-        CabeceraVenta cabeceraVenta = new CabeceraVenta();
-        DetalleVenta detalleVenta = new DetalleVenta();
-        Ctrl_RegistrarVenta controlVenta = new Ctrl_RegistrarVenta();
+        clsCabeceraVenta cabeceraVenta = new clsCabeceraVenta();
+        clsDetalleVenta detalleVenta = new clsDetalleVenta();
+        ctrl_RegistrarVenta controlVenta = new ctrl_RegistrarVenta();
 
         String fechaActual = "";
         Date date = new Date();
@@ -367,12 +367,12 @@ public class jPanelFacturacion2 extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "¡Venta Registrada!");
 
                     //Generar la factura de venta
-                    VentaPDF pdf = new VentaPDF();
+                    ctrl_VentaPDF pdf = new ctrl_VentaPDF();
                     pdf.DatosCliente(idCliente);
                     pdf.generarFacturaPDF(jlableNFact.getText());
 
                     //guardar detalle
-                    for (DetalleVenta elemento : listaProductos) {
+                    for (clsDetalleVenta elemento : listaProductos) {
                         detalleVenta.setIdDetalleVenta(0);
                         detalleVenta.setIdCabeceraVenta(0);
                         detalleVenta.setIdProducto(elemento.getIdProducto());
@@ -433,7 +433,7 @@ if (combo.equalsIgnoreCase("Seleccione producto:")) {
                 totalPagar = (double) Math.round(totalPagar * 100) / 100;
 
                 //se crea un nuevo producto
-                producto = new DetalleVenta(
+                producto = new clsDetalleVenta(
                         auxIdDetalle, // idDetalleVenta
                         1,            // idCabecera
                         idProducto,
@@ -635,7 +635,7 @@ txtCantidad.setText("");
 
         totalPagarGeneral = 0;
 
-        for (DetalleVenta elemento : listaProductos) {
+        for (clsDetalleVenta elemento : listaProductos) {
 
             totalPagarGeneral += elemento.getTotalPagar();
         }

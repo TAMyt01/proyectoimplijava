@@ -16,17 +16,17 @@ import javax.swing.JPanel;
 import Controladores.ctrlUsuarios;
 
 
-import filtros.InactividadManager;
-import javax.swing.JFrame;
+import Formatos.seguridad_InactividadManager;
+import Vistas.Login;
 
 
 import javax.swing.JOptionPane;
 
 // Instancia de la ventana de agregar usuario (JDialog)
-AgregarUsuario ventanaAgregar = new AgregarUsuario(this);
+//frm_AgregarUsuario ventanaAgregar = new frm_AgregarUsuario(this);
 
 // Abrirla de forma única y bloqueante
-clsCRUD.abrirVentanaModal(this, ventanaAgregar);
+//ctrl_Tabla.abrirVentanaModal(this, ventanaAgregar);
 
 
 public class Menu_Gerente extends javax.swing.JFrame {
@@ -47,7 +47,7 @@ public class Menu_Gerente extends javax.swing.JFrame {
         ctrlUsuarios control = new ctrlUsuarios();
         lblnombreUsuario.setText(control.IdentificadorNombre());
         
-        new InactividadManager(this, 300000, () -> { //Se va cerrar en 5min de manera automatica cuando no exista activadad eso se pone en milisegundos
+        new seguridad_InactividadManager(this, 300000, () -> { //Se va cerrar en 5min de manera automatica cuando no exista activadad eso se pone en milisegundos
             System.out.println("Cerrando sesión por inactividad...");
             dispose();  
             new Login().setVisible(true);  
@@ -641,6 +641,7 @@ private void cerrarSesion() {
         //</editor-fold>
 
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Menu_Gerente().setVisible(true);
             }
@@ -726,4 +727,4 @@ private void cerrarSesion() {
         Contenido.revalidate(); //Revalidamos
         Contenido.repaint(); //y refrescamos pantalla
     }
-}
+    }

@@ -5,9 +5,9 @@
 package Vistas.Paneles.Clientes;
 
 import Controladores.ctrlClientes;
-import Modelos.Clientes;
-import filtros.IdentidadFilter;
-import filtros.TelefonoFilter;
+import Modelos.clsClientes;
+import Formatos.formato_Identidad;
+import Formatos.formato_Telefono;
 import Vistas.Paneles.jpanelClientes;
 
 import javax.swing.JOptionPane;
@@ -30,8 +30,8 @@ public class frm_AgregarCliente extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("Agregar Cliente");
 
-        ((AbstractDocument) txtIdentidad.getDocument()).setDocumentFilter(new IdentidadFilter(txtIdentidad));
-        ((AbstractDocument) txtTelefono.getDocument()).setDocumentFilter(new TelefonoFilter(txtTelefono));
+        ((AbstractDocument) txtIdentidad.getDocument()).setDocumentFilter(new formato_Identidad(txtIdentidad));
+        ((AbstractDocument) txtTelefono.getDocument()).setDocumentFilter(new formato_Telefono(txtTelefono));
 
     }
 
@@ -143,7 +143,7 @@ public class frm_AgregarCliente extends javax.swing.JFrame {
 
             ctrlClientes ctrlclient = new ctrlClientes();
 
-            Clientes client = new Clientes();
+            clsClientes client = new clsClientes();
             client.setNombre(txtNombre.getText());
             client.setIdentidad(txtIdentidad.getText());
             client.setTelefono(txtTelefono.getText());

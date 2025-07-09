@@ -5,7 +5,7 @@
 package Vistas.Paneles.Categoria;
 
 import Controladores.ctrlCategoria;
-import Modelos.Categoria;
+import Modelos.clsCategoria;
 import Vistas.Paneles.jpanelCategoria;
 
 import javax.swing.JOptionPane;
@@ -142,7 +142,7 @@ public class frm_agregarCategoria extends javax.swing.JFrame {
         } else {
             ctrlCategoria ccontrolCategoria = new ctrlCategoria();
             if (!ccontrolCategoria.existeCategoria(txtNombre.getText())) {
-                Categoria cate = new Categoria();
+                clsCategoria cate = new clsCategoria();
                 cate.setNombre(txtNombre.getText());
                 cate.setDescripcion(txtDesc.getText());
 

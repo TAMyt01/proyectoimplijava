@@ -2,7 +2,7 @@
 package Controladores;
 
 import Conexion.clsConexion;
-import Modelos.Categoria;
+import Modelos.clsCategoria;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 
 
-public class ctrlCategoria extends Categoria {
+public class ctrlCategoria extends clsCategoria {
     
     public boolean guardar(){
         boolean resp = false;

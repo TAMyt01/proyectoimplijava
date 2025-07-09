@@ -7,7 +7,7 @@ package Vistas.Paneles;
 import Conexion.clsConexion;
 
 import Vistas.Paneles.Usuario.frm_AgregarUsuario;
-import Vistas.Paneles.Usuario.frm_ModificarUsuario;
+import Vistas.Paneles.Usuario.frm_ActualizarUsuario;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,10 +25,10 @@ public class jpanelUsuarios extends javax.swing.JPanel {
         
         this.cargaTablaUser();
         frm_AgregarUsuario.SetPanelagregar(this);
-        frm_ModificarUsuario.SetPanelModif(this);
+        frm_ActualizarUsuario.SetPanelModif(this);
     }
 
-    private frm_ModificarUsuario modf;
+    private frm_ActualizarUsuario modf;
     private frm_AgregarUsuario agreg;
     private String nombre, rol;
     private String est;
@@ -198,10 +198,10 @@ public class jpanelUsuarios extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifActionPerformed
-        if ("" == ID) {
+        if ("".equals(ID)) {
             JOptionPane.showMessageDialog(null, "Seleccione el usuario");
         } else if (modf == null || !modf.isVisible()) {
-            modf = new frm_ModificarUsuario();
+            modf = new frm_ActualizarUsuario();
             modf.RecibirDatos(nombre, rol, est,ID);
             modf.setVisible(true);
           
@@ -297,7 +297,7 @@ public class jpanelUsuarios extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtBuscarKeyReleased
 
-    public void cargaTablaUser() {
+    private void cargaTablaUser() {
         Connection cn = clsConexion.conectar();
         String sql;
 

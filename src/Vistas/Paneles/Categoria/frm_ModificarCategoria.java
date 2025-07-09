@@ -1,7 +1,7 @@
 package Vistas.Paneles.Categoria;
 
 import Controladores.ctrlCategoria;
-import Modelos.Categoria;
+import Modelos.clsCategoria;
 
 import javax.swing.JOptionPane;
 
@@ -131,7 +131,7 @@ public class frm_ModificarCategoria extends javax.swing.JFrame {
 
             ctrlCategoria ccontrolCategoria = new ctrlCategoria();
             if (!ccontrolCategoria.existeCategoria(txtNombreCategoria.getText()) || txtNombreCategoria.getText().equals(NombreInicial)) {
-                Categoria cate = new Categoria();
+                clsCategoria cate = new clsCategoria();
                 cate.setNombre(txtNombreCategoria.getText());
                 cate.setDescripcion(txtDescripCategoria.getText());
                 cate.setID_categoria(Integer.parseInt(txtIdCategoria.getText()));

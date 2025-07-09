@@ -1,7 +1,7 @@
 package Controladores;
 
-import Modelos.CabeceraVenta;
-import Modelos.DetalleVenta;
+import Modelos.clsCabeceraVenta;
+import Modelos.clsDetalleVenta;
 import Conexion.clsConexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +11,7 @@ import java.sql.Statement;
 
 
 
-public class Ctrl_RegistrarVenta {
+public class ctrl_RegistrarVenta {
     
     //ultimo id de la cabecera
     public static int idCabeceraRegistrada;
@@ -20,8 +20,10 @@ public class Ctrl_RegistrarVenta {
      * **************************************************
      * metodo para guardar la cabecera de venta
      * **************************************************
+     * @param objeto
+     * @return 
      */
-    public boolean guardar(CabeceraVenta objeto) {
+    public boolean guardar(clsCabeceraVenta objeto) {
         boolean respuesta = false;
         Connection cn = clsConexion.conectar();
         try {
@@ -55,7 +57,7 @@ public class Ctrl_RegistrarVenta {
      * metodo para guardar el detalle de venta
      * **************************************************
      */
-    public boolean guardarDetalle(DetalleVenta objeto) {
+    public boolean guardarDetalle(clsDetalleVenta objeto) {
         boolean respuesta = false;
         Connection cn = clsConexion.conectar();
         try {
@@ -84,7 +86,7 @@ public class Ctrl_RegistrarVenta {
      * metodo para actualizar un producto
      * **************************************************
      */
-    public boolean actualizar(CabeceraVenta objeto, int idCabeceraVenta) {
+    public boolean actualizar(clsCabeceraVenta objeto, int idCabeceraVenta) {
         boolean respuesta = false;
         Connection cn = clsConexion.conectar();
         try {

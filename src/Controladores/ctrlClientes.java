@@ -1,14 +1,14 @@
 package Controladores;
 
 import Conexion.clsConexion;
-import Modelos.Clientes;
+import Modelos.clsClientes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-public class ctrlClientes extends Clientes {
+public class ctrlClientes extends clsClientes {
 
     public boolean guardar() {
         boolean resp = false;
