@@ -1,5 +1,5 @@
 package Controladores;
-//hola
+
 import Vistas.Paneles.jPanelFacturacion2;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
