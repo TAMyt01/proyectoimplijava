@@ -1,11 +1,11 @@
 package Vistas.Paneles.Usuario;
 
 import Controladores.ctrlUsuarios;
-import filtros.IdentidadFilter;
+import Formato.IdentidadFilter;
 import Modelos.Usuario;
 import Vistas.Paneles.jpanelUsuarios;
-import filtros.PasswordValidator;
-import filtros.PasswordFilter;
+import Formato.PasswordValidator;
+import Formato.PasswordFilter;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 

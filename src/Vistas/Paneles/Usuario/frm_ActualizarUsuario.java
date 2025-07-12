@@ -6,11 +6,11 @@ package Vistas.Paneles.Usuario;
 
 import Controladores.ctrlUsuarios;
 
-import Modelos.Usuario;
+import Modelos.clsUsuario;
 import Vistas.Paneles.jpanelUsuarios;
-import Formato.IdentidadFilter;
-import Formato.PasswordFilter;
-import Formato.PasswordValidator;
+import Formatos.formato_Identidad;
+import Formatos.formato_Password;
+import Formatos.validar_Password;
 import java.awt.event.ActionEvent;
 
 import java.awt.event.ActionListener;
@@ -29,12 +29,12 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
  *
  * @author JManu
  */
-public class frm_ModificarUsuario extends javax.swing.JFrame {
+public class frm_ActualizarUsuario extends javax.swing.JFrame {
 
     ctrlUsuarios cont = new ctrlUsuarios();
     private boolean ModifContra = false;
 
-    public frm_ModificarUsuario() {
+    public frm_ActualizarUsuario() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Modificar Usuario");
@@ -51,11 +51,11 @@ public class frm_ModificarUsuario extends javax.swing.JFrame {
                 + "</html>");
 
         //Filtro identidad
-        ((AbstractDocument) txtIdentidad.getDocument()).setDocumentFilter(new IdentidadFilter(txtIdentidad));
+        ((AbstractDocument) txtIdentidad.getDocument()).setDocumentFilter(new formato_Identidad(txtIdentidad));
 
         // Aplicar filtro para contraseña
-        ((AbstractDocument) txtPassword.getDocument()).setDocumentFilter(new PasswordFilter());
-         ((AbstractDocument) txtPasswordRepet.getDocument()).setDocumentFilter(new PasswordFilter());
+        ((AbstractDocument) txtPassword.getDocument()).setDocumentFilter(new formato_Password());
+         ((AbstractDocument) txtPasswordRepet.getDocument()).setDocumentFilter(new formato_Password());
         
         imgAdvertencia.setVisible(false);
 
@@ -85,7 +85,7 @@ public class frm_ModificarUsuario extends javax.swing.JFrame {
             private void actualizar() {
                 String pass = new String(txtPassword.getPassword());
 
-                if (PasswordValidator.validarPassword(pass)) {
+                if (validar_Password.validarPassword(pass)) {
                     txtPassword.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 128, 0), 2)); // Verde
                     imgAdvertencia.setVisible(false);
                     txtPassword.setToolTipText(null); // Quitar tooltip si es válido
@@ -104,9 +104,9 @@ public class frm_ModificarUsuario extends javax.swing.JFrame {
         });
     }
 
-    private static jpanelUsuarios paneluser;
+    private jpanelUsuarios paneluser;
 
-    public static void SetPanelModif(jpanelUsuarios panel) {
+    public void SetPanelModif(jpanelUsuarios panel) {
         paneluser = panel; // Asignar la referencia del panel
     }
 
@@ -283,7 +283,7 @@ public class frm_ModificarUsuario extends javax.swing.JFrame {
             if (txtPassword.getText().equals(txtPasswordRepet.getText()) || !ModifContra) {
                 ctrlUsuarios controlUsuario = new ctrlUsuarios();
 
-                Usuario user = new Usuario();
+                clsUsuario user = new clsUsuario();
                 user.setIdUsuario(txtIdentidad.getText());
                 user.setNombre(txtNombre.getText());
                 user.setRol(cmbRol.getSelectedItem().toString());
@@ -310,18 +310,17 @@ public class frm_ModificarUsuario extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnGuardarActionPerformed
     public boolean validarPassword(String password) {
-        if (password == null) {
+        if (password == null) 
             return false;
-        }
-
+        
         return password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!_\\*-])[A-Za-z\\d@#$%^&+=!_\\*-]{8,16}$");
     }
     private void chkMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkMostrarActionPerformed
-        if (chkMostrar.isSelected()) {
+        if (chkMostrar.isSelected()) 
             txtPassword.setEchoChar((char) 0);
-        } else {
+        else 
             txtPassword.setEchoChar('*');
-        }
+        
     }//GEN-LAST:event_chkMostrarActionPerformed
 
     private void cmbEstadoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbEstadoMousePressed
@@ -369,9 +368,9 @@ public class frm_ModificarUsuario extends javax.swing.JFrame {
                         JOptionPane.ERROR_MESSAGE
                 );
             }
-        } else {
+        } else 
             System.out.println("Cancelado por el usuario.");
-        }
+        
 
 
     }//GEN-LAST:event_btnCambioActionPerformed
@@ -393,29 +392,30 @@ public class frm_ModificarUsuario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frm_ModificarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frm_ActualizarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frm_ModificarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frm_ActualizarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frm_ModificarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frm_ActualizarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frm_ModificarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frm_ActualizarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
-        /* Create and display the form */
+    /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                new frm_ModificarUsuario().setVisible(true);
+                new frm_ActualizarUsuario().setVisible(true);
             }
         });
     }
 
     private void MostrarAdevertenncia() {
         ctrlUsuarios ctrlUser = new ctrlUsuarios();
-        if (ctrlUser.CantAdmin() && "Administrador".equals(cmbRol.getSelectedItem().toString())) {
+        if (ctrlUser.CantAdmin() && "Administrador".equals(cmbRol.getSelectedItem().toString())) 
             JOptionPane.showMessageDialog(null, "Tiene que existir mas de un Administrador para cambiar de estado/rol");
-        }
     }
 
 

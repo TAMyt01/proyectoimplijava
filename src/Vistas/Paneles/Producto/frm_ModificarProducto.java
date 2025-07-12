@@ -6,10 +6,10 @@ package Vistas.Paneles.Producto;
 
 import Conexion.clsConexion;
 import Controladores.ctrlProducto;
-import Filtros.FiltroPrecio;
+import Formato.FiltroPrecio;
 import Modelos.Producto;
 import Vistas.Paneles.jpanelProductos;
-import filtros.NumerosNaturalesFilter;
+import Formato.NumerosNaturalesFilter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

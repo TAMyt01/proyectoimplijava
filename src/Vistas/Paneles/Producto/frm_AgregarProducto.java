@@ -2,7 +2,7 @@ package Vistas.Paneles.Producto;
 
 import Conexion.clsConexion;
 import Controladores.ctrlProducto;
-import Filtros.FiltroPrecio;
+import Formato.FiltroPrecio;
 import Modelos.Producto;
 import Vistas.Paneles.jpanelProductos;
 import java.sql.Connection;
@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 import javax.swing.text.AbstractDocument;
-import filtros.NumerosNaturalesFilter;
+import Formato.NumerosNaturalesFilter;
 
 
 /**

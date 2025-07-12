@@ -1,5 +1,5 @@
 
-package filtros;
+package Formatos;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;

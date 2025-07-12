@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import Modelos.Usuario;
 
 
-import filtros.IdentidadFilter;
+import Formato.IdentidadFilter;
 import javax.swing.text.AbstractDocument;
 
 

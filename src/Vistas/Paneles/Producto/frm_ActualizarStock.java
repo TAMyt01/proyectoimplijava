@@ -10,7 +10,7 @@ import Vistas.Paneles.jpanelProductos;
 import javax.swing.JOptionPane;
 
 import javax.swing.text.AbstractDocument;
-import filtros.NumerosNaturalesFilter;
+import Formato.NumerosNaturalesFilter;
 
 
 /**

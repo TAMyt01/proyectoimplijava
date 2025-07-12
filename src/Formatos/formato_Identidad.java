@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package filtros;
+package Formatos;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -12,11 +12,11 @@ import java.awt.*;
  *
  * @author JManu
  */
-public class IdentidadFilter extends DocumentFilter{
+public class formato_Identidad extends DocumentFilter{
 
   private final JTextField campo;
 
-    public IdentidadFilter(JTextField campo) {
+    public formato_Identidad(JTextField campo) {
         this.campo = campo;
     }
 

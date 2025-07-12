@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Filtros;
+package Formatos;
 import javax.swing.text.*;
 import java.awt.Toolkit;
 
-public class FiltroPrecio extends DocumentFilter {
+public class formato_Precio extends DocumentFilter {
 
     @Override
     public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr)

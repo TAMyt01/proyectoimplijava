@@ -6,7 +6,7 @@ package Vistas.Paneles.Clientes;
 
 import Controladores.ctrlClientes;
 import Modelos.Clientes;
-import filtros.TelefonoFilter;
+import Formato.TelefonoFilter;
 
 import Vistas.Paneles.jpanelClientes;
 

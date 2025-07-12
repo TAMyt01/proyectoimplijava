@@ -4,12 +4,12 @@
  */
 package Vistas.Paneles;
 
-import Controladores.Ctrl_RegistrarVenta;
-import Controladores.VentaPDF;
+import Controladores.ctrlRegistrarVenta;
+import Controladores.ctrlVentaPDF;
 import Modelos.CabeceraVenta;
 import Modelos.DetalleVenta;
 import Conexion.clsConexion;
-import Filtros.FiltroPrecio;
+import Formato.FiltroPrecio;
 
 
 import java.sql.Connection;
@@ -27,7 +27,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import javax.swing.text.AbstractDocument;
-import filtros.NumerosNaturalesFilter;
+import Formato.NumerosNaturalesFilter;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 
@@ -345,7 +345,7 @@ public class jPanelFacturacion2 extends javax.swing.JPanel {
 
         CabeceraVenta cabeceraVenta = new CabeceraVenta();
         DetalleVenta detalleVenta = new DetalleVenta();
-        Ctrl_RegistrarVenta controlVenta = new Ctrl_RegistrarVenta();
+        ctrlRegistrarVenta controlVenta = new ctrlRegistrarVenta();
 
         String fechaActual = "";
         Date date = new Date();
@@ -367,7 +367,7 @@ public class jPanelFacturacion2 extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "¡Venta Registrada!");
 
                     //Generar la factura de venta
-                    VentaPDF pdf = new VentaPDF();
+                    ctrlVentaPDF pdf = new ctrlVentaPDF();
                     pdf.DatosCliente(idCliente);
                     pdf.generarFacturaPDF(jlableNFact.getText());
 

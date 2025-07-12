@@ -26,7 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class VentaPDF {
+public class ctrlVentaPDF {
 
     private String nombreCliente;
     private String cedulaCliente;

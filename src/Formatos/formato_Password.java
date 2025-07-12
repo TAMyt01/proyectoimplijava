@@ -1,10 +1,10 @@
-package filtros;
+package Formatos;
 
 import javax.swing.text.*;
 import java.util.regex.Pattern;
 import java.awt.Toolkit;
 
-public class PasswordFilter extends DocumentFilter {
+public class formato_Password extends DocumentFilter {
 
   private static final String PERMITIDOS = "A-Za-z0-9@#$%^&+=!_\\*-";
     private static final int MAX_LONGITUD = 16;

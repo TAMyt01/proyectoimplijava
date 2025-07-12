@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import Controladores.ctrlUsuarios;
 
 
-import filtros.InactividadManager;
+import Formato.InactividadManager;
 import javax.swing.JFrame;
 
 

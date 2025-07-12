@@ -1,8 +1,8 @@
-package filtros;
+package Formatos;
 
 import javax.swing.text.*;
 
-public class NumerosNaturalesFilter extends DocumentFilter {
+public class formato_NumerosNaturales extends DocumentFilter {
 
     @Override
     public void insertString(FilterBypass fb, int offset, String text, AttributeSet attr) throws BadLocationException {

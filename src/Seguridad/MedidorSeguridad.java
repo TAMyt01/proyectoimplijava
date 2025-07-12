@@ -1,4 +1,4 @@
-package filtros;
+package Seguridad;
 
 public class MedidorSeguridad {
 

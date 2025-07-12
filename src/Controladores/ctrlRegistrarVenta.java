@@ -11,7 +11,7 @@ import java.sql.Statement;
 
 
 
-public class Ctrl_RegistrarVenta {
+public class ctrlRegistrarVenta {
     
     //ultimo id de la cabecera
     public static int idCabeceraRegistrada;

@@ -1,8 +1,8 @@
-package filtros;
+package Validaciones;
 
 import java.util.regex.Pattern;
 
-public class PasswordValidator {
+public class validar_Password {
 
    // Regex para validar contraseña según requisitos
     private static final String PASSWORD_PATTERN =

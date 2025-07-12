@@ -1,15 +1,15 @@
-package filtros;
+package Seguridad;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class InactividadManager {
+public class seguridad_InactividadManager {
     private final Timer temporizador;
     private final Runnable accionInactividad;
     private boolean accionEjecutada = false;
 
-    public InactividadManager(JFrame frame, int tiempoInactividadMs, Runnable accionInactividad) {
+    public seguridad_InactividadManager(JFrame frame, int tiempoInactividadMs, Runnable accionInactividad) {
         this.accionInactividad = accionInactividad;
 
         // Timer que se ejecuta después del tiempo de inactividad

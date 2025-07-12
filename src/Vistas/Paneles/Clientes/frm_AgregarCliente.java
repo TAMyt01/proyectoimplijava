@@ -6,8 +6,8 @@ package Vistas.Paneles.Clientes;
 
 import Controladores.ctrlClientes;
 import Modelos.Clientes;
-import filtros.IdentidadFilter;
-import filtros.TelefonoFilter;
+import Formato.IdentidadFilter;
+import Formato.TelefonoFilter;
 import Vistas.Paneles.jpanelClientes;
 
 import javax.swing.JOptionPane;
