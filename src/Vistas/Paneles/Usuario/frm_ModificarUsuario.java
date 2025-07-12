@@ -6,7 +6,7 @@ package Vistas.Paneles.Usuario;
 
 import Controladores.ctrlUsuarios;
 
-import Modelos.Usuario;
+import Modelos.clsUsuario;
 import Vistas.Paneles.jpanelUsuarios;
 import filtros.IdentidadFilter;
 import filtros.PasswordFilter;
@@ -283,7 +283,7 @@ public class frm_ModificarUsuario extends javax.swing.JFrame {
             if (txtPassword.getText().equals(txtPasswordRepet.getText()) || !ModifContra) {
                 ctrlUsuarios controlUsuario = new ctrlUsuarios();
 
-                Usuario user = new Usuario();
+                clsUsuario user = new clsUsuario();
                 user.setIdUsuario(txtIdentidad.getText());
                 user.setNombre(txtNombre.getText());
                 user.setRol(cmbRol.getSelectedItem().toString());

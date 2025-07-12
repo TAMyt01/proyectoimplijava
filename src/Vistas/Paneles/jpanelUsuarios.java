@@ -25,7 +25,7 @@ public class jpanelUsuarios extends javax.swing.JPanel {
         
         this.cargaTablaUser();
         frm_AgregarUsuario.SetPanelagregar(this);
-        frm_ActualizarUsuario.SetPanelModif(this);
+        frm_ModificarUsuario.SetPanelModif(this);
     }
 
     private frm_ActualizarUsuario modf;
@@ -235,29 +235,19 @@ public class jpanelUsuarios extends javax.swing.JPanel {
         String SQL;
         if ("ID".equals(cmbFiltro.getSelectedItem().toString())) {
 
-            switch (cmbEstado.getSelectedIndex()) {
-                case 0:
-                    SQL = "select * from vista_usuarios_sin_password where idUsuario = ? and estado='Activo'";
-                    break;
-                case 1:
-                    SQL = "select * from vista_usuarios_sin_password where idUsuario = ? and estado='Desactivado'";
-                    break;
-                default:
-                    SQL = "select * from vista_usuarios_sin_password where idUsuario = ?";
-            }
+            SQL = switch (cmbEstado.getSelectedIndex()) {
+                case 0 -> "select * from vista_usuarios_sin_password where idUsuario = ? and estado='Activo'";
+                case 1 -> "select * from vista_usuarios_sin_password where idUsuario = ? and estado='Desactivado'";
+                default -> "select * from vista_usuarios_sin_password where idUsuario = ?";
+            };
 
         } else {
 
-            switch (cmbEstado.getSelectedIndex()) {
-                case 0:
-                    SQL = "select * from vista_usuarios_sin_password where nombre like ? and estado='Activo'";
-                    break;
-                case 1:
-                    SQL = "select * from vista_usuarios_sin_password where nombre like ? and estado='Desactivado'";
-                    break;
-                default:
-                    SQL = "select * from vista_usuarios_sin_password where nombre like ?";
-            }
+            SQL = switch (cmbEstado.getSelectedIndex()) {
+                case 0 -> "select * from vista_usuarios_sin_password where nombre like ? and estado='Activo'";
+                case 1 -> "select * from vista_usuarios_sin_password where nombre like ? and estado='Desactivado'";
+                default -> "select * from vista_usuarios_sin_password where nombre like ?";
+            };
         }
 
         try {
@@ -301,13 +291,11 @@ public class jpanelUsuarios extends javax.swing.JPanel {
         Connection cn = clsConexion.conectar();
         String sql;
 
-        if (cmbEstado.getSelectedIndex() == 0) {
-            sql = "select * from vista_usuarios_sin_password where estado='Activo'";
-        } else if (cmbEstado.getSelectedIndex() == 1) {
-            sql = "select * from vista_usuarios_sin_password where estado='Desactivado'";
-        } else {
-            sql = "select * from vista_usuarios_sin_password";
-        }
+        sql = switch (cmbEstado.getSelectedIndex()) {
+            case 0 -> "select * from vista_usuarios_sin_password where estado='Activo'";
+            case 1 -> "select * from vista_usuarios_sin_password where estado='Desactivado'";
+            default -> "select * from vista_usuarios_sin_password";
+        };
 
         Statement st;
 
