@@ -5,8 +5,8 @@
 package Vistas.Paneles.Clientes;
 
 import Controladores.ctrlClientes;
-import Modelos.Clientes;
-import Formato.TelefonoFilter;
+import Modelos.clsClientes;
+import Formatos.formato_Telefono;
 
 import Vistas.Paneles.jpanelClientes;
 
@@ -33,7 +33,7 @@ public class frm_ModificarCliente extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Modificar Cliente");
-        ((AbstractDocument) txtTelefono.getDocument()).setDocumentFilter(new TelefonoFilter(txtTelefono));
+        ((AbstractDocument) txtTelefono.getDocument()).setDocumentFilter(new formato_Telefono(txtTelefono));
 
     }
 
@@ -156,7 +156,7 @@ public class frm_ModificarCliente extends javax.swing.JFrame {
 
             ctrlClientes ctrlclient = new ctrlClientes();
 
-            Clientes client = new Clientes();
+            clsClientes client = new clsClientes();
             client.setNombre(txtNombre.getText());
             client.setIdentidad(txtIdentidad.getText());
             client.setEstado(cmbEstado.getSelectedItem().toString());

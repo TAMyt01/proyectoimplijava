@@ -6,10 +6,10 @@ package Vistas.Paneles.Producto;
 
 import Conexion.clsConexion;
 import Controladores.ctrlProducto;
-import Formato.FiltroPrecio;
-import Modelos.Producto;
+import Formatos.formato_Precio;
+import Modelos.clsProducto;
 import Vistas.Paneles.jpanelProductos;
-import Formato.NumerosNaturalesFilter;
+import Formatos.formato_NumerosNaturales;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,8 +34,8 @@ public class frm_ModificarProducto extends javax.swing.JFrame {
         CargarCMB();
         this.setLocationRelativeTo(null);
         this.setTitle("Modificar Producto");
-         ((AbstractDocument) txtCant.getDocument()).setDocumentFilter(new NumerosNaturalesFilter());
-          ((AbstractDocument) txtPrec.getDocument()).setDocumentFilter(new FiltroPrecio());
+         ((AbstractDocument) txtCant.getDocument()).setDocumentFilter(new formato_NumerosNaturales());
+          ((AbstractDocument) txtPrec.getDocument()).setDocumentFilter(new formato_Precio());
     }
 
     public static void SetPanelmodf(jpanelProductos panel) {
@@ -186,7 +186,7 @@ public class frm_ModificarProducto extends javax.swing.JFrame {
             ctrlProducto ctrlprod = new ctrlProducto();
 
             if (!ctrlprod.existeProducto(txtCod.getText(), txtNom.getText(), "Modificar") || txtNom.getText().equals(NombreInicial)) {
-                Producto prodc = new Producto();
+                clsProducto prodc = new clsProducto();
                 prodc.setCantidad(Integer.parseInt(txtCant.getText()));
                 prodc.setDescripcion(txtDesc.getText());
                 prodc.setID_Producto(txtCod.getText());

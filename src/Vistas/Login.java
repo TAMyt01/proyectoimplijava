@@ -10,10 +10,10 @@ import Controladores.ctrlUsuarios;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
-import Modelos.Usuario;
+import Modelos.clsUsuario;
 
 
-import Formato.IdentidadFilter;
+import Formatos.formato_Identidad;
 import javax.swing.text.AbstractDocument;
 
 
@@ -28,7 +28,7 @@ public class Login extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setFocusable(true);//para que no me haga focus a los txt
         System.out.println("" + clsConexion.conectar()); //Validamos si se conecta a la base
-        ((AbstractDocument) txtIdentidad.getDocument()).setDocumentFilter(new IdentidadFilter(txtIdentidad));
+        ((AbstractDocument) txtIdentidad.getDocument()).setDocumentFilter(new formato_Identidad(txtIdentidad));
 
 
         
@@ -251,9 +251,9 @@ public class Login extends javax.swing.JFrame {
         } else {
 
             ctrlUsuarios controlUsuario = new ctrlUsuarios();
-            Usuario.setIdUsuario(txtIdentidad.getText());
-            Usuario.setContrasenia(txtPassword.getText());
-            Usuario.setEnUso(txtIdentidad.getText());
+            controlUsuario.setIdUsuario(txtIdentidad.getText());
+            controlUsuario.setContrasenia(txtPassword.getText());
+            controlUsuario.setEnUso(txtIdentidad.getText());
 
             
             if (controlUsuario.loginUser()) {
@@ -343,6 +343,7 @@ public class Login extends javax.swing.JFrame {
         //</editor-fold>
 
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Login().setVisible(true);
             }

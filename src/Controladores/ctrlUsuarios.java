@@ -5,7 +5,7 @@
 package Controladores;
 
 import Conexion.clsConexion;
-import Modelos.Usuario;
+import Modelos.clsUsuario;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +17,7 @@ import java.sql.ResultSet;
  *
  * @author JManu
  */
-public class ctrlUsuarios extends Usuario{
+public class ctrlUsuarios extends clsUsuario{
     
     //Metodo Iniciar Sesion
     public boolean loginUser(){
@@ -28,7 +28,7 @@ public class ctrlUsuarios extends Usuario{
         
    
         
-        String sql="select nombre, password from tb_usuario where idUsuario='"+idUsuario+"' and binary password= '"+contrasenia+"' and estado='Activo'";
+        String sql="select nombre, password from tb_usuario where idUsuario='"+ idUsuario +"' and binary password= '"+contrasenia+"' and estado='Activo'";
         Statement st;
         
         try {

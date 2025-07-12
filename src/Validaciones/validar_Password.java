@@ -1,4 +1,4 @@
-package Validaciones;
+package Formatos;
 
 import java.util.regex.Pattern;
 

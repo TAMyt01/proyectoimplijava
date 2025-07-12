@@ -1,12 +1,11 @@
 package Vistas.Paneles.Usuario;
 
 import Controladores.ctrlUsuarios;
-import Formato.IdentidadFilter;
-import Modelos.Usuario;
+import Formatos.formato_Identidad;
+import Modelos.clsUsuario;
 import Vistas.Paneles.jpanelUsuarios;
-import Formato.PasswordValidator;
-import Formato.PasswordFilter;
-import java.awt.Color;
+import Formatos.validar_Password;
+import Formatos.formato_Password;
 import javax.swing.BorderFactory;
 
 import javax.swing.JOptionPane;
@@ -16,15 +15,12 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import javax.swing.text.AbstractDocument;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.text.html.CSS;
 
 /**
  *
  * @author JManu
  */
 public class frm_AgregarUsuario extends javax.swing.JFrame {
-
-
 
     public frm_AgregarUsuario() {
         initComponents();
@@ -44,27 +40,30 @@ public class frm_AgregarUsuario extends javax.swing.JFrame {
                 + "</html>");
 
         //Filtro identidad
-        ((AbstractDocument) txtIdentidad.getDocument()).setDocumentFilter(new IdentidadFilter(txtIdentidad));
+        ((AbstractDocument) txtIdentidad.getDocument()).setDocumentFilter(new formato_Identidad(txtIdentidad));
 
         // Aplicar filtro para contraseña
-        ((AbstractDocument) txtPassword.getDocument()).setDocumentFilter(new PasswordFilter());
-        ((AbstractDocument) txtPasswordRepet.getDocument()).setDocumentFilter(new PasswordFilter());
+        ((AbstractDocument) txtPassword.getDocument()).setDocumentFilter(new formato_Password());
+        ((AbstractDocument) txtPasswordRepet.getDocument()).setDocumentFilter(new formato_Password());
 
         txtPassword.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
             public void insertUpdate(DocumentEvent e) {
                 actualizar();
             }
 
+            @Override
             public void removeUpdate(DocumentEvent e) {
                 actualizar();
             }
 
+            @Override
             public void changedUpdate(DocumentEvent e) {
             }
 
             private void actualizar() {
                 String pass = new String(txtPassword.getPassword());
-                if (PasswordValidator.validarPassword(pass)) {
+                if (validar_Password.validarPassword(pass)) {
                   
                     txtPassword.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 128, 0), 2));
 
@@ -73,7 +72,6 @@ public class frm_AgregarUsuario extends javax.swing.JFrame {
                 } else {
                   txtPassword.setBorder(BorderFactory.createLineBorder(new java.awt.Color(174, 0, 0), 2));
 
-                    
                     imgAdvertencia.setVisible(true);
                   
                 }
@@ -273,10 +271,9 @@ public class frm_AgregarUsuario extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
-        if ( txtIdentidad.getText().isEmpty() || txtPassword.getText().isEmpty() || txtNombre1.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "rellene todos los campos");
-        } else {
-
+        if ( txtIdentidad.getText().isEmpty() || txtPassword.getText().isEmpty() || txtNombre1.getText().isEmpty())
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos");
+        else {
             String identidad = txtIdentidad.getText().trim();
             String password = new String(txtPassword.getPassword());
 
@@ -284,16 +281,14 @@ public class frm_AgregarUsuario extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "La identidad no es válida.");
                 return;
             }
-
             if (!validarPassword(password)) {
                 JOptionPane.showMessageDialog(this, "La contraseña no cumple con los requisitos.");
                 return;
             }
-
             if (txtPassword.getText().equals(txtPasswordRepet.getText())) {
                 ctrlUsuarios controlUsuario = new ctrlUsuarios();
 
-                Usuario user = new Usuario();
+                clsUsuario user = new clsUsuario();
                 user.setIdUsuario(txtIdentidad.getText());
                 user.setNombre(txtNombre1.getText());
                 user.setRol(cmbRol.getSelectedItem().toString());
@@ -304,26 +299,24 @@ public class frm_AgregarUsuario extends javax.swing.JFrame {
 
                     paneluser.cargaTablaUser();//Actualizamos tabla del panel principal de la categoria
 
-                } else {
+                } else 
                     JOptionPane.showMessageDialog(null, "Error al guardar");
-                }
+                
 
                 txtIdentidad.setText("");
                 txtPassword.setText("");
                 cmbRol.setSelectedIndex(0);
-            } else {
+            } else 
                 JOptionPane.showMessageDialog(null, "Contraseña no es igual"); //mejorar el mensaje nmms
-            }
-
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void chkMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkMostrarActionPerformed
-        if (chkMostrar.isSelected()) {
+        if (chkMostrar.isSelected()) 
             txtPassword.setEchoChar((char) 0);
-        } else {
+        else 
             txtPassword.setEchoChar('*');
-        }
+        
     }//GEN-LAST:event_chkMostrarActionPerformed
 
     private void txtIdentidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdentidadActionPerformed
@@ -363,12 +356,12 @@ public class frm_AgregarUsuario extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new frm_AgregarUsuario().setVisible(true);
             }
         });
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
@@ -391,9 +384,9 @@ public class frm_AgregarUsuario extends javax.swing.JFrame {
 
     public boolean validarIdentidad(String identidad) {
         // La identidad debe tener exactamente 15 caracteres con guiones (ej. 0801-2004-18498)
-        if (identidad == null || !identidad.matches("\\d{4}-\\d{4}-\\d{5}")) {
+        if (identidad == null || !identidad.matches("\\d{4}-\\d{4}-\\d{5}")) 
             return false;
-        }
+        
 
         // No debe ser solo dígitos repetidos (como solo ceros o unos)
         String soloNumeros = identidad.replaceAll("-", "");
@@ -401,9 +394,9 @@ public class frm_AgregarUsuario extends javax.swing.JFrame {
     }
 
     public boolean validarPassword(String password) {
-        if (password == null) {
+        if (password == null) 
             return false;
-        }
+        
 
         return password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!_\\*-])[A-Za-z\\d@#$%^&+=!_\\*-]{8,16}$");
     }

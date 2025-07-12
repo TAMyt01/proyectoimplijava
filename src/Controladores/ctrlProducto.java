@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import Modelos.Producto;
+import Modelos.clsProducto;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  *
  * @author JManu
  */
-public class ctrlProducto extends Producto {
+public class ctrlProducto extends clsProducto {
 
     public boolean guardar() {
         boolean resp = false;
@@ -137,7 +137,7 @@ public class ctrlProducto extends Producto {
     }
     
     
-    //Actualizar Producto
+    //Actualizar clsProducto
     public boolean ActualizarStock() {
         boolean resp = false;
         Connection cn = clsConexion.conectar();

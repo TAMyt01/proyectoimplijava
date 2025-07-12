@@ -7,7 +7,7 @@ package Vistas.Paneles;
 import Conexion.clsConexion;
 
 import Vistas.Paneles.Usuario.frm_AgregarUsuario;
-import Vistas.Paneles.Usuario.frm_ModificarUsuario;
+import Vistas.Paneles.Usuario.frm_ActualizarUsuario;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,7 +28,7 @@ public class jpanelUsuarios extends javax.swing.JPanel {
         frm_ModificarUsuario.SetPanelModif(this);
     }
 
-    private frm_ModificarUsuario modf;
+    private frm_ActualizarUsuario modf;
     private frm_AgregarUsuario agreg;
     private String nombre, rol;
     private String est;
@@ -198,10 +198,10 @@ public class jpanelUsuarios extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifActionPerformed
-        if ("" == ID) {
+        if ("".equals(ID)) {
             JOptionPane.showMessageDialog(null, "Seleccione el usuario");
         } else if (modf == null || !modf.isVisible()) {
-            modf = new frm_ModificarUsuario();
+            modf = new frm_ActualizarUsuario();
             modf.RecibirDatos(nombre, rol, est,ID);
             modf.setVisible(true);
           
@@ -235,29 +235,19 @@ public class jpanelUsuarios extends javax.swing.JPanel {
         String SQL;
         if ("ID".equals(cmbFiltro.getSelectedItem().toString())) {
 
-            switch (cmbEstado.getSelectedIndex()) {
-                case 0:
-                    SQL = "select * from vista_usuarios_sin_password where idUsuario = ? and estado='Activo'";
-                    break;
-                case 1:
-                    SQL = "select * from vista_usuarios_sin_password where idUsuario = ? and estado='Desactivado'";
-                    break;
-                default:
-                    SQL = "select * from vista_usuarios_sin_password where idUsuario = ?";
-            }
+            SQL = switch (cmbEstado.getSelectedIndex()) {
+                case 0 -> "select * from vista_usuarios_sin_password where idUsuario = ? and estado='Activo'";
+                case 1 -> "select * from vista_usuarios_sin_password where idUsuario = ? and estado='Desactivado'";
+                default -> "select * from vista_usuarios_sin_password where idUsuario = ?";
+            };
 
         } else {
 
-            switch (cmbEstado.getSelectedIndex()) {
-                case 0:
-                    SQL = "select * from vista_usuarios_sin_password where nombre like ? and estado='Activo'";
-                    break;
-                case 1:
-                    SQL = "select * from vista_usuarios_sin_password where nombre like ? and estado='Desactivado'";
-                    break;
-                default:
-                    SQL = "select * from vista_usuarios_sin_password where nombre like ?";
-            }
+            SQL = switch (cmbEstado.getSelectedIndex()) {
+                case 0 -> "select * from vista_usuarios_sin_password where nombre like ? and estado='Activo'";
+                case 1 -> "select * from vista_usuarios_sin_password where nombre like ? and estado='Desactivado'";
+                default -> "select * from vista_usuarios_sin_password where nombre like ?";
+            };
         }
 
         try {
@@ -297,17 +287,15 @@ public class jpanelUsuarios extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtBuscarKeyReleased
 
-    public void cargaTablaUser() {
+    private void cargaTablaUser() {
         Connection cn = clsConexion.conectar();
         String sql;
 
-        if (cmbEstado.getSelectedIndex() == 0) {
-            sql = "select * from vista_usuarios_sin_password where estado='Activo'";
-        } else if (cmbEstado.getSelectedIndex() == 1) {
-            sql = "select * from vista_usuarios_sin_password where estado='Desactivado'";
-        } else {
-            sql = "select * from vista_usuarios_sin_password";
-        }
+        sql = switch (cmbEstado.getSelectedIndex()) {
+            case 0 -> "select * from vista_usuarios_sin_password where estado='Activo'";
+            case 1 -> "select * from vista_usuarios_sin_password where estado='Desactivado'";
+            default -> "select * from vista_usuarios_sin_password";
+        };
 
         Statement st;
 

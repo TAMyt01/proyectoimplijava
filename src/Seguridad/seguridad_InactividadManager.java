@@ -1,4 +1,4 @@
-package Seguridad;
+package Formatos;
 
 import java.awt.*;
 import java.awt.event.*;

@@ -2,8 +2,8 @@ package Vistas.Paneles.Producto;
 
 import Conexion.clsConexion;
 import Controladores.ctrlProducto;
-import Formato.FiltroPrecio;
-import Modelos.Producto;
+import Formatos.formato_Precio;
+import Modelos.clsProducto;
 import Vistas.Paneles.jpanelProductos;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 import javax.swing.text.AbstractDocument;
-import Formato.NumerosNaturalesFilter;
+import Formatos.formato_NumerosNaturales;
 
 
 /**
@@ -31,8 +31,8 @@ public class frm_AgregarProducto extends javax.swing.JFrame {
         CargarCMB();
         AutoCompleteDecorator.decorate(cmbCategoria);
         
-        ((AbstractDocument) txtCantidad.getDocument()).setDocumentFilter(new NumerosNaturalesFilter());
-         ((AbstractDocument) txtPrec.getDocument()).setDocumentFilter(new FiltroPrecio());
+        ((AbstractDocument) txtCantidad.getDocument()).setDocumentFilter(new formato_NumerosNaturales());
+         ((AbstractDocument) txtPrec.getDocument()).setDocumentFilter(new formato_Precio());
 
     }
 
@@ -156,7 +156,7 @@ public class frm_AgregarProducto extends javax.swing.JFrame {
             ctrlProducto ctrlprod = new ctrlProducto();
 
             if (!ctrlprod.existeProducto(txtCod.getText(), txtNom.getText(), "Agregar")) {
-                Producto prodc = new Producto();
+                clsProducto prodc = new clsProducto();
                 prodc.setCantidad(Integer.parseInt(txtCantidad.getText()));
                 prodc.setDescripcion(txtDesc.getText());
                 prodc.setID_Producto(txtCod.getText());

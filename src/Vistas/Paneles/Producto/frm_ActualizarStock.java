@@ -5,12 +5,12 @@
 package Vistas.Paneles.Producto;
 
 import Controladores.ctrlProducto;
-import Modelos.Producto;
+import Modelos.clsProducto;
 import Vistas.Paneles.jpanelProductos;
 import javax.swing.JOptionPane;
 
 import javax.swing.text.AbstractDocument;
-import Formato.NumerosNaturalesFilter;
+import Formatos.formato_NumerosNaturales;
 
 
 /**
@@ -26,7 +26,7 @@ public class frm_ActualizarStock extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("Actualizar Stock");
         
-        ((AbstractDocument) txtAgregarCant.getDocument()).setDocumentFilter(new NumerosNaturalesFilter());
+        ((AbstractDocument) txtAgregarCant.getDocument()).setDocumentFilter(new formato_NumerosNaturales());
 
 
     }
@@ -166,7 +166,7 @@ public class frm_ActualizarStock extends javax.swing.JFrame {
 
                 int calcular = Integer.parseInt(txtCant.getText()) + Integer.parseInt(txtAgregarCant.getText());
 
-                Producto prodc = new Producto();
+                clsProducto prodc = new clsProducto();
                 prodc.setCantidad(calcular);
                 prodc.setID_Producto(txtCod.getText());
 

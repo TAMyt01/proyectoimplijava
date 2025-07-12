@@ -3,13 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/kenne/Desktop/5_26_225/5_26_225/PuntoVenta/src/Modelos/Usuario.java</file>
-            <file>file:/C:/Users/kenne/Desktop/5_26_225/5_26_225/PuntoVenta/src/Conexion/clsConexion.java</file>
-            <file>file:/C:/Users/kenne/Desktop/5_26_225/5_26_225/PuntoVenta/src/Vistas/Login.java</file>
-            <file>file:/C:/Users/kenne/Desktop/5_26_225/5_26_225/PuntoVenta/src/Controladores/clsCrud.java</file>
-            <file>file:/C:/Users/kenne/Desktop/5_26_225/5_26_225/PuntoVenta/src/Vistas/Menu_Gerente.java</file>
-            <file>file:/C:/Users/kenne/Desktop/5_26_225/5_26_225/PuntoVenta/src/Vistas/Paneles/jpanelClientes.java</file>
-            <file>file:/C:/Users/kenne/Desktop/5_26_225/5_26_225/PuntoVenta/src/Vistas/Paneles/jpanelUsuarios.java</file>
+            <file>file:/C:/Users/kenne/Documents/GitHub/proyectoimplijava/src/Vistas/Paneles/jpanelUsuarios.java</file>
+            <file>file:/C:/Users/kenne/Documents/GitHub/proyectoimplijava/src/Vistas/Paneles/Usuario/frm_ActualizarUsuario.java</file>
+            <file>file:/C:/Users/kenne/Documents/GitHub/proyectoimplijava/src/Vistas/Paneles/Usuario/frm_ModificarUsuario.java</file>
+            <file>file:/C:/Users/kenne/Documents/GitHub/proyectoimplijava/src/Modelos/clsUsuario.java</file>
+            <file>file:/C:/Users/kenne/Documents/GitHub/proyectoimplijava/src/Vistas/Paneles/Usuario/frm_AgregarUsuario.java</file>
+            <file>file:/C:/Users/kenne/Documents/GitHub/proyectoimplijava/src/Controladores/ctrlUsuarios.java</file>
+            <file>file:/C:/Users/kenne/Documents/GitHub/proyectoimplijava/src/Controladores/Ctrl_RegistrarVenta.java</file>
+            <file>file:/C:/Users/kenne/Documents/GitHub/proyectoimplijava/src/Controladores/VentaPDF.java</file>
+            <file>file:/C:/Users/kenne/Documents/GitHub/proyectoimplijava/src/Vistas/Menu_Gerente.java</file>
         </group>
     </open-files>
 </project-private>
