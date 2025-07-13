@@ -42,6 +42,7 @@ public class Login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PuntoVenta");
@@ -68,12 +69,12 @@ public class Login extends javax.swing.JFrame {
         PanelLogin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         placeholderPassword.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        placeholderPassword.setForeground(new java.awt.Color(235, 234, 234));
+        placeholderPassword.setForeground(new java.awt.Color(153, 153, 153));
         placeholderPassword.setText("Password");
         PanelLogin.add(placeholderPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, -1));
 
         placeholderUser.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        placeholderUser.setForeground(new java.awt.Color(235, 234, 234));
+        placeholderUser.setForeground(new java.awt.Color(153, 153, 153));
         placeholderUser.setText("Identidad");
         PanelLogin.add(placeholderUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, -1, -1));
 
@@ -163,6 +164,10 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setText("Identidad");
         PanelLogin.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
         PanelLogin.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, -1, -1));
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/log.jpg"))); // NOI18N
+        PanelLogin.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 350, 340));
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -341,6 +346,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel PanelLogin;
     private javax.swing.JButton btnInicio;
     private javax.swing.JCheckBox chkMostrar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
