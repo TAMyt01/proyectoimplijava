@@ -36,30 +36,26 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class jPanelHistorial extends javax.swing.JPanel {
 
-    /**
-     * Creates new form jPanelHistorial
-     */
-
     private int id=0;
     
     public jPanelHistorial() {
         initComponents();
         // Obtener el primer día del año actual
-Calendar calendario = Calendar.getInstance();
-calendario.set(Calendar.MONTH, Calendar.JANUARY);
-calendario.set(Calendar.DAY_OF_MONTH, 1);
+        Calendar calendario = Calendar.getInstance();
+        calendario.set(Calendar.MONTH, Calendar.JANUARY);
+        calendario.set(Calendar.DAY_OF_MONTH, 1);
 
-// Establecer la fecha en el JDateChooser
-jdcFechaInicio.setDate(calendario.getTime());
+        // Establecer la fecha en el JDateChooser
+        jdcFechaInicio.setDate(calendario.getTime());
 
 
-// Obtener la fecha actual
-Date fechaActual = new Date();
+        // Obtener la fecha actual
+        Date fechaActual = new Date();
 
-// Establecer la fecha actual en el JDateChooser
-jdcFechaFinal.setDate(fechaActual);
+        // Establecer la fecha actual en el JDateChooser
+        jdcFechaFinal.setDate(fechaActual);
 
-        cargaTabla();
+                cargaTabla();
     }
 
     public void cargaTabla() {
@@ -84,38 +80,37 @@ jdcFechaFinal.setDate(fechaActual);
     
     
     public void cargaTablaFech() {
-    Connection cn = clsConexion.conectar();
-    String sql = "SELECT cv.idCabeceraVenta, c.nombre AS Cliente, cv.valorPagar, cv.fechaVenta\n"
-               + "FROM tb_cabecera_venta cv\n"
-               + "JOIN tb_cliente c ON cv.idCliente = c.identidad\n"
-               + "WHERE cv.fechaVenta BETWEEN ? AND ?;";
+        Connection cn = clsConexion.conectar();
+        String sql = "SELECT cv.idCabeceraVenta, c.nombre AS Cliente, cv.valorPagar, cv.fechaVenta\n"
+                   + "FROM tb_cabecera_venta cv\n"
+                   + "JOIN tb_cliente c ON cv.idCliente = c.identidad\n"
+                   + "WHERE cv.fechaVenta BETWEEN ? AND ?;";
 
-    try {
-        PreparedStatement ps = cn.prepareStatement(sql);
-        ps.setDate(1, fechaInicio_sql); // Ejemplo: "2025-05-01"
-        ps.setDate(2, fechaFinal_sql);    // Ejemplo: "2025-05-18"
+        try {
+            PreparedStatement ps = cn.prepareStatement(sql);
+            ps.setDate(1, fechaInicio_sql); // Ejemplo: "2025-05-01"
+            ps.setDate(2, fechaFinal_sql);    // Ejemplo: "2025-05-18"
 
-        ResultSet rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
 
-        rellenarTabla(rs); // tu método que llena la tabla
-        cn.close();
-    } catch (SQLException ex) {
-        System.out.println("Error al cargar tabla con rango de fechas: " + ex);
+            rellenarTabla(rs); // tu método que llena la tabla
+            cn.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al cargar tabla con rango de fechas: " + ex);
+        }
     }
-}
 
-    
-     private void rellenarTabla(ResultSet rs) throws SQLException{
-         DefaultTableModel model = (DefaultTableModel) tablas.getModel();
-         model.setRowCount(0);
-         while (rs.next()) {
+    private void rellenarTabla(ResultSet rs) throws SQLException{
+        DefaultTableModel model = (DefaultTableModel) tablas.getModel();
+        model.setRowCount(0);
+        while (rs.next()) {
             Object fila[] = new Object[4];
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 4; i++) 
                 fila[i] = rs.getObject(i + 1);
-            }
+            
             model.addRow(fila);
         }
-     }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -313,7 +308,6 @@ jdcFechaFinal.setDate(fechaActual);
 
     java.sql.Date fechaInicio_sql,fechaFinal_sql;
     
-    
     private void FiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FiltrarActionPerformed
         Date FechIn, FechFin;
         if (jdcFechaFinal.getDate().equals(null) || jdcFechaInicio.getDate().equals(null)) {
@@ -337,39 +331,32 @@ jdcFechaFinal.setDate(fechaActual);
     }//GEN-LAST:event_FiltrarActionPerformed
 
     private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
-    
-        
-        if (jdcFechaFinal.getDate().equals(null) || jdcFechaInicio.getDate().equals(null)) {
+
+        if (jdcFechaFinal.getDate().equals(null) || jdcFechaInicio.getDate().equals(null)) 
             System.out.println("Ingrese un rango de fecha");
-        } else {
+        else {
             try {
-    Connection cn = clsConexion.conectar();
-    
-    JasperReport reporte = null;
-    String path = "src\\Report\\ReportVenta.jasper";
-    reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
-    
-    // Suponiendo que ya tienes los valores como java.sql.Date
-    Map<String, Object> parametros = new HashMap<>();
-    parametros.put("fechaInicio_sql", fechaInicio_sql);  // ya definidos antes
-    parametros.put("fechaFinal_sql", fechaFinal_sql);    // ya definidos antes
-    
-    JasperPrint jprint = JasperFillManager.fillReport(path, parametros, cn);
-    
-    JasperViewer view = new JasperViewer(jprint, false);
-    view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-    view.setVisible(true);
-    
-} catch (JRException ex) {
-    Logger.getLogger(jPanelHistorial.class.getName()).log(Level.SEVERE, null, ex);
-}
+                Connection cn = clsConexion.conectar();
+
+                JasperReport reporte = null;
+                String path = "src\\Report\\ReportVenta.jasper";
+                reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+
+                // Suponiendo que ya tienes los valores como java.sql.Date
+                Map<String, Object> parametros = new HashMap<>();
+                parametros.put("fechaInicio_sql", fechaInicio_sql);  // ya definidos antes
+                parametros.put("fechaFinal_sql", fechaFinal_sql);    // ya definidos antes
+
+                JasperPrint jprint = JasperFillManager.fillReport(path, parametros, cn);
+
+                JasperViewer view = new JasperViewer(jprint, false);
+                view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                view.setVisible(true);
+            } catch (JRException ex) {
+                Logger.getLogger(jPanelHistorial.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        
-        
-        
-
     }//GEN-LAST:event_btnReportActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Filtrar;

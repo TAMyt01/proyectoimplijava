@@ -6,18 +6,11 @@ package Vistas;
 
 import Conexion.clsConexion;
 import Controladores.ctrlUsuarios;
-
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
-import Modelos.clsUsuario;
-
-
 import Formatos.formato_Identidad;
 import javax.swing.text.AbstractDocument;
-
-
-
 
 public class Login extends javax.swing.JFrame {
 
@@ -29,10 +22,6 @@ public class Login extends javax.swing.JFrame {
         this.setFocusable(true);//para que no me haga focus a los txt
         System.out.println("" + clsConexion.conectar()); //Validamos si se conecta a la base
         ((AbstractDocument) txtIdentidad.getDocument()).setDocumentFilter(new formato_Identidad(txtIdentidad));
-
-
-        
-
     }
 
     @SuppressWarnings("unchecked")
@@ -281,7 +270,6 @@ public class Login extends javax.swing.JFrame {
 
     private void formComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_formComponentAdded
 
-
     }//GEN-LAST:event_formComponentAdded
 
     private void formComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_formComponentRemoved
@@ -319,7 +307,6 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPasswordActionPerformed
 
     public static void main(String args[]) {
-
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -349,11 +336,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
-
-    
-
-    
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ErrorPassword;

@@ -28,13 +28,13 @@ import java.util.Date;
 
 public class ctrlVentaPDF {
 
-    private String nombreCliente;
-    private String cedulaCliente;
-    private String telefonoCliente;
-    private String direccionCliente;
+    String nombreCliente;
+    String cedulaCliente;
+    String telefonoCliente;
+    String direccionCliente;
 
-    private String fechaActual = "";
-    private String nombreArchivoPDFVenta = "";
+    String fechaActual = "";
+    String nombreArchivoPDFVenta = "";
 
    
     //metodo para obtener datos del cliente
@@ -43,7 +43,6 @@ public class ctrlVentaPDF {
         String sql = "select * from tb_cliente where identidad = '" + identidad + "'";
         Statement st;
         try {
-
             st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
@@ -61,18 +60,15 @@ public class ctrlVentaPDF {
     //metodo para generar la factura de venta
     public void generarFacturaPDF(String idcabecera) {
         try {
-
             //cargar la fecha actual
             Date date = new Date();
             fechaActual = new SimpleDateFormat("yyyy/MM/dd").format(date);
             //cambiar el formato de la fecha de / a _
             String fechaNueva = "";
             for (int i = 0; i < fechaActual.length(); i++) {
-                if (fechaActual.charAt(i) == '/') {
+                if (fechaActual.charAt(i) == '/') 
                     fechaNueva = fechaActual.replace("/", "_");
-                }
             }
-
             nombreArchivoPDFVenta = "Venta_" + nombreCliente + "_" + fechaNueva + ".pdf";
 
             FileOutputStream archivo;
@@ -98,12 +94,9 @@ public class ctrlVentaPDF {
             Encabezado.setHorizontalAlignment(Element.ALIGN_LEFT);
             //agregar celdas
             Encabezado.addCell(img);
-
             
             String nombre = "Floristeria Moreno";
             String telefono = "0987654321";
-            
-     
 
             Encabezado.addCell("");//celda vacia
             Encabezado.addCell("RUC: " + "\nNOMBRE: " + nombre + "\nTELEFONO: " + telefono);
@@ -224,10 +217,8 @@ public class ctrlVentaPDF {
            //abrir el documento al ser generado automaticamente
             Desktop.getDesktop().open(file);
             
-            
         } catch (DocumentException | IOException e) {
             System.out.println("Error en: " + e);
         }
     }
-
 }

@@ -352,7 +352,7 @@ public class jPanelFacturacion2 extends javax.swing.JPanel {
         fechaActual = new SimpleDateFormat("yyyy/MM/dd").format(date);
 
         if (!jComboBox_cliente.getSelectedItem().equals("Seleccione cliente:")) {
-            if (listaProductos.size() > 0) {
+            if (!listaProductos.isEmpty()) {
 
                 //metodo para obtener el id del cliente
                 this.ObtenerIdCliente();
@@ -688,14 +688,14 @@ txtCantidad.setText("");
         }
 
         try {
-            Connection cn = clsConexion.conectar();
-            PreparedStatement consulta = cn.prepareStatement("update tb_producto set cantidad=? where ID_Producto = '" + idProducto + "'");
-            int cantidadNueva = cantidadProductosBaseDeDatos - cantidad;
-            consulta.setInt(1, cantidadNueva);
-            if (consulta.executeUpdate() > 0) {
-                //System.out.println("Todo bien");
+            try (Connection cn = clsConexion.conectar()) {
+                PreparedStatement consulta = cn.prepareStatement("update tb_producto set cantidad=? where ID_Producto = '" + idProducto + "'");
+                int cantidadNueva = cantidadProductosBaseDeDatos - cantidad;
+                consulta.setInt(1, cantidadNueva);
+                if (consulta.executeUpdate() > 0) {
+                    //System.out.println("Todo bien");
+                }
             }
-            cn.close();
         } catch (SQLException e) {
             System.out.println("Error al restar cantidad 2, " + e);
         }
