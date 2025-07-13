@@ -21,8 +21,6 @@ public class Menu_Vendedor extends javax.swing.JFrame {
 
     public Menu_Vendedor() {
         initComponents();
-        this.setTitle("Menu");
-
         
         this.setLocationRelativeTo(null);
 
@@ -60,6 +58,7 @@ public class Menu_Vendedor extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("PuntoVenta");
         setExtendedState(6);
 
         Menu.setBackground(new java.awt.Color(33, 44, 50));
@@ -159,7 +158,7 @@ public class Menu_Vendedor extends javax.swing.JFrame {
         btnAdminVentLayout.setHorizontalGroup(
             btnAdminVentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnAdminVentLayout.createSequentialGroup()
-                .addContainerGap(42, Short.MAX_VALUE)
+                .addContainerGap(44, Short.MAX_VALUE)
                 .addComponent(jLabel11)
                 .addGap(42, 42, 42))
         );
@@ -270,7 +269,7 @@ public class Menu_Vendedor extends javax.swing.JFrame {
         lblnombreUsuario.setText("Nombre Usuario");
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cerrar-sesion.png"))); // NOI18N
-        jLabel2.setText("Cerrar Secion");
+        jLabel2.setText("Cerrar Sesión");
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel2MousePressed(evt);

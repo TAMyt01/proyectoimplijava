@@ -16,7 +16,6 @@ public class Login extends javax.swing.JFrame {
 
     public Login() {
         initComponents();
-        this.setTitle("Login");
         this.setSize(new Dimension(1020, 640));
         this.setLocationRelativeTo(null);
         this.setFocusable(true);//para que no me haga focus a los txt
@@ -45,6 +44,7 @@ public class Login extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("PuntoVenta");
         setExtendedState(6);
         setSize(new java.awt.Dimension(0, 0));
         addContainerListener(new java.awt.event.ContainerAdapter() {
@@ -162,8 +162,6 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel3.setText("Identidad");
         PanelLogin.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
-
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\kenne\\Desktop\\5_26_225\\5_26_225\\PuntoVenta\\img\\log.jpg")); // NOI18N
         PanelLogin.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, -1, -1));
 
         gridBagConstraints = new java.awt.GridBagConstraints();

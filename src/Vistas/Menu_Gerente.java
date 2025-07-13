@@ -30,15 +30,11 @@ import javax.swing.JOptionPane;
 
 
 public class Menu_Gerente extends javax.swing.JFrame {
-
-       
     
     public Menu_Gerente() {
         initComponents();
-        this.setTitle("Menu");
 
         this.setLocationRelativeTo(null);
-
 
         //Abrir el panel del inicio
         jpanelInicio inicio = new jpanelInicio();
@@ -92,6 +88,7 @@ private void cerrarSesion() {
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("PuntoVenta");
         setExtendedState(6);
 
         Menu.setBackground(new java.awt.Color(0, 0, 0));
@@ -413,7 +410,7 @@ private void cerrarSesion() {
         lblnombreUsuario.setText("Nombre Usuario");
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cerrar-sesion.png"))); // NOI18N
-        jLabel7.setText("Cerrar Secion");
+        jLabel7.setText("Cerrar Sesión");
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel7MousePressed(evt);
