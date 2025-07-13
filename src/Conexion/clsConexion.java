@@ -10,8 +10,6 @@ public class clsConexion {
     private static final String userdatabase="root";
     private static final String contradatabase="TAMyt_01";
     
-    
-    
     public static Connection conectar(){
         
         try {

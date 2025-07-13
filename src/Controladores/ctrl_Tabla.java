@@ -131,9 +131,9 @@ public class ctrl_Tabla {
  *
  * @author kenne
  */
-<<<<<<<< HEAD:src/Controladores/ctrlTabla.java
+/*<<<<<<<< HEAD:src/Controladores/ctrlTabla.java
 public class ctrlTabla {
     
 }
 ========
->>>>>>>> e59aa079cf2045f86d9fb2b5f7752d515b16faf4:src/Controladores/ctrl_Tabla.java
+>>>>>>>> e59aa079cf2045f86d9fb2b5f7752d515b16faf4:src/Controladores/ctrl_Tabla.java*/

@@ -8,9 +8,6 @@ import Controladores.ctrlUsuarios;
 
 import Modelos.clsUsuario;
 import Vistas.Paneles.jpanelUsuarios;
-import Formato.IdentidadFilter;
-import Formato.PasswordFilter;
-import Formato.PasswordValidator;
 import java.awt.event.ActionEvent;
 
 import java.awt.event.ActionListener;
@@ -70,14 +67,17 @@ public class frm_ModificarUsuario extends javax.swing.JFrame {
 
     private void activarValidacionDePassword() {
         txtPassword.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
             public void insertUpdate(DocumentEvent e) {
                 actualizar();
             }
 
+            @Override
             public void removeUpdate(DocumentEvent e) {
                 actualizar();
             }
 
+            @Override
             public void changedUpdate(DocumentEvent e) {
                 actualizar();
             }
@@ -405,6 +405,7 @@ public class frm_ModificarUsuario extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new frm_ModificarUsuario().setVisible(true);
             }

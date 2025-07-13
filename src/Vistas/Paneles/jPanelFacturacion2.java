@@ -41,8 +41,9 @@ public class jPanelFacturacion2 extends javax.swing.JPanel {
      * Creates new form jPanelFacturacion2
      */
     public jPanelFacturacion2() {
+        this.totalPagar = 0.0;
+        this.cantidad = 0;
         initComponents();
-     
 
         //Cargar lo Clientes en la vista - cargar productos
         this.CargarComboClientes();
@@ -61,9 +62,7 @@ public class jPanelFacturacion2 extends javax.swing.JPanel {
         jlableNFact.setText(Nfact()+"");
         
         ((AbstractDocument) txtCantidad.getDocument()).setDocumentFilter(new formato_NumerosNaturales());
-         ((AbstractDocument) txt_efectivo.getDocument()).setDocumentFilter(new formato_Precio());
-
-       
+         ((AbstractDocument) txt_efectivo.getDocument()).setDocumentFilter(new formato_Precio());  
     }
 
     //Modelo de los datos
@@ -78,9 +77,10 @@ public class jPanelFacturacion2 extends javax.swing.JPanel {
     private String nombre = "";
     private int cantidadProductoBBDD = 0;
     private double precioUnitario = 0.0;
+    //cantidad de productos a comprar
 
-    private int cantidad = 0;//cantidad de productos a comprar
-    private double totalPagar = 0.0;
+    private int cantidad;
+    private double totalPagar;
 
     //variables para calculos globales
     private double totalPagarGeneral = 0.0;
@@ -92,12 +92,12 @@ public class jPanelFacturacion2 extends javax.swing.JPanel {
     private void inicializarTablaProducto() {
         modeloDatosProductos = new DefaultTableModel();
         //añadir columnas
-        modeloDatosProductos.addColumn("N");
+        modeloDatosProductos.addColumn("Número");
         modeloDatosProductos.addColumn("Nombre");
         modeloDatosProductos.addColumn("Cantidad");
-        modeloDatosProductos.addColumn("P. Unitario");
+        modeloDatosProductos.addColumn("Precio Unitario");
         modeloDatosProductos.addColumn("Total Pagar");
-        modeloDatosProductos.addColumn("Accion");
+        modeloDatosProductos.addColumn("Acción");
         //agregar los datos del modelo a la tabla
         this.jTable_productos.setModel(modeloDatosProductos);
     }
@@ -416,9 +416,12 @@ public class jPanelFacturacion2 extends javax.swing.JPanel {
 
         String combo = this.jComboBox_producto.getSelectedItem().toString();
 //validar que seleccione un producto
-if (combo.equalsIgnoreCase("Seleccione producto:")) {
+
+// Verifica si el texto de la variable 'combo' es igual a "Seleccione producto:",
+// sin importar si las letras están en mayúsculas o minúsculas
+if (combo.equalsIgnoreCase("Seleccione producto:")) 
     JOptionPane.showMessageDialog(null, "Seleccione un producto");
-} else {
+ else {
     //validar que ingrese una cantidad
     if (!txtCantidad.getText().isEmpty()) {
         cantidad = Integer.parseInt(txtCantidad.getText());
@@ -454,15 +457,15 @@ if (combo.equalsIgnoreCase("Seleccione producto:")) {
                 txt_efectivo.setEnabled(true);
                 jButton_calcular_cambio.setEnabled(true);
 
-            } else {
+            } else 
                 JOptionPane.showMessageDialog(null, "La cantidad supera el Stock");
-            }
-        } else {
+            
+        } else 
             JOptionPane.showMessageDialog(null, "La cantidad debe ser mayor a cero");
-        }
-    } else {
+        
+    } else 
         JOptionPane.showMessageDialog(null, "Ingresa la cantidad de productos");
-    }
+    
 }
 //llamar al metodo
 this.listaTablaProductos();
@@ -473,22 +476,24 @@ txtCantidad.setText("");
     private void jTable_productosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_productosMouseClicked
         int fila_point = jTable_productos.rowAtPoint(evt.getPoint());
         int columna_point = 0;
-        if (fila_point > -1) {
+        if (fila_point > -1) 
             idArrayList = (int) modeloDatosProductos.getValueAt(fila_point, columna_point);
-        }
+        
         int opcion = JOptionPane.showConfirmDialog(null, "¿Eliminar Producto?");
         //opciones de confir dialog - (si = 0; no = 1; cancel = 2; close = -1)
         switch (opcion) {
-            case 0: //presione si
+            case 0 -> {
+                //presione si
                 listaProductos.remove(idArrayList - 1);
                 this.CalcularTotalPagar();
                 this.listaTablaProductos();
-                break;
-            case 1: //presione no
-                break;
-            default://sea que presione cancel (2) o close (-1)
-                break;
+            }
+            case 1 -> {
+            }
+            default -> {
+            }
         }
+        //presione no
     }//GEN-LAST:event_jTable_productosMouseClicked
 
     private void jButton_calcular_cambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_calcular_cambioActionPerformed

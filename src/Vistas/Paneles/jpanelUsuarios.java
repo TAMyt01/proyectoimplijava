@@ -8,6 +8,7 @@ import Conexion.clsConexion;
 
 import Vistas.Paneles.Usuario.frm_AgregarUsuario;
 import Vistas.Paneles.Usuario.frm_ActualizarUsuario;
+import Vistas.Paneles.Usuario.frm_ModificarUsuario;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -287,7 +288,7 @@ public class jpanelUsuarios extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtBuscarKeyReleased
 
-    private void cargaTablaUser() {
+    public void cargaTablaUser() {
         Connection cn = clsConexion.conectar();
         String sql;
 
