@@ -4,6 +4,12 @@
  */
 package Vistas;
 
+import java.time.LocalDateTime;
+import javax.swing.JOptionPane;
+/*import java.util.Properties;
+import javax.mail.*;
+import javax.mail.internet.*;*/
+
 /**
  *
  * @author hp
@@ -17,6 +23,17 @@ public class Recuperar_Password extends javax.swing.JFrame {
         initComponents();
     }
 
+    
+    public class EnviarCorreo {
+        
+        //ENVIAR CODIGO
+        
+    }
+    
+    
+    private String codigoGenerado;
+    private LocalDateTime fechaExpiracion;
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,29 +44,56 @@ public class Recuperar_Password extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btn_EnviarCodigo = new javax.swing.JButton();
+        btn_Regresar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        lbl_ID_Usuario = new javax.swing.JLabel();
+        txt_ID_Usuario = new javax.swing.JTextField();
+        lbl_Cod_Verificacion = new javax.swing.JLabel();
+        txt_Cod_Verificacion = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("PuntoVenta");
 
         jPanel1.setEnabled(false);
+        jPanel1.setName(""); // NOI18N
 
-        jButton1.setText("Enviar Código");
+        btn_EnviarCodigo.setText("Enviar Código");
+        btn_EnviarCodigo.setName("btn_EnviarCodigo"); // NOI18N
+        btn_EnviarCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_EnviarCodigoActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Regresar");
+        btn_Regresar.setText("Regresar");
+        btn_Regresar.setName("btnRegresar"); // NOI18N
+        btn_Regresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_RegresarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Recuperación de Contraseña");
 
-        jLabel2.setText("ID Usuario:");
+        lbl_ID_Usuario.setText("ID Usuario:");
 
-        jLabel3.setText("Código de Verificación:");
+        txt_ID_Usuario.setName("txt_IDUsuario"); // NOI18N
+        txt_ID_Usuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_ID_UsuarioKeyTyped(evt);
+            }
+        });
 
-        jTextField2.setEnabled(false);
+        lbl_Cod_Verificacion.setText("Código de Verificación:");
+
+        txt_Cod_Verificacion.setEnabled(false);
+        txt_Cod_Verificacion.setName("txt_CodigoVerificacion"); // NOI18N
+        txt_Cod_Verificacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_Cod_VerificacionKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -57,9 +101,9 @@ public class Recuperar_Password extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(57, 57, 57)
-                .addComponent(jButton1)
+                .addComponent(btn_EnviarCodigo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(btn_Regresar)
                 .addGap(75, 75, 75))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(120, 120, 120)
@@ -69,14 +113,14 @@ public class Recuperar_Password extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addComponent(jLabel2)
+                        .addComponent(lbl_ID_Usuario)
                         .addGap(60, 60, 60)
-                        .addComponent(jTextField1))
+                        .addComponent(txt_ID_Usuario))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel3)
+                        .addComponent(lbl_Cod_Verificacion)
                         .addGap(21, 21, 21)
-                        .addComponent(jTextField2)))
+                        .addComponent(txt_Cod_Verificacion)))
                 .addGap(33, 33, 33))
         );
         jPanel1Layout.setVerticalGroup(
@@ -86,16 +130,16 @@ public class Recuperar_Password extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(46, 46, 46)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbl_ID_Usuario)
+                    .addComponent(txt_ID_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbl_Cod_Verificacion)
+                    .addComponent(txt_Cod_Verificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btn_EnviarCodigo)
+                    .addComponent(btn_Regresar))
                 .addGap(54, 54, 54))
         );
 
@@ -112,6 +156,45 @@ public class Recuperar_Password extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txt_ID_UsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_ID_UsuarioKeyTyped
+        // TODO add your handling code here:
+        if (txt_ID_Usuario.getText().length() >= 13) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_ID_UsuarioKeyTyped
+
+    private void txt_Cod_VerificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_Cod_VerificacionKeyTyped
+        // TODO add your handling code here:
+        if (txt_Cod_Verificacion.getText().length() >= 6) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_Cod_VerificacionKeyTyped
+
+    private void btn_RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegresarActionPerformed
+        // TODO add your handling code here:
+        // Crear y mostrar el formulario de Login
+        Login login = new Login();
+        login.setVisible(true);
+
+        // Cerrar el formulario actual
+        this.dispose();
+    }//GEN-LAST:event_btn_RegresarActionPerformed
+
+    private void btn_EnviarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EnviarCodigoActionPerformed
+        // TODO add your handling code here:
+        String idUsuario = txt_ID_Usuario.getText().trim();
+        
+        if (idUsuario.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingresa tu ID de usuario.");
+            return;
+        }
+        
+        //VALIDAR QUE EL ID DE USUARIO EXISTA
+        //
+        
+        
+    }//GEN-LAST:event_btn_EnviarCodigoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -149,13 +232,13 @@ public class Recuperar_Password extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btn_EnviarCodigo;
+    private javax.swing.JButton btn_Regresar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel lbl_Cod_Verificacion;
+    private javax.swing.JLabel lbl_ID_Usuario;
+    private javax.swing.JTextField txt_Cod_Verificacion;
+    private javax.swing.JTextField txt_ID_Usuario;
     // End of variables declaration//GEN-END:variables
 }

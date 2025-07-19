@@ -23,7 +23,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.AbstractDocument;
 
-import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
  *
@@ -37,7 +36,6 @@ public class frm_ActualizarUsuario extends javax.swing.JFrame {
     public frm_ActualizarUsuario() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setTitle("Modificar Usuario");
 
         imgAdvertencia.setVisible(false);
         imgAdvertencia.setToolTipText("<html>"
@@ -112,7 +110,6 @@ public class frm_ActualizarUsuario extends javax.swing.JFrame {
 
     public void RecibirDatos(String nom, String rol, String est, String ID) {
         txtNombre.setText(nom);
-        cmbRol.setSelectedItem(rol);
 
         if (est.equals("Activo")) {
             cmbEstado.setSelectedIndex(0);
@@ -121,16 +118,8 @@ public class frm_ActualizarUsuario extends javax.swing.JFrame {
         }
 
         txtIdentidad.setText(ID);
-        
-        cmbRol.setSelectedItem(rol);
 
         ctrlUsuarios ctrlUser = new ctrlUsuarios();
-        if (ctrlUser.CantAdmin() && "Gerente".equals(cmbRol.getSelectedItem().toString())) {
-            cmbEstado.enable(false);
-            cmbRol.enable(false);
-        } else {
-            AutoCompleteDecorator.decorate(cmbRol);
-        }
 
         txtPassword.setText(cont.obtenerPasswordModif(txtIdentidad.getText()));
 
@@ -144,11 +133,9 @@ public class frm_ActualizarUsuario extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
-        cmbRol = new javax.swing.JComboBox<>();
         cmbEstado = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         txtIdentidad = new javax.swing.JTextField();
@@ -159,6 +146,8 @@ public class frm_ActualizarUsuario extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         imgAdvertencia = new javax.swing.JLabel();
         btnCambio = new javax.swing.JButton();
+        lbl_Correo = new javax.swing.JLabel();
+        txt_Correo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -172,10 +161,13 @@ public class frm_ActualizarUsuario extends javax.swing.JFrame {
 
         jLabel3.setText("Nombre:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, -1, -1));
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 270, -1));
 
-        jLabel2.setText("Rol");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, -1, -1));
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 270, -1));
 
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -189,15 +181,12 @@ public class frm_ActualizarUsuario extends javax.swing.JFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
 
         txtPassword.setEnabled(false);
-        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 270, -1));
-
-        cmbRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gerente", "Vendedor" }));
-        cmbRol.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                cmbRolMousePressed(evt);
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyTyped(evt);
             }
         });
-        jPanel1.add(cmbRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 270, -1));
+        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 270, -1));
 
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Desactivado" }));
         cmbEstado.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -234,6 +223,11 @@ public class frm_ActualizarUsuario extends javax.swing.JFrame {
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 330, -1, -1));
 
         txtPasswordRepet.setEnabled(false);
+        txtPasswordRepet.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPasswordRepetKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtPasswordRepet, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 270, -1));
 
         jLabel6.setText("Repetir Contraseña");
@@ -249,6 +243,16 @@ public class frm_ActualizarUsuario extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnCambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, -1, -1));
+
+        lbl_Correo.setText("Correo Electrónico:");
+        jPanel1.add(lbl_Correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+
+        txt_Correo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_CorreoKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txt_Correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 270, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -286,7 +290,7 @@ public class frm_ActualizarUsuario extends javax.swing.JFrame {
                 clsUsuario user = new clsUsuario();
                 user.setIdUsuario(txtIdentidad.getText());
                 user.setNombre(txtNombre.getText());
-                user.setRol(cmbRol.getSelectedItem().toString());
+                
                 user.setContrasenia(txtPassword.getText());
                 user.setEstado(cmbEstado.getSelectedItem().toString());
 
@@ -299,7 +303,7 @@ public class frm_ActualizarUsuario extends javax.swing.JFrame {
 
                 txtNombre.setText("");
                 txtPassword.setText("");
-                cmbRol.setSelectedIndex(0);
+                
                 this.dispose();
 
             }else{
@@ -324,12 +328,8 @@ public class frm_ActualizarUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_chkMostrarActionPerformed
 
     private void cmbEstadoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbEstadoMousePressed
-        MostrarAdevertenncia();
+        
     }//GEN-LAST:event_cmbEstadoMousePressed
-
-    private void cmbRolMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbRolMousePressed
-        MostrarAdevertenncia();
-    }//GEN-LAST:event_cmbRolMousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
@@ -375,6 +375,34 @@ public class frm_ActualizarUsuario extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnCambioActionPerformed
 
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        // TODO add your handling code here:
+        if (txtNombre.getText().length() >= 50) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txt_CorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_CorreoKeyTyped
+        // TODO add your handling code here:
+        if (txtCorreo.getText().length() >= 100) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_CorreoKeyTyped
+
+    private void txtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyTyped
+        // TODO add your handling code here:
+        if (txtPassword.getText().length() >= 100) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPasswordKeyTyped
+
+    private void txtPasswordRepetKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordRepetKeyTyped
+        // TODO add your handling code here:
+        if (txtPasswordRepet.getText().length() >= 100) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPasswordRepetKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -412,11 +440,6 @@ public class frm_ActualizarUsuario extends javax.swing.JFrame {
         });
     }
 
-    private void MostrarAdevertenncia() {
-        ctrlUsuarios ctrlUser = new ctrlUsuarios();
-        if (ctrlUser.CantAdmin() && "Administrador".equals(cmbRol.getSelectedItem().toString())) 
-            JOptionPane.showMessageDialog(null, "Tiene que existir mas de un Administrador para cambiar de estado/rol");
-    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -424,20 +447,20 @@ public class frm_ActualizarUsuario extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JCheckBox chkMostrar;
     private javax.swing.JComboBox<String> cmbEstado;
-    private javax.swing.JComboBox<String> cmbRol;
     private javax.swing.JLabel imgAdvertencia;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbl_Correo;
     private javax.swing.JTextField txtIdentidad;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JPasswordField txtPasswordRepet;
+    private javax.swing.JTextField txt_Correo;
     // End of variables declaration//GEN-END:variables
 }

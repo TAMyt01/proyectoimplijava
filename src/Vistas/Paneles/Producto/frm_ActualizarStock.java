@@ -69,6 +69,11 @@ public class frm_ActualizarStock extends javax.swing.JFrame {
         fondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 6, -1, -1));
 
         txtCod.setEnabled(false);
+        txtCod.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodKeyTyped(evt);
+            }
+        });
         fondo.add(txtCod, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 52, 206, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -80,6 +85,11 @@ public class frm_ActualizarStock extends javax.swing.JFrame {
         fondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 92, -1, -1));
 
         txtNom.setEnabled(false);
+        txtNom.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNomKeyTyped(evt);
+            }
+        });
         fondo.add(txtNom, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 89, 206, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -91,6 +101,9 @@ public class frm_ActualizarStock extends javax.swing.JFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtCantKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantKeyTyped(evt);
+            }
         });
         fondo.add(txtCant, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 123, 206, -1));
 
@@ -101,6 +114,9 @@ public class frm_ActualizarStock extends javax.swing.JFrame {
         txtAgregarCant.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtAgregarCantKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAgregarCantKeyTyped(evt);
             }
         });
         fondo.add(txtAgregarCant, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 162, 206, -1));
@@ -190,6 +206,34 @@ public class frm_ActualizarStock extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtCodKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodKeyTyped
+        // TODO add your handling code here:
+        if (txtCod.getText().length() >= 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCodKeyTyped
+
+    private void txtNomKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomKeyTyped
+        // TODO add your handling code here:
+        if (txtNom.getText().length() >= 50) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNomKeyTyped
+
+    private void txtCantKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantKeyTyped
+        // TODO add your handling code here:
+        if (txtCant.getText().length() >= 20) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCantKeyTyped
+
+    private void txtAgregarCantKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAgregarCantKeyTyped
+        // TODO add your handling code here:
+        if (txtAgregarCant.getText().length() >= 20) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtAgregarCantKeyTyped
 
     /**
      * @param args the command line arguments

@@ -360,6 +360,9 @@ public class jpanelProductos extends javax.swing.JPanel {
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
         // TODO add your handling code here:
+        if (txtBuscar.getText().length() >= 30) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtBuscarKeyTyped
 
 

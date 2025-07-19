@@ -8,7 +8,6 @@ import Conexion.clsConexion;
 
 import Vistas.Paneles.Usuario.frm_AgregarUsuario;
 import Vistas.Paneles.Usuario.frm_ActualizarUsuario;
-import Vistas.Paneles.Usuario.frm_ModificarUsuario;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,7 +25,7 @@ public class jpanelUsuarios extends javax.swing.JPanel {
         
         this.cargaTablaUser();
         frm_AgregarUsuario.SetPanelagregar(this);
-        frm_ModificarUsuario.SetPanelModif(this);
+        //frm_ActualizarUsuario.SetPanelModif(this);
     }
 
     private frm_ActualizarUsuario modf;
@@ -61,6 +60,9 @@ public class jpanelUsuarios extends javax.swing.JPanel {
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyTyped(evt);
             }
         });
 
@@ -287,6 +289,13 @@ public class jpanelUsuarios extends javax.swing.JPanel {
             System.out.println("Error al buscar" + ex);
         }
     }//GEN-LAST:event_txtBuscarKeyReleased
+
+    private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
+        // TODO add your handling code here:
+        if (txtBuscar.getText().length() >= 30) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtBuscarKeyTyped
 
     public void cargaTablaUser() {
         Connection cn = clsConexion.conectar();

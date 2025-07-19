@@ -79,6 +79,12 @@ public class frm_ModificarCategoria extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, -1, -1));
+
+        txtNombreCategoria.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreCategoriaKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtNombreCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 202, -1));
 
         txtIdCategoria.setEnabled(false);
@@ -87,6 +93,11 @@ public class frm_ModificarCategoria extends javax.swing.JFrame {
         txtDescripCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDescripCategoriaActionPerformed(evt);
+            }
+        });
+        txtDescripCategoria.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDescripCategoriaKeyTyped(evt);
             }
         });
         jPanel1.add(txtDescripCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 200, -1));
@@ -157,6 +168,20 @@ public class frm_ModificarCategoria extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void txtNombreCategoriaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreCategoriaKeyTyped
+        // TODO add your handling code here:
+        if (txtNombreCategoria.getText().length() >= 100) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreCategoriaKeyTyped
+
+    private void txtDescripCategoriaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripCategoriaKeyTyped
+        // TODO add your handling code here:
+        if (txtDescripCategoria.getText().length() >= 100) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDescripCategoriaKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -195,7 +220,6 @@ public class frm_ModificarCategoria extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<String> cmbEstado;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

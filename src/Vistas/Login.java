@@ -43,6 +43,7 @@ public class Login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        lbl_Recuperacion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PuntoVenta");
@@ -70,7 +71,7 @@ public class Login extends javax.swing.JFrame {
 
         placeholderPassword.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         placeholderPassword.setForeground(new java.awt.Color(153, 153, 153));
-        placeholderPassword.setText("Password");
+        placeholderPassword.setText("Contraseña");
         PanelLogin.add(placeholderPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, -1));
 
         placeholderUser.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -168,6 +169,19 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/log.jpg"))); // NOI18N
         PanelLogin.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 350, 340));
+
+        lbl_Recuperacion.setForeground(new java.awt.Color(0, 102, 255));
+        lbl_Recuperacion.setText("¿Olvidaste tu contraseña?");
+        lbl_Recuperacion.setName("lbl_Recuperacion"); // NOI18N
+        lbl_Recuperacion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_RecuperacionMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbl_RecuperacionMouseEntered(evt);
+            }
+        });
+        PanelLogin.add(lbl_Recuperacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, -1, -1));
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -309,6 +323,20 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordActionPerformed
 
+    private void lbl_RecuperacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_RecuperacionMouseClicked
+        // TODO add your handling code here:
+        Recuperar_Password recuperar = new Recuperar_Password();
+        recuperar.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lbl_RecuperacionMouseClicked
+
+    private void lbl_RecuperacionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_RecuperacionMouseEntered
+        // TODO add your handling code here:
+        /*Recuperar_Password recuperar = new Recuperar_Password();
+        recuperar.setVisible(true);
+        this.dispose();*/
+    }//GEN-LAST:event_lbl_RecuperacionMouseEntered
+
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -352,6 +380,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel labelIngresarSistema;
+    private javax.swing.JLabel lbl_Recuperacion;
     private javax.swing.JLabel placeholderPassword;
     private javax.swing.JLabel placeholderUser;
     private javax.swing.JTextField txtIdentidad;

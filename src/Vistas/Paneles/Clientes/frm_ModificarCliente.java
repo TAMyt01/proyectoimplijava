@@ -79,6 +79,12 @@ public class frm_ModificarCliente extends javax.swing.JFrame {
         jLabel50.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel50.setText("Modificar Cliente");
         cmbEstadi.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 6, -1, -1));
+
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
         cmbEstadi.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 206, -1));
 
         jLabel51.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -88,11 +94,23 @@ public class frm_ModificarCliente extends javax.swing.JFrame {
         jLabel53.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel53.setText("Telefono");
         cmbEstadi.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, -1, -1));
+
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyTyped(evt);
+            }
+        });
         cmbEstadi.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 206, -1));
 
         jLabel54.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel54.setText("Estado");
         cmbEstadi.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, -1, -1));
+
+        txtDirec.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDirecKeyTyped(evt);
+            }
+        });
         cmbEstadi.add(txtDirec, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 206, -1));
 
         jButton8.setText("Guardar");
@@ -204,6 +222,27 @@ public class frm_ModificarCliente extends javax.swing.JFrame {
             txtIdentidad.setText("");
         }
     }//GEN-LAST:event_txtIdentidadKeyReleased
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        // TODO add your handling code here:
+        if (txtNombre.getText().length() >= 50) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
+        // TODO add your handling code here:
+        if (txtTelefono.getText().length() >= 50) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTelefonoKeyTyped
+
+    private void txtDirecKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDirecKeyTyped
+        // TODO add your handling code here:
+        if (txtDirec.getText().length() >= 100) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDirecKeyTyped
 
     /**
      * @param args the command line arguments

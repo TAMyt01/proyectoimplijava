@@ -1,6 +1,6 @@
 package Controladores;
 
-import Vistas.Paneles.jPanelFacturacion2;
+import Vistas.Paneles.jPanelFacturacion;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -173,11 +173,11 @@ public class ctrlVentaPDF {
             tablaProducto.addCell(producto3);
             tablaProducto.addCell(producto4);
             
-            for(int i = 0; i < jPanelFacturacion2.jTable_productos.getRowCount(); i++){
-                String producto = jPanelFacturacion2.jTable_productos.getValueAt(i, 1).toString();
-                String cantidad = jPanelFacturacion2.jTable_productos.getValueAt(i, 2).toString();
-                String precio = jPanelFacturacion2.jTable_productos.getValueAt(i, 3).toString();
-                String total = jPanelFacturacion2.jTable_productos.getValueAt(i, 4).toString();
+            for(int i = 0; i < jPanelFacturacion.jTable_productos.getRowCount(); i++){
+                String producto = jPanelFacturacion.jTable_productos.getValueAt(i, 1).toString();
+                String cantidad = jPanelFacturacion.jTable_productos.getValueAt(i, 2).toString();
+                String precio = jPanelFacturacion.jTable_productos.getValueAt(i, 3).toString();
+                String total = jPanelFacturacion.jTable_productos.getValueAt(i, 4).toString();
                 
                 tablaProducto.addCell(cantidad);
                 tablaProducto.addCell(producto);
@@ -191,7 +191,7 @@ public class ctrlVentaPDF {
             //Total pagar
             Paragraph info = new Paragraph();
             info.add(Chunk.NEWLINE);
-            info.add("Total a pagar: " + jPanelFacturacion2.txt_total_pagar.getText());
+            info.add("Total a pagar: " + jPanelFacturacion.txt_total_pagar.getText());
             info.setAlignment(Element.ALIGN_RIGHT);
             doc.add(info);
             

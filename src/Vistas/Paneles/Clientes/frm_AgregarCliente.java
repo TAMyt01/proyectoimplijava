@@ -66,6 +66,12 @@ public class frm_AgregarCliente extends javax.swing.JFrame {
         jLabel50.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel50.setText("Agregar Cliente");
         fondo7.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 6, -1, -1));
+
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
         fondo7.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 52, 206, -1));
 
         jLabel51.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -80,17 +86,32 @@ public class frm_AgregarCliente extends javax.swing.JFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtIdentidadKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIdentidadKeyTyped(evt);
+            }
         });
         fondo7.add(txtIdentidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 89, 206, -1));
 
         jLabel53.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel53.setText("Telefono");
         fondo7.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 127, -1, -1));
+
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyTyped(evt);
+            }
+        });
         fondo7.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 123, 206, -1));
 
         jLabel54.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel54.setText("Direccion");
         fondo7.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 164, -1, -1));
+
+        txtDirec.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDirecKeyTyped(evt);
+            }
+        });
         fondo7.add(txtDirec, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 162, 206, -1));
 
         jButton8.setText("Guardar");
@@ -186,6 +207,34 @@ public class frm_AgregarCliente extends javax.swing.JFrame {
     private void txtIdentidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdentidadKeyReleased
 
     }//GEN-LAST:event_txtIdentidadKeyReleased
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        // TODO add your handling code here:
+        if (txtNombre.getText().length() >= 100) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtIdentidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdentidadKeyTyped
+        // TODO add your handling code here:
+        if (txtIdentidad.getText().length() >= 13) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtIdentidadKeyTyped
+
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
+        // TODO add your handling code here:
+        if (txtTelefono.getText().length() >= 50) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTelefonoKeyTyped
+
+    private void txtDirecKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDirecKeyTyped
+        // TODO add your handling code here:
+        if (txtDirec.getText().length() >= 100) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDirecKeyTyped
 
     /**
      * @param args the command line arguments

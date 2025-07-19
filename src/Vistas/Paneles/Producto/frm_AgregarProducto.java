@@ -69,6 +69,12 @@ public class frm_AgregarProducto extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Nuevo Producto");
         fondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 6, -1, -1));
+
+        txtCod.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodKeyTyped(evt);
+            }
+        });
         fondo.add(txtCod, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 52, 206, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -78,6 +84,12 @@ public class frm_AgregarProducto extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Nombre");
         fondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 92, -1, -1));
+
+        txtNom.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNomKeyTyped(evt);
+            }
+        });
         fondo.add(txtNom, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 89, 206, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -93,6 +105,9 @@ public class frm_AgregarProducto extends javax.swing.JFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtCantidadKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantidadKeyTyped(evt);
+            }
         });
         fondo.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 123, 206, -1));
 
@@ -104,15 +119,29 @@ public class frm_AgregarProducto extends javax.swing.JFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPrecKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecKeyTyped(evt);
+            }
         });
         fondo.add(txtPrec, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 162, 206, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Descripcion");
         fondo.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 207, -1, -1));
+
+        txtDesc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDescKeyTyped(evt);
+            }
+        });
         fondo.add(txtDesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 202, 206, -1));
 
         cmbCategoria.setEditable(true);
+        cmbCategoria.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cmbCategoriaKeyTyped(evt);
+            }
+        });
         fondo.add(cmbCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 244, 206, 20));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -193,6 +222,45 @@ public class frm_AgregarProducto extends javax.swing.JFrame {
     private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCantidadActionPerformed
+
+    private void txtCodKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodKeyTyped
+        // TODO add your handling code here:
+        if (txtCod.getText().length() >= 20) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCodKeyTyped
+
+    private void txtNomKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomKeyTyped
+        // TODO add your handling code here:
+        if (txtNom.getText().length() >= 100) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNomKeyTyped
+
+    private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
+        // TODO add your handling code here:
+        if (txtCantidad.getText().length() >= 20) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCantidadKeyTyped
+
+    private void txtPrecKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecKeyTyped
+        // TODO add your handling code here:
+        if (txtPrec.getText().length() >= 20) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPrecKeyTyped
+
+    private void txtDescKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescKeyTyped
+        // TODO add your handling code here:
+        if (txtDesc.getText().length() >= 100) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDescKeyTyped
+
+    private void cmbCategoriaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbCategoriaKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbCategoriaKeyTyped
 
     private void CargarCMB() {
         Connection cn = clsConexion.conectar();

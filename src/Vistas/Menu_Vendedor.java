@@ -1,7 +1,7 @@
 package Vistas;
 
 import Controladores.ctrlUsuarios;
-import Vistas.Paneles.jPanelFacturacion2;
+import Vistas.Paneles.jPanelFacturacion;
 import Vistas.Paneles.jPanelHistorial;
 
 import Vistas.Paneles.jpanelClientes;
@@ -328,7 +328,7 @@ public class Menu_Vendedor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReportVentMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportVentMousePressed
-        jPanelFacturacion2 fact = new jPanelFacturacion2();
+        jPanelFacturacion fact = new jPanelFacturacion();
         abrirPanel(fact);
         this.colorpress(btnAdminVent,  btnInicio,  btnCliente, btnReportVent);
     }//GEN-LAST:event_btnReportVentMousePressed

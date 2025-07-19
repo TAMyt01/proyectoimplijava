@@ -3,7 +3,7 @@ package Vistas.Paneles;
 import Conexion.clsConexion;
 
 import Vistas.Paneles.Categoria.frm_ModificarCategoria;
-import Vistas.Paneles.Categoria.frm_agregarCategoria;
+import Vistas.Paneles.Categoria.frm_AgregarCategoria;
 
 import javax.swing.JOptionPane;
 
@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class jpanelCategoria extends javax.swing.JPanel {
 
-    private frm_agregarCategoria cate; //Declaramos cate como  formulario
+    private frm_AgregarCategoria cate; //Declaramos cate como  formulario
     private frm_ModificarCategoria Mcate; //lo mismo que arriba
     private String ID = "", nombre = "", descripcion = "", estado = "";
 
@@ -26,7 +26,7 @@ public class jpanelCategoria extends javax.swing.JPanel {
         initComponents();
         this.cargaTablaCategoria();
         frm_ModificarCategoria.SetPanelModificar(this);
-        frm_agregarCategoria.setPanelCategoria(this); //le mandamos la informacion de este panel al frmAGREGAR para que tenga acceso a los metodos publicos
+        frm_AgregarCategoria.setPanelCategoria(this); //le mandamos la informacion de este panel al frmAGREGAR para que tenga acceso a los metodos publicos
        
     }
 
@@ -125,6 +125,9 @@ public class jpanelCategoria extends javax.swing.JPanel {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyTyped(evt);
+            }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 10;
@@ -220,7 +223,7 @@ public class jpanelCategoria extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (cate == null || !cate.isVisible()) {
-            cate = new frm_agregarCategoria(); //Se declara el objeto
+            cate = new frm_AgregarCategoria(); //Se declara el objeto
             cate.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "La ventana ya está abierta, ciérrela antes de abrirla nuevamente.");
@@ -333,6 +336,13 @@ public class jpanelCategoria extends javax.swing.JPanel {
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarActionPerformed
+
+    private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
+        // TODO add your handling code here:
+        if (txtBuscar.getText().length() >= 20) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtBuscarKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

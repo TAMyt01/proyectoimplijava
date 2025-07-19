@@ -1,6 +1,6 @@
 package Vistas;
 
-import Vistas.Paneles.jPanelFacturacion2;
+import Vistas.Paneles.jPanelFacturacion;
 import Vistas.Paneles.jPanelHistorial;
 import Vistas.Paneles.jpanelCategoria;
 import Vistas.Paneles.jpanelClientes;
@@ -469,7 +469,7 @@ private void cerrarSesion() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfMousePressed
-        jPanelFacturacion2 fact = new jPanelFacturacion2();
+        jPanelFacturacion fact = new jPanelFacturacion();
         abrirPanel(fact);
         this.colorpress(btnHistorial, btnCategorias, btnUsuario, btnInicio, btnProducto, btnCliente, btnConf);
     }//GEN-LAST:event_btnConfMousePressed
