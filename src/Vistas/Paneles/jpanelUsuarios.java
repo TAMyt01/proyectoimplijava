@@ -30,9 +30,7 @@ public class jpanelUsuarios extends javax.swing.JPanel {
 
     private frm_ActualizarUsuario modf;
     private frm_AgregarUsuario agreg;
-    private String nombre, rol;
-    private String est;
-    private String ID;
+    private String nombre, rol, correo, est, ID;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -41,7 +39,7 @@ public class jpanelUsuarios extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btn_AgregarUsuario = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaUser = new javax.swing.JTable();
         btnModif = new javax.swing.JButton();
@@ -66,13 +64,13 @@ public class jpanelUsuarios extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(55, 116, 209));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Agregar Usuario");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_AgregarUsuario.setBackground(new java.awt.Color(55, 116, 209));
+        btn_AgregarUsuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_AgregarUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        btn_AgregarUsuario.setText("Agregar Usuario");
+        btn_AgregarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_AgregarUsuarioActionPerformed(evt);
             }
         });
 
@@ -149,7 +147,7 @@ public class jpanelUsuarios extends javax.swing.JPanel {
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btn_AgregarUsuario)
                         .addGap(12, 12, 12)
                         .addComponent(btnModif))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 788, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -184,34 +182,35 @@ public class jpanelUsuarios extends javax.swing.JPanel {
                         .addComponent(jLabel3)))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
+                    .addComponent(btn_AgregarUsuario)
                     .addComponent(btnModif))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_AgregarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarUsuarioActionPerformed
         if (agreg == null || !agreg.isVisible()) {
             agreg = new frm_AgregarUsuario();
             agreg.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "La ventana ya está abierta, ciérrela antes de abrirla nuevamente.");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_AgregarUsuarioActionPerformed
 
     private void btnModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifActionPerformed
-        if ("".equals(ID)) {
+
+        if ("".equals(ID)) 
             JOptionPane.showMessageDialog(null, "Seleccione el usuario");
-        } else if (modf == null || !modf.isVisible()) {
+        else if (modf == null || !modf.isVisible()) {
             modf = new frm_ActualizarUsuario();
-            modf.RecibirDatos(nombre, rol, est,ID);
+            modf.RecibirDatos(nombre, rol, correo, est, ID);
             modf.setVisible(true);
           
-        } else {
+        } else 
             JOptionPane.showMessageDialog(null, "La ventana ya está abierta, ciérrela antes de abrirla nuevamente.");
-        }
-          ID = "";
+        
+          //ID = "";
     }//GEN-LAST:event_btnModifActionPerformed
 
     private void tablaUserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaUserKeyReleased
@@ -222,11 +221,8 @@ public class jpanelUsuarios extends javax.swing.JPanel {
         int seleccion = tablaUser.rowAtPoint(evt.getPoint());
         ID = tablaUser.getValueAt(seleccion, 0).toString();
         nombre = String.valueOf(tablaUser.getValueAt(seleccion, 1));
-        
         rol = String.valueOf(tablaUser.getValueAt(seleccion, 2));
         est = String.valueOf(tablaUser.getValueAt(seleccion, 3));
-
-
     }//GEN-LAST:event_tablaUserMousePressed
 
     private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed
@@ -337,9 +333,9 @@ public class jpanelUsuarios extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnModif;
+    private javax.swing.JButton btn_AgregarUsuario;
     private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JComboBox<String> cmbFiltro;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

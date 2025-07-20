@@ -106,6 +106,9 @@ public class Login extends javax.swing.JFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtIdentidadKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIdentidadKeyTyped(evt);
+            }
         });
         PanelLogin.add(txtIdentidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 613, 39));
 
@@ -137,6 +140,9 @@ public class Login extends javax.swing.JFrame {
         txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtPasswordKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyTyped(evt);
             }
         });
         PanelLogin.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 613, 39));
@@ -336,6 +342,20 @@ public class Login extends javax.swing.JFrame {
         recuperar.setVisible(true);
         this.dispose();*/
     }//GEN-LAST:event_lbl_RecuperacionMouseEntered
+
+    private void txtIdentidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdentidadKeyTyped
+        // TODO add your handling code here:
+        if (txtIdentidad.getText().length() >= 15) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtIdentidadKeyTyped
+
+    private void txtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyTyped
+        // TODO add your handling code here:
+        if (txtPassword.getText().length() >= 50) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPasswordKeyTyped
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

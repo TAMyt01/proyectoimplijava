@@ -108,7 +108,14 @@ public class frm_ActualizarUsuario extends javax.swing.JFrame {
         paneluser = panel; // Asignar la referencia del panel
     }
 
-    public void RecibirDatos(String nom, String rol, String est, String ID) {
+    /**
+     *
+     * @param nom
+     * @param correo
+     * @param est
+     * @param ID
+     */
+    public void RecibirDatos(String nom, String correo, String est, String ID) {
         txtNombre.setText(nom);
 
         if (est.equals("Activo")) {
@@ -116,7 +123,7 @@ public class frm_ActualizarUsuario extends javax.swing.JFrame {
         } else {
             cmbEstado.setSelectedIndex(1);
         }
-
+        txt_Correo.setText(correo);
         txtIdentidad.setText(ID);
 
         ctrlUsuarios ctrlUser = new ctrlUsuarios();
@@ -258,7 +265,7 @@ public class frm_ActualizarUsuario extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,9 +278,9 @@ public class frm_ActualizarUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        if (txtNombre.getText().isEmpty() || txtPassword.getText().isEmpty()) {
+        if (txtNombre.getText().isEmpty() || txtPassword.getText().isEmpty()) 
             JOptionPane.showMessageDialog(null, "rellene todos los campos");
-        } else {
+        else {
 
             String password = new String(txtPassword.getPassword());
 
@@ -290,6 +297,7 @@ public class frm_ActualizarUsuario extends javax.swing.JFrame {
                 clsUsuario user = new clsUsuario();
                 user.setIdUsuario(txtIdentidad.getText());
                 user.setNombre(txtNombre.getText());
+                user.setCorreo(txt_Correo.getText());
                 
                 user.setContrasenia(txtPassword.getText());
                 user.setEstado(cmbEstado.getSelectedItem().toString());
@@ -297,18 +305,18 @@ public class frm_ActualizarUsuario extends javax.swing.JFrame {
                 if (controlUsuario.modificar()) {
                     JOptionPane.showMessageDialog(null, "Registro modificado");
                     paneluser.cargaTablaUser();//Actualizamos tabla del panel principal de la categoria
-                } else {
+                } else 
                     JOptionPane.showMessageDialog(null, "Error al Modificar");
-                }
+                
 
                 txtNombre.setText("");
                 txtPassword.setText("");
                 
                 this.dispose();
 
-            }else{
+            }else
                 JOptionPane.showMessageDialog(null, "La contraseña no coenciden");
-            }
+            
         }
 
 
@@ -463,4 +471,8 @@ public class frm_ActualizarUsuario extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtPasswordRepet;
     private javax.swing.JTextField txt_Correo;
     // End of variables declaration//GEN-END:variables
+
+    public void RecibirDatos(String nombre, String rol, String correo, String est, String ID) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

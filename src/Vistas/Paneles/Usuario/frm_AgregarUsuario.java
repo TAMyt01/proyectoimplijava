@@ -129,6 +129,11 @@ public class frm_AgregarUsuario extends javax.swing.JFrame {
                 txtIdentidadActionPerformed(evt);
             }
         });
+        txtIdentidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIdentidadKeyTyped(evt);
+            }
+        });
 
         jLabel2.setText("Rol");
 
@@ -148,6 +153,12 @@ public class frm_AgregarUsuario extends javax.swing.JFrame {
 
         jLabel4.setText("Contraseña");
 
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyTyped(evt);
+            }
+        });
+
         cmbRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gerente", "Vendedor" }));
         cmbRol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,7 +175,19 @@ public class frm_AgregarUsuario extends javax.swing.JFrame {
 
         jLabel5.setText("Nombre:");
 
+        txtNombre1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombre1KeyTyped(evt);
+            }
+        });
+
         imgAdvertencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/advertencia.png"))); // NOI18N
+
+        txtPasswordRepet.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPasswordRepetKeyTyped(evt);
+            }
+        });
 
         jLabel6.setText("Repetir Contraseña");
 
@@ -365,6 +388,34 @@ public class frm_AgregarUsuario extends javax.swing.JFrame {
             evt.consume();
         }*/
     }//GEN-LAST:event_txt_CorreoKeyTyped
+
+    private void txtIdentidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdentidadKeyTyped
+        // TODO add your handling code here:
+        if (txtIdentidad.getText().length() >= 15) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtIdentidadKeyTyped
+
+    private void txtNombre1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombre1KeyTyped
+        // TODO add your handling code here:
+        if (txtNombre1.getText().length() >= 50) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombre1KeyTyped
+
+    private void txtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyTyped
+        // TODO add your handling code here:
+        if (txtPassword.getText().length() >= 50) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPasswordKeyTyped
+
+    private void txtPasswordRepetKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordRepetKeyTyped
+        // TODO add your handling code here:
+        if (txtPasswordRepet.getText().length() >= 50) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPasswordRepetKeyTyped
 
     /**
      * @param args the command line arguments

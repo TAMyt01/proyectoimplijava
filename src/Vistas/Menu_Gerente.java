@@ -55,7 +55,7 @@ public class Menu_Gerente extends javax.swing.JFrame {
 
 private void cerrarSesion() {
     
-    System.out.println("Sesion cerrada por inactividad");
+    System.out.println("Sesión cerrada por inactividad");
         dispose();
         new Login().setVisible(true);
 }
@@ -582,7 +582,7 @@ private void cerrarSesion() {
 
         int respuesta = JOptionPane.showConfirmDialog(
                 null, // Componente padre (null para centrado en pantalla)
-                "¿Deseas Cerrar secion?", // Mensaje
+                "¿Deseas Cerrar sesión?", // Mensaje
                 "Confirmación", // Título de la ventana
                 JOptionPane.YES_NO_OPTION // Tipo de opciones
         );

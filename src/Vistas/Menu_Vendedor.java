@@ -390,7 +390,7 @@ public class Menu_Vendedor extends javax.swing.JFrame {
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
         int respuesta = JOptionPane.showConfirmDialog(
             null, // Componente padre (null para centrado en pantalla)
-            "¿Deseas Cerrar secion?", // Mensaje
+            "¿Deseas Cerrar sesión?", // Mensaje
             "Confirmación", // Título de la ventana
             JOptionPane.YES_NO_OPTION // Tipo de opciones
         );

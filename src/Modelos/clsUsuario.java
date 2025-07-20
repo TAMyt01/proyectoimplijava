@@ -12,6 +12,7 @@ public class clsUsuario
     public String rol;
     public String estado;
     public String enUso;
+    private String correo;
 
     // Constructor vacío
     public clsUsuario() 
@@ -80,6 +81,11 @@ public class clsUsuario
     {
         this.contrasenia = contrasenia;
     }
+    
+    public void setCorreo (String correo)
+    {
+        this.correo = correo;
+    } 
 
     public void setRol(String rol) 
     {

@@ -21,6 +21,7 @@ public class Recuperar_Password extends javax.swing.JFrame {
      */
     public Recuperar_Password() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     
@@ -159,7 +160,7 @@ public class Recuperar_Password extends javax.swing.JFrame {
 
     private void txt_ID_UsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_ID_UsuarioKeyTyped
         // TODO add your handling code here:
-        if (txt_ID_Usuario.getText().length() >= 13) {
+        if (txt_ID_Usuario.getText().length() >= 15) {
             evt.consume();
         }
     }//GEN-LAST:event_txt_ID_UsuarioKeyTyped
