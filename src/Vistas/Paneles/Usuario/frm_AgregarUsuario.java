@@ -361,9 +361,9 @@ public class frm_AgregarUsuario extends javax.swing.JFrame {
 
     private void txt_CorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_CorreoKeyTyped
         // TODO add your handling code here:
-        if (txtCorreo.getText().length() >= 100) {
+        /*if (txtCorreo.getText().length() >= 100) {
             evt.consume();
-        }
+        }*/
     }//GEN-LAST:event_txt_CorreoKeyTyped
 
     /**
