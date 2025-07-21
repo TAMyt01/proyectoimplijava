@@ -56,7 +56,7 @@ public class Recuperar_Password extends javax.swing.JFrame {
     
         public static boolean enviarCorreo(String destinatario, String codigo) {
             final String remitente = "correo@gmail.com";
-            final String clave = "clave_aplicacion";//Clave de Aplicacion
+            final String clave = "azbc mltv xlib hcpj";//Clave de Aplicacion
 
             Properties props = new Properties();
             props.put("mail.smtp.auth", "true");
@@ -135,8 +135,23 @@ public class Recuperar_Password extends javax.swing.JFrame {
             return correo;
         }
         //
-    
-    //private String codigoGenerado;
+        
+        // Método para mostrar el correo parcialmente
+        private void mostrarCorreoParcial(String idUsuario) {
+            String correo = obtenerCorreoUsuario(idUsuario);
+            String correoParcial = null;
+
+            if (correo != null) 
+                correoParcial = correo.substring(0, 3) + "******" + correo.substring(correo.indexOf("@"));
+                lblCorreo.setText(correoParcial);
+            
+        }
+        
+        
+        
+        
+        //
+        
     //private LocalDateTime fechaExpiracion;
     
     /**
@@ -156,6 +171,7 @@ public class Recuperar_Password extends javax.swing.JFrame {
         txt_ID_Usuario = new javax.swing.JTextField();
         lbl_Cod_Verificacion = new javax.swing.JLabel();
         txt_Cod_Verificacion = new javax.swing.JTextField();
+        lblCorreo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PuntoVenta");
@@ -203,6 +219,8 @@ public class Recuperar_Password extends javax.swing.JFrame {
             }
         });
 
+        lblCorreo.setText("Correo");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -219,16 +237,20 @@ public class Recuperar_Password extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(lbl_ID_Usuario)
-                        .addGap(60, 60, 60)
-                        .addComponent(txt_ID_Usuario))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lbl_Cod_Verificacion)
                         .addGap(21, 21, 21)
-                        .addComponent(txt_Cod_Verificacion)))
+                        .addComponent(txt_Cod_Verificacion))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(lbl_ID_Usuario)
+                        .addGap(60, 60, 60)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblCorreo)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txt_ID_Usuario))))
                 .addGap(33, 33, 33))
         );
         jPanel1Layout.setVerticalGroup(
@@ -240,7 +262,9 @@ public class Recuperar_Password extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_ID_Usuario)
                     .addComponent(txt_ID_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblCorreo)
+                .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_Cod_Verificacion)
                     .addComponent(txt_Cod_Verificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -318,6 +342,8 @@ public class Recuperar_Password extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No se pudo obtener el correo del usuario.");
             return;
         }
+        else
+            mostrarCorreoParcial(idUsuario);
         
         
         String codigo = EnviarCorreo.generarCodigo();
@@ -383,6 +409,7 @@ public class Recuperar_Password extends javax.swing.JFrame {
     private javax.swing.JButton btn_Regresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblCorreo;
     private javax.swing.JLabel lbl_Cod_Verificacion;
     private javax.swing.JLabel lbl_ID_Usuario;
     private javax.swing.JTextField txt_Cod_Verificacion;
