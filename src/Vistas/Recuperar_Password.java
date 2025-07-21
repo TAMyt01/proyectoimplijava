@@ -5,10 +5,19 @@
 package Vistas;
 
 import java.time.LocalDateTime;
+import java.util.Properties;
+import java.util.Random;
+import javax.mail.Authenticator;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
-/*import java.util.Properties;
+
+import java.util.Properties;
 import javax.mail.*;
-import javax.mail.internet.*;*/
+import javax.mail.internet.*;
 
 /**
  *
@@ -28,8 +37,51 @@ public class Recuperar_Password extends javax.swing.JFrame {
     public class EnviarCorreo {
         
         //ENVIAR CODIGO
-        
+        public static String generarCodigo() {
+            Random rand = new Random();
+            int codigo = 100000 + rand.nextInt(900000); // 6 dígitos
+            return String.valueOf(codigo);
+        }
+    
+        public static boolean enviarCorreo(String destinatario, String codigo) {
+            final String remitente = "correo@gmail.com";
+            final String clave = "clave_aplicacion";//Clave de Aplicacion
+
+            Properties props = new Properties();
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.smtp.host", "smtp.gmail.com");
+            props.put("mail.smtp.port", "587");
+
+            // Autenticación con el correo remitente
+            Session session = Session.getInstance(props, new Authenticator() {
+                @Override
+                protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+                    return new javax.mail.PasswordAuthentication(remitente, clave);
+                }
+            });
+
+            try {
+                MimeMessage message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(remitente));
+                message.setRecipients(
+                    MimeMessage.RecipientType.TO,
+                    InternetAddress.parse(destinatario)
+                );
+                message.setSubject("Código de Verificación");
+                message.setText("Tu código de verificación es: " + codigo);
+
+                Transport.send(message);
+                return true;
+
+            } catch (MessagingException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
     }
+    
+    
     
     
     private String codigoGenerado;
@@ -193,6 +245,18 @@ public class Recuperar_Password extends javax.swing.JFrame {
         
         //VALIDAR QUE EL ID DE USUARIO EXISTA
         //
+        
+        String correoDestino = "correo@gmail.com";
+        String codigo = EnviarCorreo.generarCodigo();
+
+        boolean enviado = EnviarCorreo.enviarCorreo(correoDestino, codigo);
+
+        if (enviado) {
+            System.out.println("Correo enviado con éxito a " + correoDestino);
+            JOptionPane.showMessageDialog(this, "Correo enviado correctamente.");
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al enviar el correo.");
+        }
         
         
     }//GEN-LAST:event_btn_EnviarCodigoActionPerformed
