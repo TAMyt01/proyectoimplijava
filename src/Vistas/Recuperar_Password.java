@@ -4,6 +4,13 @@
  */
 package Vistas;
 
+import Conexion.clsConexion;
+import Vistas.Login;
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.time.LocalDateTime;
 import java.util.Properties;
 import java.util.Random;
@@ -18,6 +25,10 @@ import javax.swing.JOptionPane;
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 
 /**
  *
@@ -81,11 +92,52 @@ public class Recuperar_Password extends javax.swing.JFrame {
         }
     }
     
+        //VALIDAR QUE EL ID DE USUARIO EXISTA
+        //
+        public boolean usuarioExiste(String idUsuario) {
+            boolean existe = false;
+            String sql = "SELECT idUsuario FROM tb_usuario WHERE idUsuario = ?";
+
+            try (Connection cn = (Connection) clsConexion.conectar();
+                 PreparedStatement pst = (PreparedStatement) cn.prepareStatement(sql)) {
+
+                pst.setString(1, idUsuario);
+                ResultSet rs = pst.executeQuery();
+
+                if (rs.next()) 
+                    existe = true;
+                
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return existe;
+        }
+        //
     
+        //Obtener Correo del Usuario
+        public String obtenerCorreoUsuario(String idUsuario) {
+            String correo = null;
+            String sql = "SELECT correo FROM tb_usuario WHERE idUsuario = ?";
+
+            try (Connection cn = (Connection) clsConexion.conectar();
+                 PreparedStatement pst = (PreparedStatement) cn.prepareStatement(sql)) {
+
+                pst.setString(1, idUsuario);
+                ResultSet rs = pst.executeQuery();
+
+                if (rs.next()) {
+                    correo = rs.getString("correo");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            return correo;
+        }
+        //
     
-    
-    private String codigoGenerado;
-    private LocalDateTime fechaExpiracion;
+    //private String codigoGenerado;
+    //private LocalDateTime fechaExpiracion;
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -133,6 +185,9 @@ public class Recuperar_Password extends javax.swing.JFrame {
 
         txt_ID_Usuario.setName("txt_IDUsuario"); // NOI18N
         txt_ID_Usuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_ID_UsuarioKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_ID_UsuarioKeyTyped(evt);
             }
@@ -212,16 +267,25 @@ public class Recuperar_Password extends javax.swing.JFrame {
 
     private void txt_ID_UsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_ID_UsuarioKeyTyped
         // TODO add your handling code here:
-        if (txt_ID_Usuario.getText().length() >= 15) {
+        if (txt_ID_Usuario.getText().length() >= 15) 
             evt.consume();
-        }
+        
+        txt_ID_Usuario.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c)) {
+                    e.consume();
+                }
+            }
+        });
     }//GEN-LAST:event_txt_ID_UsuarioKeyTyped
 
     private void txt_Cod_VerificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_Cod_VerificacionKeyTyped
         // TODO add your handling code here:
-        if (txt_Cod_Verificacion.getText().length() >= 6) {
+        if (txt_Cod_Verificacion.getText().length() >= 6) 
             evt.consume();
-        }
+        
     }//GEN-LAST:event_txt_Cod_VerificacionKeyTyped
 
     private void btn_RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegresarActionPerformed
@@ -242,24 +306,42 @@ public class Recuperar_Password extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Por favor, ingresa tu ID de usuario.");
             return;
         }
-        
-        //VALIDAR QUE EL ID DE USUARIO EXISTA
-        //
-        
-        String correoDestino = "correo@gmail.com";
-        String codigo = EnviarCorreo.generarCodigo();
 
+        if (!usuarioExiste(idUsuario)) {
+            JOptionPane.showMessageDialog(this, "El ID de usuario no existe.");
+            return;
+        }
+        
+        String correoDestino = obtenerCorreoUsuario(idUsuario);
+        
+        if (correoDestino == null) {
+            JOptionPane.showMessageDialog(this, "No se pudo obtener el correo del usuario.");
+            return;
+        }
+        
+        
+        String codigo = EnviarCorreo.generarCodigo();
         boolean enviado = EnviarCorreo.enviarCorreo(correoDestino, codigo);
 
         if (enviado) {
             System.out.println("Correo enviado con éxito a " + correoDestino);
             JOptionPane.showMessageDialog(this, "Correo enviado correctamente.");
-        } else {
+        } else 
             JOptionPane.showMessageDialog(this, "Error al enviar el correo.");
-        }
-        
         
     }//GEN-LAST:event_btn_EnviarCodigoActionPerformed
+
+    private void txt_ID_UsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_ID_UsuarioKeyReleased
+        // TODO add your handling code here:
+        String texto = txt_ID_Usuario.getText().replaceAll("-", "");
+        
+        if (texto.length() > 4 && texto.length() <= 8) 
+            texto = texto.substring(0, 4) + "-" + texto.substring(4);
+         else if (texto.length() > 8) 
+            texto = texto.substring(0, 4) + "-" + texto.substring(4, 8) + "-" + texto.substring(8, Math.min(13, texto.length()));
+        
+        txt_ID_Usuario.setText(texto);
+    }//GEN-LAST:event_txt_ID_UsuarioKeyReleased
 
     /**
      * @param args the command line arguments

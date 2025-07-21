@@ -301,14 +301,14 @@ public class Login extends javax.swing.JFrame {
 
     private void txtIdentidadKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdentidadKeyPressed
 
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) { //Preuntamos si preciona enter
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) { //Preguntamos si presiona enter
             txtPassword.grabFocus(); // redireccionamos al password
         }
     }//GEN-LAST:event_txtIdentidadKeyPressed
 
     private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
 
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) { //Preuntamos si preciona enter
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) { //Preguntamos si presiona enter
             this.login(); // redireccionamos al password
         }
     }//GEN-LAST:event_txtPasswordKeyPressed
