@@ -6,7 +6,7 @@ import java.awt.Toolkit;
 
 public class formato_Password extends DocumentFilter {
 
-  private static final String PERMITIDOS = "A-Za-z0-9@#$%^&+=!_\\*-";
+    private static final String PERMITIDOS = "A-Za-z0-9@#$%^&+=!_\\*\\-.()[]{}|^~,:;?<>,'\"/";
     private static final int MAX_LONGITUD = 16;
 
     private final Pattern pattern = Pattern.compile("^[" + PERMITIDOS + "]{0," + MAX_LONGITUD + "}$");

@@ -271,6 +271,7 @@ public class Recuperar_Password extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         btn_EnviarCodigo = new javax.swing.JButton();
         btn_Regresar = new javax.swing.JButton();
@@ -281,6 +282,25 @@ public class Recuperar_Password extends javax.swing.JFrame {
         txt_Cod_Verificacion = new javax.swing.JTextField();
         lblCorreo = new javax.swing.JLabel();
         btnConfirmarCodigo = new javax.swing.JButton();
+        panelCambioContra = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        btnCambiarContra = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        chkMostrar = new javax.swing.JCheckBox();
+        txtNuevaContra = new javax.swing.JPasswordField();
+        txtConfirmarContra = new javax.swing.JPasswordField();
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PuntoVenta");
@@ -338,14 +358,106 @@ public class Recuperar_Password extends javax.swing.JFrame {
             }
         });
 
+        panelCambioContra.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelCambioContra.setEnabled(false);
+
+        jLabel2.setText("Nueva Contraseña:");
+
+        jLabel3.setText("Confirmar Contraseña:");
+
+        btnCambiarContra.setText("Cambiar Contraseña");
+        btnCambiarContra.setEnabled(false);
+        btnCambiarContra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambiarContraActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Ingresa Nueva Contraseña");
+
+        chkMostrar.setText("Mostrar Contraseña");
+        chkMostrar.setEnabled(false);
+        chkMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkMostrarActionPerformed(evt);
+            }
+        });
+
+        txtNuevaContra.setEnabled(false);
+        txtNuevaContra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNuevaContraKeyTyped(evt);
+            }
+        });
+
+        txtConfirmarContra.setEnabled(false);
+        txtConfirmarContra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtConfirmarContraKeyTyped(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelCambioContraLayout = new javax.swing.GroupLayout(panelCambioContra);
+        panelCambioContra.setLayout(panelCambioContraLayout);
+        panelCambioContraLayout.setHorizontalGroup(
+            panelCambioContraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCambioContraLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(131, 131, 131))
+            .addGroup(panelCambioContraLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelCambioContraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelCambioContraLayout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(chkMostrar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                        .addComponent(btnCambiarContra))
+                    .addGroup(panelCambioContraLayout.createSequentialGroup()
+                        .addGroup(panelCambioContraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addGap(28, 28, 28)
+                        .addGroup(panelCambioContraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNuevaContra)
+                            .addComponent(txtConfirmarContra))))
+                .addGap(18, 18, 18))
+        );
+        panelCambioContraLayout.setVerticalGroup(
+            panelCambioContraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCambioContraLayout.createSequentialGroup()
+                .addContainerGap(11, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelCambioContraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelCambioContraLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(29, 29, 29))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCambioContraLayout.createSequentialGroup()
+                        .addComponent(txtNuevaContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
+                .addGroup(panelCambioContraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtConfirmarContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelCambioContraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCambiarContra)
+                    .addComponent(chkMostrar))
+                .addGap(15, 15, 15))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(120, 120, 120)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(57, 57, 57)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnConfirmarCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_EnviarCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                .addComponent(btn_Regresar)
+                .addGap(75, 75, 75))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
@@ -364,20 +476,21 @@ public class Recuperar_Password extends javax.swing.JFrame {
                             .addComponent(txt_ID_Usuario))))
                 .addGap(33, 33, 33))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnConfirmarCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_EnviarCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-                .addComponent(btn_Regresar)
-                .addGap(75, 75, 75))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(141, 141, 141)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(panelCambioContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
                 .addComponent(jLabel1)
-                .addGap(46, 46, 46)
+                .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_ID_Usuario)
                     .addComponent(txt_ID_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -387,13 +500,15 @@ public class Recuperar_Password extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_Cod_Verificacion)
                     .addComponent(txt_Cod_Verificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_EnviarCodigo)
                     .addComponent(btn_Regresar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnConfirmarCodigo)
-                .addGap(19, 19, 19))
+                .addGap(46, 46, 46)
+                .addComponent(panelCambioContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -552,6 +667,7 @@ public class Recuperar_Password extends javax.swing.JFrame {
             if (tiempoTranscurrido <= diezMinutos) {
                 JOptionPane.showMessageDialog(this, "Código verificado correctamente.");
                 // Proceder con la recuperación de la contraseña
+                mostrarPanelCambioContra();
             } else 
                 JOptionPane.showMessageDialog(this, "El código ha expirado.");
             
@@ -561,6 +677,96 @@ public class Recuperar_Password extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnConfirmarCodigoActionPerformed
 
+    private void btnCambiarContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarContraActionPerformed
+        // TODO add your handling code here:
+        // Obtener las contraseñas
+        String nuevaContraseña = txtNuevaContra.getText().trim();
+        String confirmarContraseña = txtConfirmarContra.getText().trim();
+
+        // Verificar que las contraseñas coincidan
+        if (nuevaContraseña.isEmpty() || confirmarContraseña.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingresa y confirma la nueva contraseña.");
+            return;
+        }
+
+        if (!nuevaContraseña.equals(confirmarContraseña)) {
+            JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden. Por favor, inténtalo nuevamente.");
+            return;
+        }
+
+        // Cambiar la contraseña en la base de datos
+        String idUsuario = txt_ID_Usuario.getText().trim();
+        boolean cambioExitoso = cambiarContraseña(idUsuario, nuevaContraseña);
+
+        if (cambioExitoso) {
+            JOptionPane.showMessageDialog(this, "Contraseña cambiada correctamente.");
+            // Redirigir al login
+            redirigirALogin();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al cambiar la contraseña. Inténtalo nuevamente.");
+        }
+        
+        
+    }//GEN-LAST:event_btnCambiarContraActionPerformed
+
+    private void chkMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkMostrarActionPerformed
+        // TODO add your handling code here:
+        if (chkMostrar.isSelected()) {
+            txtNuevaContra.setEchoChar((char) 0);  // Muestra el texto sin máscara
+        } else {
+            txtNuevaContra.setEchoChar('*');  // Enmascara el texto con asteriscos
+        }
+
+    }//GEN-LAST:event_chkMostrarActionPerformed
+
+    private void txtNuevaContraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNuevaContraKeyTyped
+        // TODO add your handling code here:
+        if (txtNuevaContra.getText().length() >= 30) 
+            evt.consume();
+    }//GEN-LAST:event_txtNuevaContraKeyTyped
+
+    private void txtConfirmarContraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConfirmarContraKeyTyped
+        // TODO add your handling code here:
+        if (txtConfirmarContra.getText().length() >= 30) 
+            evt.consume();
+    }//GEN-LAST:event_txtConfirmarContraKeyTyped
+
+    private void mostrarPanelCambioContra() {
+        // Mostrar panel para cambiar la contraseña
+        btnConfirmarCodigo.setEnabled(false);
+        chkMostrar.setEnabled(true);
+        panelCambioContra.setVisible(true);  // Habilitar el panel
+        txtNuevaContra.setEnabled(true);
+        txtConfirmarContra.setEnabled(true);
+        btnCambiarContra.setEnabled(true);
+    }
+    
+    
+    private boolean cambiarContraseña(String idUsuario, String nuevaContraseña) {
+        String sql = "UPDATE tb_usuario SET password = ? WHERE idUsuario = ?";
+        try (Connection cn = (Connection) clsConexion.conectar(); 
+             PreparedStatement pst = (PreparedStatement) cn.prepareStatement(sql)) {
+
+            pst.setString(1, nuevaContraseña); // Establecer la nueva contraseña
+            pst.setString(2, idUsuario);  // ID del usuario
+
+            int filasAfectadas = pst.executeUpdate();
+            return filasAfectadas > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private void redirigirALogin() {
+        // Redirigir al Login (o al JFrame donde está el login)
+        this.setVisible(false);  // Ocultar el panel actual
+        new Login().setVisible(true);  // Mostrar el formulario de login
+    }
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -597,14 +803,23 @@ public class Recuperar_Password extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCambiarContra;
     private javax.swing.JButton btnConfirmarCodigo;
     private javax.swing.JButton btn_EnviarCodigo;
     private javax.swing.JButton btn_Regresar;
+    private javax.swing.JCheckBox chkMostrar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblCorreo;
     private javax.swing.JLabel lbl_Cod_Verificacion;
     private javax.swing.JLabel lbl_ID_Usuario;
+    private javax.swing.JPanel panelCambioContra;
+    private javax.swing.JPasswordField txtConfirmarContra;
+    private javax.swing.JPasswordField txtNuevaContra;
     private javax.swing.JTextField txt_Cod_Verificacion;
     private javax.swing.JTextField txt_ID_Usuario;
     // End of variables declaration//GEN-END:variables
