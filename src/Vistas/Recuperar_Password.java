@@ -28,6 +28,9 @@ import javax.mail.internet.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.Timer;
 
 
 /**
@@ -146,14 +149,119 @@ public class Recuperar_Password extends javax.swing.JFrame {
                 lblCorreo.setText(correoParcial);
             
         }
+        //
+        
+        
+        //
+        // Método para guardar el código de recuperación en la base de datos
+        public boolean guardarCodigoRecuperacion(String idUsuario, String codigo) {
+            String sql = "UPDATE tb_usuario SET cod_recuperacion = ?, fecha_envio_codigo = ? WHERE idUsuario = ?";
+            try (Connection cn = (Connection) clsConexion.conectar(); 
+                 PreparedStatement pst = (PreparedStatement) cn.prepareStatement(sql)) {
+
+                // Establecer el código de recuperación
+                pst.setString(1, codigo);
+
+                // Establecer la fecha y hora actual para la columna fecha_envio_codigo
+                java.sql.Timestamp timestamp = new java.sql.Timestamp(System.currentTimeMillis());
+                pst.setTimestamp(2, timestamp);  // Fecha actual como fecha de envío
+
+                // Establecer el ID de usuario
+                pst.setString(3, idUsuario);
+
+                // Ejecutar la actualización
+                int filasAfectadas = pst.executeUpdate();
+
+                return filasAfectadas > 0;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+
+        //
+        
+        //Verificar expiración del código de recuperación
+        private boolean verificarCodigoExpirado(String idUsuario) throws java.text.ParseException {
+            String sql = "SELECT cod_recuperacion FROM tb_usuario WHERE idUsuario = ?";
+            try (Connection cn = (Connection) clsConexion.conectar(); 
+                 PreparedStatement pst = (PreparedStatement) cn.prepareStatement(sql)) {
+
+                pst.setString(1, idUsuario);
+
+                ResultSet rs = pst.executeQuery();
+
+                if (rs.next()) {
+                    String codRecuperacion = rs.getString("cod_recuperacion");
+                    if (codRecuperacion != null && !codRecuperacion.isEmpty()) {
+                        // Separar código y fecha de expiración
+                        String[] partes = codRecuperacion.split("\\|");
+                        if (partes.length == 2) {
+                            String fechaExpiracionStr = partes[1];
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                            Date fechaExpiracion = sdf.parse(fechaExpiracionStr);
+
+                            // Verificar si la fecha ha expirado
+                            if (fechaExpiracion.before(new Date())) {
+                                return true;  // El código ha expirado
+                            }
+                        }
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return false;  // Si no hay coincidencia o no ha expirado
+        }
+        //
+        //Obtener la fecha de envio del codigo de recuperacion
+        public long obtenerFechaEnvioCodigo(String idUsuario) {
+            String query = "SELECT fecha_envio_codigo FROM tb_usuario WHERE idUsuario = ?";
+            try (Connection conn = (Connection) clsConexion.conectar();
+                 PreparedStatement pst = (PreparedStatement) conn.prepareStatement(query)) {
+
+                pst.setString(1, idUsuario);
+                ResultSet rs = pst.executeQuery();
+
+                if (rs.next()) {
+                    java.sql.Timestamp fechaEnvio = rs.getTimestamp("fecha_envio_codigo");
+                    return fechaEnvio.getTime();  // Devolver la fecha como long (milisegundos)
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return 0;
+        }
+        //Obtener el codigo de recuperacion
+        public String obtenerCodigoRecuperacion(String idUsuario) {
+            String sql = "SELECT cod_recuperacion FROM tb_usuario WHERE idUsuario = ?";
+            String codigo = null;
+
+            try (Connection cn = (Connection) clsConexion.conectar(); 
+                 PreparedStatement pst = (PreparedStatement) cn.prepareStatement(sql)) {
+
+                pst.setString(1, idUsuario); // Asignar el ID de usuario al PreparedStatement
+
+                try (ResultSet rs = pst.executeQuery()) {
+                    if (rs.next()) {
+                        // Si el resultado tiene una fila, obtenemos el código de recuperación
+                        codigo = rs.getString("cod_recuperacion");
+                    }
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            return codigo;
+        }
+
+        
         
         
         
         
         //
-        
-    //private LocalDateTime fechaExpiracion;
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -172,6 +280,7 @@ public class Recuperar_Password extends javax.swing.JFrame {
         lbl_Cod_Verificacion = new javax.swing.JLabel();
         txt_Cod_Verificacion = new javax.swing.JTextField();
         lblCorreo = new javax.swing.JLabel();
+        btnConfirmarCodigo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PuntoVenta");
@@ -221,16 +330,18 @@ public class Recuperar_Password extends javax.swing.JFrame {
 
         lblCorreo.setText("Correo");
 
+        btnConfirmarCodigo.setText("Confirmar Código");
+        btnConfirmarCodigo.setEnabled(false);
+        btnConfirmarCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarCodigoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(btn_EnviarCodigo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
-                .addComponent(btn_Regresar)
-                .addGap(75, 75, 75))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(120, 120, 120)
                 .addComponent(jLabel1)
@@ -252,6 +363,14 @@ public class Recuperar_Password extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(txt_ID_Usuario))))
                 .addGap(33, 33, 33))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnConfirmarCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_EnviarCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addComponent(btn_Regresar)
+                .addGap(75, 75, 75))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,7 +391,9 @@ public class Recuperar_Password extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_EnviarCodigo)
                     .addComponent(btn_Regresar))
-                .addGap(54, 54, 54))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnConfirmarCodigo)
+                .addGap(19, 19, 19))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -310,6 +431,16 @@ public class Recuperar_Password extends javax.swing.JFrame {
         if (txt_Cod_Verificacion.getText().length() >= 6) 
             evt.consume();
         
+        txt_Cod_Verificacion.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c)) {
+                    e.consume();
+                }
+            }
+        });
+        
     }//GEN-LAST:event_txt_Cod_VerificacionKeyTyped
 
     private void btn_RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegresarActionPerformed
@@ -322,6 +453,7 @@ public class Recuperar_Password extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btn_RegresarActionPerformed
 
+    private boolean codigoEnviado = false;
     private void btn_EnviarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EnviarCodigoActionPerformed
         // TODO add your handling code here:
         String idUsuario = txt_ID_Usuario.getText().trim();
@@ -345,13 +477,33 @@ public class Recuperar_Password extends javax.swing.JFrame {
         else
             mostrarCorreoParcial(idUsuario);
         
-        
         String codigo = EnviarCorreo.generarCodigo();
         boolean enviado = EnviarCorreo.enviarCorreo(correoDestino, codigo);
 
         if (enviado) {
             System.out.println("Correo enviado con éxito a " + correoDestino);
             JOptionPane.showMessageDialog(this, "Correo enviado correctamente.");
+            
+            // Guardar el código de verificación en la base de datos
+            if (guardarCodigoRecuperacion(idUsuario, codigo)) {
+                // Habilitar el campo de código de verificación
+                txt_Cod_Verificacion.setEnabled(true);
+                txt_Cod_Verificacion.setText("");  // Limpiar el campo
+                codigoEnviado = true;
+                btn_EnviarCodigo.setEnabled(false);
+                btnConfirmarCodigo.setEnabled(true);
+                
+                // Temporizador para reactivar el botón de Enviar Codigo después de 10 minutos
+                Timer timer = new Timer(600000, e -> {
+                    btn_EnviarCodigo.setEnabled(true);  // Reactivar el botón después de 10 minutos
+                    codigoEnviado = false;  // Resetea
+                });
+                timer.setRepeats(false);  // Solo se ejecuta una vez
+                timer.start();
+                
+            } else 
+                JOptionPane.showMessageDialog(this, "Error al guardar el código de verificación.");
+            
         } else 
             JOptionPane.showMessageDialog(this, "Error al enviar el correo.");
         
@@ -368,6 +520,46 @@ public class Recuperar_Password extends javax.swing.JFrame {
         
         txt_ID_Usuario.setText(texto);
     }//GEN-LAST:event_txt_ID_UsuarioKeyReleased
+
+    private void btnConfirmarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarCodigoActionPerformed
+        // TODO add your handling code here:
+        String idUsuario = txt_ID_Usuario.getText().trim();
+        String codigoIngresado = txt_Cod_Verificacion.getText().trim();
+
+        if (codigoIngresado.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingresa el código de verificación.");
+            return;
+        }
+
+        if (!codigoEnviado) {
+            JOptionPane.showMessageDialog(this, "No se ha enviado ningún código aún. Envíe un código primero.");
+            return;
+        }
+
+        String codigoGuardado = obtenerCodigoRecuperacion(idUsuario);  // Método para obtener el código guardado
+        if (codigoGuardado == null) {
+            JOptionPane.showMessageDialog(this, "No se encontró el código de verificación.");
+            return;
+        }
+        
+        long fechaEnvio = obtenerFechaEnvioCodigo(idUsuario);  // Método para obtener la fecha en que se envió el código
+
+        // Verificar si el código es correcto y no ha expirado
+        if (codigoIngresado.equals(codigoGuardado)) {
+            long tiempoTranscurrido = System.currentTimeMillis() - fechaEnvio;
+            long diezMinutos = 600000;  // 10 minutos
+
+            if (tiempoTranscurrido <= diezMinutos) {
+                JOptionPane.showMessageDialog(this, "Código verificado correctamente.");
+                // Proceder con la recuperación de la contraseña
+            } else 
+                JOptionPane.showMessageDialog(this, "El código ha expirado.");
+            
+        } else 
+            JOptionPane.showMessageDialog(this, "El código ingresado es incorrecto.");
+        
+        
+    }//GEN-LAST:event_btnConfirmarCodigoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -405,6 +597,7 @@ public class Recuperar_Password extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnConfirmarCodigo;
     private javax.swing.JButton btn_EnviarCodigo;
     private javax.swing.JButton btn_Regresar;
     private javax.swing.JLabel jLabel1;
