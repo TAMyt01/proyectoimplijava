@@ -7,7 +7,7 @@ package Vistas.Paneles;
 import Conexion.clsConexion;
 
 import Vistas.Paneles.Usuario.frm_AgregarUsuario;
-import Vistas.Paneles.Usuario.frm_ActualizarUsuario;
+import Vistas.Paneles.Usuario.frm_ModificarUsuario;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,7 +28,7 @@ public class jpanelUsuarios extends javax.swing.JPanel {
         //frm_ActualizarUsuario.SetPanelModif(this);
     }
 
-    private frm_ActualizarUsuario modf;
+    private frm_ModificarUsuario modf;
     private frm_AgregarUsuario agreg;
     private String nombre, rol, correo, est, ID;
 
@@ -203,8 +203,9 @@ public class jpanelUsuarios extends javax.swing.JPanel {
         if ("".equals(ID)) 
             JOptionPane.showMessageDialog(null, "Seleccione el usuario");
         else if (modf == null || !modf.isVisible()) {
-            modf = new frm_ActualizarUsuario();
-            modf.RecibirDatos(nombre, rol, correo, est, ID);
+            modf = new frm_ModificarUsuario();
+            modf.SetPanelModif(this);
+            modf.RecibirDatos(nombre, correo, est, ID);
             modf.setVisible(true);
           
         } else 

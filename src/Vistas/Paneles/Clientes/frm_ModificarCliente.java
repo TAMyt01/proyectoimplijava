@@ -43,11 +43,12 @@ public class frm_ModificarCliente extends javax.swing.JFrame {
         txtTelefono.setText(tel);
         txtDirec.setText(direc);
 
-        if (est.equals("Activo")) {
+        if ("Activo".equals(est)) 
             cmbEstado.setSelectedIndex(0);
-        } else {
+        else 
             cmbEstado.setSelectedIndex(1);
-        }
+    
+
 
     }
 

@@ -28,12 +28,12 @@ import javax.swing.text.AbstractDocument;
  *
  * @author JManu
  */
-public class frm_ActualizarUsuario extends javax.swing.JFrame {
+public class frm_ModificarUsuario extends javax.swing.JFrame {
 
     ctrlUsuarios cont = new ctrlUsuarios();
     private boolean ModifContra = false;
 
-    public frm_ActualizarUsuario() {
+    public frm_ModificarUsuario() {
         initComponents();
         this.setLocationRelativeTo(null);
 
@@ -118,11 +118,12 @@ public class frm_ActualizarUsuario extends javax.swing.JFrame {
     public void RecibirDatos(String nom, String correo, String est, String ID) {
         txtNombre.setText(nom);
 
-        if (est.equals("Activo")) {
+        if ("Activo".equals(est)) 
             cmbEstado.setSelectedIndex(0);
-        } else {
+         else 
             cmbEstado.setSelectedIndex(1);
-        }
+        
+
         txt_Correo.setText(correo);
         txtIdentidad.setText(ID);
 
@@ -428,14 +429,16 @@ public class frm_ActualizarUsuario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frm_ActualizarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frm_ModificarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frm_ActualizarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frm_ModificarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frm_ActualizarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frm_ModificarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frm_ActualizarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frm_ModificarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -443,7 +446,7 @@ public class frm_ActualizarUsuario extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new frm_ActualizarUsuario().setVisible(true);
+                new frm_ModificarUsuario().setVisible(true);
             }
         });
     }
@@ -472,7 +475,12 @@ public class frm_ActualizarUsuario extends javax.swing.JFrame {
     private javax.swing.JTextField txt_Correo;
     // End of variables declaration//GEN-END:variables
 
-    public void RecibirDatos(String nombre, String rol, String correo, String est, String ID) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    /*public void RecibirDatos(String nombre, String rol, String correo, String est, String ID) {
+        txtNombre.setText(nombre);
+        txt_Correo.setText(correo);
+        //cmbRol.setSelectedItem(rol);
+        cmbEstado.setSelectedItem(est);
+        txtIdentidad.setText(ID);
+    }*/
+
 }
