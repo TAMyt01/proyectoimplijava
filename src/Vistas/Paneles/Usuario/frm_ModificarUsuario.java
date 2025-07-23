@@ -36,7 +36,8 @@ public class frm_ModificarUsuario extends javax.swing.JFrame {
     public frm_ModificarUsuario() {
         initComponents();
         this.setLocationRelativeTo(null);
-
+        
+        
         imgAdvertencia.setVisible(false);
         imgAdvertencia.setToolTipText("<html>"
                 + "<b>Requisitos de la contraseña:</b><br>"
@@ -111,11 +112,12 @@ public class frm_ModificarUsuario extends javax.swing.JFrame {
     /**
      *
      * @param nom
+     * @param rol
      * @param correo
      * @param est
      * @param ID
      */
-    public void RecibirDatos(String nom, String correo, String est, String ID) {
+    public void RecibirDatos(String nom, String rol, String correo, String est, String ID) {
         txtNombre.setText(nom);
 
         if ("Activo".equals(est)) 
@@ -123,7 +125,15 @@ public class frm_ModificarUsuario extends javax.swing.JFrame {
          else 
             cmbEstado.setSelectedIndex(1);
         
-
+        if ("Gerente".equalsIgnoreCase(rol)) {
+            cmb_Rol.addItem("Gerente");
+            cmb_Rol.addItem("Vendedor");
+        } else {
+            cmb_Rol.addItem("Vendedor");
+            cmb_Rol.addItem("Gerente");
+        }
+        
+        cmb_Rol.setSelectedItem(rol);
         txt_Correo.setText(correo);
         txtIdentidad.setText(ID);
 
@@ -156,6 +166,8 @@ public class frm_ModificarUsuario extends javax.swing.JFrame {
         btnCambio = new javax.swing.JButton();
         lbl_Correo = new javax.swing.JLabel();
         txt_Correo = new javax.swing.JTextField();
+        cmb_Rol = new javax.swing.JComboBox<>();
+        lbl_Rol = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -183,10 +195,10 @@ public class frm_ModificarUsuario extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, -1, -1));
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, -1, -1));
 
         jLabel4.setText("Contraseña");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, -1));
 
         txtPassword.setEnabled(false);
         txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -194,7 +206,7 @@ public class frm_ModificarUsuario extends javax.swing.JFrame {
                 txtPasswordKeyTyped(evt);
             }
         });
-        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 270, -1));
+        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 270, -1));
 
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Desactivado" }));
         cmbEstado.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -202,10 +214,15 @@ public class frm_ModificarUsuario extends javax.swing.JFrame {
                 cmbEstadoMousePressed(evt);
             }
         });
-        jPanel1.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, -1, -1));
+        cmbEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbEstadoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, -1, -1));
 
         jLabel8.setText("Estado");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
 
         txtIdentidad.setEnabled(false);
         jPanel1.add(txtIdentidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 270, -1));
@@ -220,7 +237,7 @@ public class frm_ModificarUsuario extends javax.swing.JFrame {
                 chkMostrarActionPerformed(evt);
             }
         });
-        jPanel1.add(chkMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, -1, -1));
+        jPanel1.add(chkMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, -1, -1));
 
         jButton1.setText("Regresar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -228,7 +245,7 @@ public class frm_ModificarUsuario extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 330, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 360, -1, -1));
 
         txtPasswordRepet.setEnabled(false);
         txtPasswordRepet.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -236,13 +253,13 @@ public class frm_ModificarUsuario extends javax.swing.JFrame {
                 txtPasswordRepetKeyTyped(evt);
             }
         });
-        jPanel1.add(txtPasswordRepet, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 270, -1));
+        jPanel1.add(txtPasswordRepet, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 270, -1));
 
         jLabel6.setText("Repetir Contraseña");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
         imgAdvertencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/advertencia.png"))); // NOI18N
-        jPanel1.add(imgAdvertencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, -1, -1));
+        jPanel1.add(imgAdvertencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 170, -1, -1));
 
         btnCambio.setText("Cambiar Contraseña");
         btnCambio.addActionListener(new java.awt.event.ActionListener() {
@@ -250,17 +267,24 @@ public class frm_ModificarUsuario extends javax.swing.JFrame {
                 btnCambioActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, -1, -1));
+        jPanel1.add(btnCambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 310, -1, -1));
 
         lbl_Correo.setText("Correo Electrónico:");
-        jPanel1.add(lbl_Correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+        jPanel1.add(lbl_Correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
 
         txt_Correo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_CorreoKeyTyped(evt);
             }
         });
-        jPanel1.add(txt_Correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 270, -1));
+        jPanel1.add(txt_Correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 270, -1));
+
+        cmb_Rol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gerente", "Vendedor" }));
+        cmb_Rol.setEnabled(false);
+        jPanel1.add(cmb_Rol, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 90, -1));
+
+        lbl_Rol.setText("Rol:");
+        jPanel1.add(lbl_Rol, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -412,6 +436,10 @@ public class frm_ModificarUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtPasswordRepetKeyTyped
 
+    private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbEstadoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -458,6 +486,7 @@ public class frm_ModificarUsuario extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JCheckBox chkMostrar;
     private javax.swing.JComboBox<String> cmbEstado;
+    private javax.swing.JComboBox<String> cmb_Rol;
     private javax.swing.JLabel imgAdvertencia;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -468,6 +497,7 @@ public class frm_ModificarUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbl_Correo;
+    private javax.swing.JLabel lbl_Rol;
     private javax.swing.JTextField txtIdentidad;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JPasswordField txtPassword;

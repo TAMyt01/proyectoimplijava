@@ -25,7 +25,6 @@ public class jpanelUsuarios extends javax.swing.JPanel {
         
         this.cargaTablaUser();
         frm_AgregarUsuario.SetPanelagregar(this);
-        //frm_ActualizarUsuario.SetPanelModif(this);
     }
 
     private frm_ModificarUsuario modf;
@@ -205,7 +204,7 @@ public class jpanelUsuarios extends javax.swing.JPanel {
         else if (modf == null || !modf.isVisible()) {
             modf = new frm_ModificarUsuario();
             modf.SetPanelModif(this);
-            modf.RecibirDatos(nombre, correo, est, ID);
+            modf.RecibirDatos(nombre, rol, correo, est, ID);
             modf.setVisible(true);
           
         } else 

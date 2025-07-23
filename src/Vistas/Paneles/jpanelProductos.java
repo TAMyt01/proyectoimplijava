@@ -317,7 +317,7 @@ public class jpanelProductos extends javax.swing.JPanel {
             Mprod = new frm_ModificarProducto();
             Mprod.RecibirDatos(ID, nombre, descripcion, prec, cant, cate, estado);
             Mprod.setVisible(true);
-            ID = "";
+            //ID = "";
         } else {
             JOptionPane.showMessageDialog(null, "La ventana ya está abierta, ciérrela antes de abrirla nuevamente.");
         }

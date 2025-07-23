@@ -238,9 +238,9 @@ public class jpanelCategoria extends javax.swing.JPanel {
             Mcate.RecibirDatos(ID, nombre, descripcion, estado);
             Mcate.setVisible(true);
             //Le quitamos la asignacion de valor a las variables seleccionada por cursorr
-            ID = "";
-            nombre = "";
-            descripcion = "";
+            //ID = "";
+            //nombre = "";
+            //descripcion = "";
         } else {
             JOptionPane.showMessageDialog(null, "La ventana ya está abierta, ciérrela antes de abrirla nuevamente.");
         }

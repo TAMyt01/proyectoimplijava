@@ -324,7 +324,7 @@ public class jpanelClientes extends javax.swing.JPanel {
             Modf.setVisible(true);
             //Le quitamos la asignacion de valor a las variables seleccionada por cursorr
 
-            identidad = "";
+            //identidad = "";
         } else {
             JOptionPane.showMessageDialog(null, "La ventana ya está abierta, ciérrela antes de abrirla nuevamente.");
         }
