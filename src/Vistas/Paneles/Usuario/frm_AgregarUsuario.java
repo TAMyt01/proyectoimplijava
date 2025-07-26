@@ -6,6 +6,7 @@ import Modelos.clsUsuario;
 import Vistas.Paneles.jpanelUsuarios;
 import Formatos.validar_Password;
 import Formatos.formato_Password;
+import java.awt.Frame;
 import javax.swing.BorderFactory;
 
 import javax.swing.JOptionPane;
@@ -20,12 +21,12 @@ import javax.swing.event.DocumentListener;
  *
  * @author JManu
  */
-public class frm_AgregarUsuario extends javax.swing.JFrame {
+public class frm_AgregarUsuario extends javax.swing.JDialog {
 
-    public frm_AgregarUsuario() {
+    public frm_AgregarUsuario(Frame parent) {
+        super(parent, "Agregar Usuario", true);
         initComponents();
-        this.setTitle("Agregar Usuario");
-        this.setLocationRelativeTo(null);
+        setLocationRelativeTo(parent);
         AutoCompleteDecorator.decorate(cmbRol);
         
         imgAdvertencia.setVisible(false);
@@ -57,10 +58,6 @@ public class frm_AgregarUsuario extends javax.swing.JFrame {
                 actualizar();
             }
 
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-            }
-
             private void actualizar() {
                 String pass = new String(txtPassword.getPassword());
                 if (validar_Password.validarPassword(pass)) {
@@ -75,6 +72,11 @@ public class frm_AgregarUsuario extends javax.swing.JFrame {
                     imgAdvertencia.setVisible(true);
                   
                 }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
         });
 
@@ -100,7 +102,7 @@ public class frm_AgregarUsuario extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtIdentidad = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        btnSalir = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
@@ -137,10 +139,10 @@ public class frm_AgregarUsuario extends javax.swing.JFrame {
 
         jLabel2.setText("Rol");
 
-        btnSalir.setText("Salir");
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
+                btnRegresarActionPerformed(evt);
             }
         });
 
@@ -250,7 +252,7 @@ public class frm_AgregarUsuario extends javax.swing.JFrame {
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(btnGuardar)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(btnSalir))
+                                                .addComponent(btnRegresar))
                                             .addComponent(txtPasswordRepet, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(33, 33, 33)
@@ -297,7 +299,7 @@ public class frm_AgregarUsuario extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
-                    .addComponent(btnSalir))
+                    .addComponent(btnRegresar))
                 .addGap(46, 46, 46))
         );
 
@@ -315,14 +317,14 @@ public class frm_AgregarUsuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        // TODO add your handling code here:
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        
         this.dispose();
-    }//GEN-LAST:event_btnSalirActionPerformed
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-
-        if ( txtIdentidad.getText().isEmpty() || txtPassword.getText().isEmpty() || txtNombre1.getText().isEmpty())
+        ctrlUsuarios controlUsuario = new ctrlUsuarios();
+        if ( txtIdentidad.getText().isEmpty() || txtPassword.getText().isEmpty() || txtNombre1.getText().isEmpty() || txt_Correo.getText().isEmpty())
             JOptionPane.showMessageDialog(null, "Rellene todos los campos");
         else {
             String identidad = txtIdentidad.getText().trim();
@@ -332,16 +334,24 @@ public class frm_AgregarUsuario extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "La identidad no es válida.");
                 return;
             }
+            if (controlUsuario.existeUsuario(identidad)) {
+                JOptionPane.showMessageDialog(this, "Ya existe un usuario con esta identidad.");
+                return;
+            }
+            if (!validarCorreo(txt_Correo.getText())) {
+                JOptionPane.showMessageDialog(this, "Correo electrónico no válido.");
+                return;
+            }
             if (!validarPassword(password)) {
                 JOptionPane.showMessageDialog(this, "La contraseña no cumple con los requisitos.");
                 return;
             }
             if (txtPassword.getText().equals(txtPasswordRepet.getText())) {
-                ctrlUsuarios controlUsuario = new ctrlUsuarios();
 
                 clsUsuario user = new clsUsuario();
                 user.setIdUsuario(txtIdentidad.getText());
                 user.setNombre(txtNombre1.getText());
+                user.setCorreo(txt_Correo.getText());
                 user.setRol(cmbRol.getSelectedItem().toString());
                 user.setContrasenia(txtPassword.getText());
 
@@ -349,16 +359,18 @@ public class frm_AgregarUsuario extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Registro guardado");
 
                     paneluser.cargaTablaUser();//Actualizamos tabla del panel principal de la categoria
-
-                } else 
+                    this.dispose();
+                } else {
                     JOptionPane.showMessageDialog(null, "Error al guardar");
-                
-
-                txtIdentidad.setText("");
-                txtPassword.setText("");
-                cmbRol.setSelectedIndex(0);
+                    txtIdentidad.setText("");
+                    txtNombre1.setText("");
+                    txt_Correo.setText("");
+                    txtPassword.setText("");
+                    txtPasswordRepet.setText("");
+                    cmbRol.setSelectedIndex(0);
+                }
             } else 
-                JOptionPane.showMessageDialog(null, "Contraseña no es igual"); //mejorar el mensaje nmms
+                JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -371,7 +383,7 @@ public class frm_AgregarUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_chkMostrarActionPerformed
 
     private void txtIdentidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdentidadActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtIdentidadActionPerformed
 
     private void cmbRolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRolActionPerformed
@@ -379,40 +391,40 @@ public class frm_AgregarUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbRolActionPerformed
 
     private void txt_CorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_CorreoActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txt_CorreoActionPerformed
 
     private void txt_CorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_CorreoKeyTyped
-        // TODO add your handling code here:
-        /*if (txtCorreo.getText().length() >= 100) {
+        
+        if (txt_Correo.getText().length() >= 50) {
             evt.consume();
-        }*/
+        }
     }//GEN-LAST:event_txt_CorreoKeyTyped
 
     private void txtIdentidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdentidadKeyTyped
-        // TODO add your handling code here:
+        
         if (txtIdentidad.getText().length() >= 15) {
             evt.consume();
         }
     }//GEN-LAST:event_txtIdentidadKeyTyped
 
     private void txtNombre1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombre1KeyTyped
-        // TODO add your handling code here:
+        
         if (txtNombre1.getText().length() >= 50) {
             evt.consume();
         }
     }//GEN-LAST:event_txtNombre1KeyTyped
 
     private void txtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyTyped
-        // TODO add your handling code here:
-        if (txtPassword.getText().length() >= 50) {
+        
+        if (txtPassword.getText().length() >= 100) {
             evt.consume();
         }
     }//GEN-LAST:event_txtPasswordKeyTyped
 
     private void txtPasswordRepetKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordRepetKeyTyped
-        // TODO add your handling code here:
-        if (txtPasswordRepet.getText().length() >= 50) {
+
+        if (txtPasswordRepet.getText().length() >= 100) {
             evt.consume();
         }
     }//GEN-LAST:event_txtPasswordRepetKeyTyped
@@ -445,17 +457,11 @@ public class frm_AgregarUsuario extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new frm_AgregarUsuario().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnSalir;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JCheckBox chkMostrar;
     private javax.swing.JComboBox<String> cmbRol;
     private javax.swing.JLabel imgAdvertencia;
@@ -492,5 +498,10 @@ public class frm_AgregarUsuario extends javax.swing.JFrame {
 
         return password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!_\\*-])[A-Za-z\\d@#$%^&+=!_\\*-]{8,16}$");
     }
+    
+    public boolean validarCorreo(String correo) {
+        return correo != null && correo.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,6}$");
+    }
+
 
 }

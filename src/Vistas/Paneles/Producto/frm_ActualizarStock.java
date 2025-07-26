@@ -11,20 +11,21 @@ import javax.swing.JOptionPane;
 
 import javax.swing.text.AbstractDocument;
 import Formatos.formato_NumerosNaturales;
+import java.awt.Frame;
 
 
 /**
  *
  * @author JManu
  */
-public class frm_ActualizarStock extends javax.swing.JFrame {
+public class frm_ActualizarStock extends javax.swing.JDialog {
 
     private static jpanelProductos panelprodc;
 
-    public frm_ActualizarStock() {
+    public frm_ActualizarStock(Frame parent) {
+        super(parent, "Actualizar Stock", true);
         initComponents();
-        this.setLocationRelativeTo(null);
-        this.setTitle("Actualizar Stock");
+        setLocationRelativeTo(parent);
         
         ((AbstractDocument) txtAgregarCant.getDocument()).setDocumentFilter(new formato_NumerosNaturales());
 
@@ -55,11 +56,10 @@ public class frm_ActualizarStock extends javax.swing.JFrame {
         txtCant = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtAgregarCant = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        btnSalir = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         fondo.setBackground(new java.awt.Color(51, 136, 191));
         fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -121,29 +121,21 @@ public class frm_ActualizarStock extends javax.swing.JFrame {
         });
         fondo.add(txtAgregarCant, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 162, 206, -1));
 
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
-        fondo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, -1, -1));
+        fondo.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, -1, -1));
 
-        btnSalir.setText("Salir");
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
+                btnRegresarActionPerformed(evt);
             }
         });
-        fondo.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, -1, -1));
-
-        jButton2.setText("Regresar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        fondo.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, -1, -1));
+        fondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -155,7 +147,7 @@ public class frm_ActualizarStock extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(fondo, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
         );
 
         pack();
@@ -169,7 +161,7 @@ public class frm_ActualizarStock extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtAgregarCantKeyReleased
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         if (txtAgregarCant.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Complete todos los campos necesarios");
         } else {
@@ -197,15 +189,7 @@ public class frm_ActualizarStock extends javax.swing.JFrame {
 
         }
 
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnSalirActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtCodKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodKeyTyped
         // TODO add your handling code here:
@@ -235,6 +219,10 @@ public class frm_ActualizarStock extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtAgregarCantKeyTyped
 
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -263,19 +251,13 @@ public class frm_ActualizarStock extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frm_ActualizarStock().setVisible(true);
-            }
-        });
     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSalir;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JPanel fondo;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

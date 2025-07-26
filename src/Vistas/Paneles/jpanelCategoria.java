@@ -4,6 +4,8 @@ import Conexion.clsConexion;
 
 import Vistas.Paneles.Categoria.frm_ModificarCategoria;
 import Vistas.Paneles.Categoria.frm_AgregarCategoria;
+import java.awt.Frame;
+import java.awt.Window;
 
 import javax.swing.JOptionPane;
 
@@ -12,6 +14,7 @@ import java.sql.Statement;
 import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import javax.swing.SwingUtilities;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -38,12 +41,12 @@ public class jpanelCategoria extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         cmbEstado = new javax.swing.JComboBox<>();
         cmbFiltro = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaCategoria = new javax.swing.JTable();
-        btnActualizar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -90,13 +93,13 @@ public class jpanelCategoria extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(54, 6, 0, 0);
         add(cmbFiltro, gridBagConstraints);
 
-        jButton1.setBackground(new java.awt.Color(55, 116, 209));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Agregar Categoria");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregar.setBackground(new java.awt.Color(55, 116, 209));
+        btnAgregar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregar.setText("Agregar Categoria");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAgregarActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -105,7 +108,7 @@ public class jpanelCategoria extends javax.swing.JPanel {
         gridBagConstraints.gridheight = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(28, 17, 0, 0);
-        add(jButton1, gridBagConstraints);
+        add(btnAgregar, gridBagConstraints);
 
         jLabel3.setText("Mostrar categorias:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -193,13 +196,13 @@ public class jpanelCategoria extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(12, 35, 45, 41);
         add(jScrollPane2, gridBagConstraints);
 
-        btnActualizar.setBackground(new java.awt.Color(55, 116, 209));
-        btnActualizar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnActualizar.setForeground(new java.awt.Color(255, 255, 255));
-        btnActualizar.setText("Modificar categoria");
-        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+        btnModificar.setBackground(new java.awt.Color(55, 116, 209));
+        btnModificar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnModificar.setForeground(new java.awt.Color(255, 255, 255));
+        btnModificar.setText("Modificar categoria");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarActionPerformed(evt);
+                btnModificarActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -209,7 +212,7 @@ public class jpanelCategoria extends javax.swing.JPanel {
         gridBagConstraints.gridheight = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(28, 12, 0, 0);
-        add(btnActualizar, gridBagConstraints);
+        add(btnModificar, gridBagConstraints);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Buscar por:");
@@ -221,31 +224,37 @@ public class jpanelCategoria extends javax.swing.JPanel {
         add(jLabel2, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         if (cate == null || !cate.isVisible()) {
-            cate = new frm_AgregarCategoria(); //Se declara el objeto
-            cate.setVisible(true);
+            Window ventanaPadre = SwingUtilities.getWindowAncestor(this);
+            if (ventanaPadre instanceof Frame) {
+                cate = new frm_AgregarCategoria((Frame) ventanaPadre); // modal vinculado al padre
+                cate.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo encontrar una ventana válida para abrir el formulario.");
+            }
         } else {
             JOptionPane.showMessageDialog(null, "La ventana ya está abierta, ciérrela antes de abrirla nuevamente.");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
-    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        if (ID == "") {
-            JOptionPane.showMessageDialog(null, "Seleccione la categoria");
-        } else if (Mcate == null || !Mcate.isVisible()) {
-            Mcate = new frm_ModificarCategoria();
-            Mcate.RecibirDatos(ID, nombre, descripcion, estado);
-            Mcate.setVisible(true);
-            //Le quitamos la asignacion de valor a las variables seleccionada por cursorr
-            //ID = "";
-            //nombre = "";
-            //descripcion = "";
-        } else {
-            JOptionPane.showMessageDialog(null, "La ventana ya está abierta, ciérrela antes de abrirla nuevamente.");
-        }
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        if (ID.equals("")) 
+            JOptionPane.showMessageDialog(this, "Seleccione la categoría");
+         else if (Mcate == null || !Mcate.isVisible()) {
+            Window ventanaPadre = SwingUtilities.getWindowAncestor(this);
+            if (ventanaPadre instanceof Frame) {
+                Mcate = new frm_ModificarCategoria((Frame) ventanaPadre);
+                Mcate.RecibirDatos(ID, nombre, descripcion, estado);
+                Mcate.setVisible(true);
+            } else 
+                JOptionPane.showMessageDialog(this, "No se pudo encontrar una ventana padre.");
+            
+        } else 
+            JOptionPane.showMessageDialog(this, "La ventana ya está abierta, ciérrela antes de abrirla nuevamente.");
+        
 
-    }//GEN-LAST:event_btnActualizarActionPerformed
+    }//GEN-LAST:event_btnModificarActionPerformed
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         Connection cn = clsConexion.conectar();
@@ -346,10 +355,10 @@ public class jpanelCategoria extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JComboBox<String> cmbFiltro;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -40,6 +40,9 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="graf">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">

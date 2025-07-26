@@ -7,6 +7,7 @@ package Vistas.Paneles.Categoria;
 import Controladores.ctrlCategoria;
 import Modelos.clsCategoria;
 import Vistas.Paneles.jpanelCategoria;
+import java.awt.Frame;
 
 import javax.swing.JOptionPane;
 
@@ -14,14 +15,14 @@ import javax.swing.JOptionPane;
  *
  * @author JManu
  */
-public class frm_AgregarCategoria extends javax.swing.JFrame {
+public class frm_AgregarCategoria extends javax.swing.JDialog {
 
     private static jpanelCategoria panelcategoria;
 
-    public frm_AgregarCategoria() {
+    public frm_AgregarCategoria(Frame parent) {
+        super(parent, "Agregar Categoría", true);
         initComponents();
-        this.setTitle("Agregar categoria");
-        this.setLocationRelativeTo(null);
+        setLocationRelativeTo(parent);
     }
 
     //Para que se actualice la tabla con solo llamar la funcion de mostrar desde otro formulario
@@ -39,7 +40,7 @@ public class frm_AgregarCategoria extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtDesc = new javax.swing.JTextField();
-        btnSalir = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -67,10 +68,10 @@ public class frm_AgregarCategoria extends javax.swing.JFrame {
             }
         });
 
-        btnSalir.setText("Salir");
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
+                btnRegresarActionPerformed(evt);
             }
         });
 
@@ -103,7 +104,7 @@ public class frm_AgregarCategoria extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(130, 130, 130)
-                        .addComponent(btnSalir))
+                        .addComponent(btnRegresar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,7 +128,7 @@ public class frm_AgregarCategoria extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
-                    .addComponent(btnSalir))
+                    .addComponent(btnRegresar))
                 .addGap(48, 48, 48))
         );
 
@@ -179,10 +180,10 @@ public class frm_AgregarCategoria extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_btnSalirActionPerformed
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         // TODO add your handling code here:
@@ -227,16 +228,11 @@ public class frm_AgregarCategoria extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frm_AgregarCategoria().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnSalir;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

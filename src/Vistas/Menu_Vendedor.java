@@ -11,6 +11,8 @@ import Vistas.Paneles.jpanelInicio;
 import java.awt.BorderLayout;
 
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -28,7 +30,27 @@ public class Menu_Vendedor extends javax.swing.JFrame {
         //Abrir el panel del inicio
         jpanelInicio inicio = new jpanelInicio();
         abrirPanel(inicio); //Funcion para abrir los paneles
-        
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Evita cierre automático
+
+        //Confirmar salida
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                int respuesta = JOptionPane.showConfirmDialog(
+                    Menu_Vendedor.this,
+                    "¿Seguro que quieres salir?",
+                    "Confirmar salida",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE
+                );
+
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    dispose(); // Cierra la ventana
+                    System.exit(0); // Finaliza el programa
+                }
+            }
+        });
+        setVisible(true);
         ctrlUsuarios control = new ctrlUsuarios();
         lblnombreUsuario.setText(control.IdentificadorNombre());
     }

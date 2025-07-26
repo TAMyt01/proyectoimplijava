@@ -3,6 +3,8 @@ package Vistas.Paneles;
 import Conexion.clsConexion;
 import Vistas.Paneles.Clientes.frm_AgregarCliente;
 import Vistas.Paneles.Clientes.frm_ModificarCliente;
+import java.awt.Frame;
+import java.awt.Window;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,7 +24,7 @@ public class jpanelClientes extends javax.swing.JPanel {
     private frm_AgregarCliente agreg;
     private frm_ModificarCliente Modf;
 
-    private String nombre, telefono, direccion, estado, identidad;
+    private String nombre = "", telefono="", direccion="", estado="Activo", identidad="";
 
     public jpanelClientes() {
         initComponents();
@@ -291,13 +294,18 @@ public class jpanelClientes extends javax.swing.JPanel {
 
     private void btnAgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarClienteActionPerformed
 
-        if (agreg == null || !agreg.isVisible()) {
-            agreg = new frm_AgregarCliente();
-            agreg.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "La ventana ya está abierta, ciérrela antes de abrirla nuevamente.");
-        }
+        Window ventanaPadre = SwingUtilities.getWindowAncestor(this);
 
+        if (agreg == null || !agreg.isVisible()) {
+            if (ventanaPadre instanceof Frame) {
+                agreg = new frm_AgregarCliente((Frame) ventanaPadre);
+                agreg.setVisible(true);
+            } else 
+                JOptionPane.showMessageDialog(this, "No se pudo determinar la ventana principal.");
+            
+        } else 
+            JOptionPane.showMessageDialog(this, "La ventana ya está abierta, ciérrela antes de abrirla nuevamente.");
+        
     }//GEN-LAST:event_btnAgregarClienteActionPerformed
 
     private void tablaClientMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaClientMousePressed
@@ -316,18 +324,20 @@ public class jpanelClientes extends javax.swing.JPanel {
     }//GEN-LAST:event_cmbFiltroActionPerformed
 
     private void btnModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifActionPerformed
-        if (identidad == "") {
-            JOptionPane.showMessageDialog(null, "Seleccione la categoria");
-        } else if (Modf == null || !Modf.isVisible()) {
-            Modf = new frm_ModificarCliente();
-            Modf.RecibirDatos(nombre, telefono, direccion, estado, identidad);
-            Modf.setVisible(true);
-            //Le quitamos la asignacion de valor a las variables seleccionada por cursorr
-
-            //identidad = "";
-        } else {
-            JOptionPane.showMessageDialog(null, "La ventana ya está abierta, ciérrela antes de abrirla nuevamente.");
-        }
+        if (identidad.equals("")) 
+            JOptionPane.showMessageDialog(this, "Seleccione el cliente");
+         else if (Modf == null || !Modf.isVisible()) {
+            Window ventanaPadre = SwingUtilities.getWindowAncestor(this);
+            if (ventanaPadre instanceof Frame) {
+                Modf = new frm_ModificarCliente((Frame) ventanaPadre);
+                Modf.RecibirDatos(nombre, telefono, direccion, estado, identidad);
+                Modf.setVisible(true);
+            } else 
+                JOptionPane.showMessageDialog(this, "No se pudo identificar la ventana principal.");
+            
+        } else 
+            JOptionPane.showMessageDialog(this, "La ventana ya está abierta, ciérrela antes de abrirla nuevamente.");
+        
     }//GEN-LAST:event_btnModifActionPerformed
 
     private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed

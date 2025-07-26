@@ -8,6 +8,8 @@ import Conexion.clsConexion;
 import Vistas.Paneles.Producto.frm_ActualizarStock;
 import Vistas.Paneles.Producto.frm_AgregarProducto;
 import Vistas.Paneles.Producto.frm_ModificarProducto;
+import java.awt.Frame;
+import java.awt.Window;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,6 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -259,12 +262,18 @@ public class jpanelProductos extends javax.swing.JPanel {
 
     private void btnAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProductoActionPerformed
 
+        Window ventanaPadre = SwingUtilities.getWindowAncestor(this);
+
         if (agreg == null || !agreg.isVisible()) {
-            agreg = new frm_AgregarProducto();
-            agreg.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "La ventana ya está abierta, ciérrela antes de abrirla nuevamente.");
-        }
+            if (ventanaPadre instanceof Frame) {
+                agreg = new frm_AgregarProducto((Frame) ventanaPadre);
+                agreg.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo identificar la ventana principal.");
+            }
+        } else 
+            JOptionPane.showMessageDialog(this, "La ventana ya está abierta, ciérrela antes de abrirla nuevamente.");
+        
     }//GEN-LAST:event_btnAgregarProductoActionPerformed
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
@@ -311,16 +320,20 @@ public class jpanelProductos extends javax.swing.JPanel {
     }//GEN-LAST:event_cmbFiltroActionPerformed
 
     private void btnModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifActionPerformed
-        if (ID == "") {
-            JOptionPane.showMessageDialog(null, "Seleccione el producto");
-        } else if (Mprod == null || !Mprod.isVisible()) {
-            Mprod = new frm_ModificarProducto();
-            Mprod.RecibirDatos(ID, nombre, descripcion, prec, cant, cate, estado);
-            Mprod.setVisible(true);
-            //ID = "";
-        } else {
-            JOptionPane.showMessageDialog(null, "La ventana ya está abierta, ciérrela antes de abrirla nuevamente.");
-        }
+        if (ID.equals("")) 
+            JOptionPane.showMessageDialog(this, "Seleccione el producto");
+         else if (Mprod == null || !Mprod.isVisible()) {
+            Window ventanaPadre = SwingUtilities.getWindowAncestor(this);
+            if (ventanaPadre instanceof Frame) {
+                Mprod = new frm_ModificarProducto((Frame) ventanaPadre);
+                Mprod.RecibirDatos(ID, nombre, descripcion, prec, cant, cate, estado);
+                Mprod.setVisible(true);
+            } else 
+                JOptionPane.showMessageDialog(this, "No se pudo determinar la ventana principal.");
+            
+        } else 
+            JOptionPane.showMessageDialog(this, "La ventana ya está abierta, ciérrela antes de abrirla nuevamente.");
+        
     }//GEN-LAST:event_btnModifActionPerformed
 
     private void tablaProdcMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProdcMousePressed
@@ -334,11 +347,6 @@ public class jpanelProductos extends javax.swing.JPanel {
         estado = String.valueOf(tablaProdc.getValueAt(seleccion, 6));
 
         System.out.println(""+estado);
-        if (estado == "Activo") {
-            btnActualizarStock.setEnabled(true);
-        } else {
-            btnActualizarStock.setEnabled(false);
-        }
     }//GEN-LAST:event_tablaProdcMousePressed
 
     private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed
@@ -346,15 +354,20 @@ public class jpanelProductos extends javax.swing.JPanel {
     }//GEN-LAST:event_cmbEstadoActionPerformed
 
     private void btnActualizarStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarStockActionPerformed
-        if (ID == "") {
-            JOptionPane.showMessageDialog(null, "Seleccione el producto");
+        if (ID.equals("")) {
+            JOptionPane.showMessageDialog(this, "Seleccione el producto");
         } else if (ActStock == null || !ActStock.isVisible()) {
-            ActStock = new frm_ActualizarStock();
-            ActStock.RecibirDatos(ID, nombre, cant);
-            ActStock.setVisible(true);
-            ID = "";
+            Window ventanaPadre = SwingUtilities.getWindowAncestor(this);
+            if (ventanaPadre instanceof Frame) {
+                ActStock = new frm_ActualizarStock((Frame) ventanaPadre);
+                ActStock.RecibirDatos(ID, nombre, cant);
+                ActStock.setVisible(true);
+                ID = "";
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo identificar la ventana principal.");
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "La ventana ya está abierta, ciérrela antes de abrirla nuevamente.");
+            JOptionPane.showMessageDialog(this, "La ventana ya está abierta, ciérrela antes de abrirla nuevamente.");
         }
     }//GEN-LAST:event_btnActualizarStockActionPerformed
 

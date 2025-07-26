@@ -12,13 +12,14 @@ public class clsUsuario
     public String rol;
     public String estado;
     public String enUso;
-    private String correo;
+    public String correo;
 
     // Constructor vacío
     public clsUsuario() 
     {
         this.idUsuario = "";
         this.nombre = "";
+        this.correo = "";
         this.contrasenia = "";
         this.rol = "";
         this.estado = "";
@@ -26,10 +27,11 @@ public class clsUsuario
     }
 
     // Constructor con parámetros
-    public clsUsuario(String idUsuario, String nombre, String contrasenia, String rol, String estado, String enUso) 
+    public clsUsuario(String idUsuario, String nombre, String correo, String contrasenia, String rol, String estado, String enUso) 
     {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
+        this.correo = correo;
         this.contrasenia = contrasenia;
         this.rol = rol;
         this.estado = estado;
@@ -45,6 +47,11 @@ public class clsUsuario
     public String getNombre() 
     {
         return nombre;
+    }
+    
+    public String getCorreo()
+    {
+        return correo;
     }
 
     public String getContrasenia() 

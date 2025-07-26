@@ -55,14 +55,15 @@ public class ctrlUsuarios extends clsUsuario{
     public boolean guardar(){
         boolean resp = false;
         Connection cn = clsConexion.conectar();
-        final String SQL= "insert into tb_usuario (idUsuario,nombre,password,rol,estado) values (?,?,?,?,'Activo')";
+        final String SQL= "insert into tb_usuario (idUsuario,nombre,correo,password,rol,estado) values (?,?,?,?,?,'Activo')";
         try {
             
             PreparedStatement consulta = cn.prepareStatement(SQL);
             consulta.setString(1, idUsuario);
             consulta.setString(2, nombre);
-            consulta.setString(3, contrasenia);
-            consulta.setString(4, rol);
+            consulta.setString(3, correo);
+            consulta.setString(4, contrasenia);
+            consulta.setString(5, rol);
             if (consulta.executeUpdate()>0) {
                 resp=true;
             }
@@ -81,17 +82,18 @@ public class ctrlUsuarios extends clsUsuario{
     public boolean modificar(){
         boolean resp = false;
         Connection cn = clsConexion.conectar();
-        final String SQL="update tb_usuario set nombre=?,password=?, rol=?, estado=? where idUsuario=?";
+        final String SQL="update tb_usuario set nombre=?,correo=?,password=?, rol=?, estado=? where idUsuario=?";
         try {
             
             PreparedStatement consulta = cn.prepareStatement(SQL);
             System.out.println(""+idUsuario);
             consulta.setString(1, nombre);
-            consulta.setString(2, contrasenia);
-            consulta.setString(3, rol);
-            consulta.setString(4, estado);
+            consulta.setString(2, correo);
+            consulta.setString(3, contrasenia);
+            consulta.setString(4, rol);
+            consulta.setString(5, estado);
             
-            consulta.setString(5, idUsuario);
+            consulta.setString(6, idUsuario);
             if (consulta.executeUpdate()>0) {
                 resp=true;
             }
@@ -108,7 +110,7 @@ public class ctrlUsuarios extends clsUsuario{
     
 
     
-    //Virifacar si hay mas de un Administrador
+    //Verifacar si hay mas de un Administrador
      public boolean CantAdmin (){
         boolean resp=false;
         Connection cn = clsConexion.conectar();
@@ -133,121 +135,140 @@ public class ctrlUsuarios extends clsUsuario{
     
     
    public String IdentificadorRol() {
-    String permiso = "";
+        String permiso = "";
 
-    final String sql = "SELECT rol FROM tb_usuario WHERE idUsuario = '" + enUso + "'";
-    Connection cn = clsConexion.conectar();
-    Statement st = null;
-    ResultSet rs = null;
+        final String sql = "SELECT rol FROM tb_usuario WHERE idUsuario = '" + enUso + "'";
+        Connection cn = clsConexion.conectar();
+        Statement st = null;
+        ResultSet rs = null;
 
-    try {
-        st = cn.createStatement();
-        rs = st.executeQuery(sql);
+        try {
+            st = cn.createStatement();
+            rs = st.executeQuery(sql);
 
-        if (rs.next()) {
-            permiso = rs.getString("rol");
+            if (rs.next()) {
+                permiso = rs.getString("rol");
+            }
+             cn.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar: " + ex.getMessage());
+
         }
-         cn.close();
-    } catch (SQLException ex) {
-        System.out.println("Error al buscar: " + ex.getMessage());
-    
-    }
 
-    return permiso;
-}
+        return permiso;
+    }
    
    public String IdentificadorNombre() {
-    String name = "";
+        String name = "";
 
-    final String sql = "SELECT nombre FROM tb_usuario WHERE idUsuario = '" + enUso + "'";
-    Connection cn = clsConexion.conectar();
-    Statement st = null;
-    ResultSet rs = null;
+        final String sql = "SELECT nombre FROM tb_usuario WHERE idUsuario = '" + enUso + "'";
+        Connection cn = clsConexion.conectar();
+        Statement st = null;
+        ResultSet rs = null;
 
-    try {
-        st = cn.createStatement();
-        rs = st.executeQuery(sql);
+        try {
+            st = cn.createStatement();
+            rs = st.executeQuery(sql);
 
-        if (rs.next()) {
-            name = rs.getString("nombre");
+            if (rs.next()) {
+                name = rs.getString("nombre");
+            }
+             cn.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar nombre: " + ex.getMessage());
+
         }
-         cn.close();
-    } catch (SQLException ex) {
-        System.out.println("Error al buscar nombre: " + ex.getMessage());
-    
-    }
 
-    return name;
-}
+        return name;
+    }
    
    public String obtenerPassword() {
-    String password = "";
+        String password = "";
 
-    final String sql = "SELECT password FROM tb_usuario WHERE idUsuario = ?";
-    Connection cn = clsConexion.conectar();
-    PreparedStatement pst = null;
-    ResultSet rs = null;
+        final String sql = "SELECT password FROM tb_usuario WHERE idUsuario = ?";
+        Connection cn = clsConexion.conectar();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
 
-    try {
-        pst = cn.prepareStatement(sql);
-        pst.setString(1, enUso); 
-        rs = pst.executeQuery();
-
-        if (rs.next()) {
-            password = rs.getString("password");
-        }
-        cn.close();
-    } catch (SQLException ex) {
-        System.out.println("Error al buscar contraseña: " + ex.getMessage());
-    } finally {
         try {
-            if (rs != null) rs.close();
-            if (pst != null) pst.close();
-            if (cn != null) cn.close();
-        } catch (SQLException e) {
-            System.out.println("Error al cerrar recursos: " + e.getMessage());
+            pst = cn.prepareStatement(sql);
+            pst.setString(1, enUso); 
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                password = rs.getString("password");
+            }
+            cn.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar contraseña: " + ex.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pst != null) pst.close();
+                if (cn != null) cn.close();
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar recursos: " + e.getMessage());
+            }
         }
+
+        return password;
     }
-    
-    return password;
-}
    
     public String obtenerPasswordModif(String identidadModif) {
-    String password = "";
+        String password = "";
 
-    final String sql = "SELECT password FROM tb_usuario WHERE idUsuario = ?";
-    Connection cn = clsConexion.conectar();
-    PreparedStatement pst = null;
-    ResultSet rs = null;
+        final String sql = "SELECT password FROM tb_usuario WHERE idUsuario = ?";
+        Connection cn = clsConexion.conectar();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
 
-    try {
-        pst = cn.prepareStatement(sql);
-        pst.setString(1, identidadModif); 
-        rs = pst.executeQuery();
-
-        if (rs.next()) {
-            password = rs.getString("password");
-        }
-        cn.close();
-    } catch (SQLException ex) {
-        System.out.println("Error al buscar contraseña: " + ex.getMessage());
-    } finally {
         try {
-            if (rs != null) rs.close();
-            if (pst != null) pst.close();
-            if (cn != null) cn.close();
-        } catch (SQLException e) {
-            System.out.println("Error al cerrar recursos: " + e.getMessage());
+            pst = cn.prepareStatement(sql);
+            pst.setString(1, identidadModif); 
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                password = rs.getString("password");
+            }
+            cn.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar contraseña: " + ex.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pst != null) pst.close();
+                if (cn != null) cn.close();
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar recursos: " + e.getMessage());
+            }
         }
+
+        return password;
+    }   
+    
+    
+    public boolean existeUsuario(String id) {
+        boolean existe = false;
+        Connection cn = clsConexion.conectar();
+        ResultSet rs;
+        final String SQL = "SELECT idUsuario FROM tb_usuario WHERE idUsuario = ?";
+
+        try {
+            PreparedStatement pst = cn.prepareStatement(SQL);
+            pst.setString(1, id);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                existe = true; // Ya existe un usuario con ese ID
+            }
+            rs.close();
+            pst.close();
+            cn.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al verificar existencia de usuario: " + ex);
+        }
+
+        return existe;
     }
 
-    return password;
-}
-
-   
- 
-
-    
-    
     
 }

@@ -8,6 +8,8 @@ import Conexion.clsConexion;
 
 import Vistas.Paneles.Usuario.frm_AgregarUsuario;
 import Vistas.Paneles.Usuario.frm_ModificarUsuario;
+import java.awt.Frame;
+import java.awt.Window;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,6 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -190,27 +193,42 @@ public class jpanelUsuarios extends javax.swing.JPanel {
 
     private void btn_AgregarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarUsuarioActionPerformed
         if (agreg == null || !agreg.isVisible()) {
-            agreg = new frm_AgregarUsuario();
-            agreg.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "La ventana ya está abierta, ciérrela antes de abrirla nuevamente.");
-        }
+            Window ventanaPadre = SwingUtilities.getWindowAncestor(this);
+            if (ventanaPadre instanceof Frame) {
+                agreg = new frm_AgregarUsuario((Frame) ventanaPadre);
+                agreg.setVisible(true);
+            } else 
+                JOptionPane.showMessageDialog(this, "No se encontró la ventana principal.");
+            
+        } else 
+            JOptionPane.showMessageDialog(this, "La ventana ya está abierta, ciérrela antes de abrirla nuevamente.");
+        
     }//GEN-LAST:event_btn_AgregarUsuarioActionPerformed
 
     private void btnModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifActionPerformed
 
-        if ("".equals(ID)) 
-            JOptionPane.showMessageDialog(null, "Seleccione el usuario");
-        else if (modf == null || !modf.isVisible()) {
-            modf = new frm_ModificarUsuario();
-            modf.SetPanelModif(this);
-            modf.RecibirDatos(nombre, rol, correo, est, ID);
-            modf.setVisible(true);
-          
+        int filaSeleccionada = tablaUser.getSelectedRow();
+        if (filaSeleccionada == -1) 
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una fila para modificar");
+         else if (modf == null || !modf.isVisible()) {
+            ID = tablaUser.getValueAt(filaSeleccionada, 0).toString();
+            nombre = tablaUser.getValueAt(filaSeleccionada, 1).toString();
+            rol = tablaUser.getValueAt(filaSeleccionada, 2).toString();
+            correo = tablaUser.getValueAt(filaSeleccionada, 3).toString();
+            est = tablaUser.getValueAt(filaSeleccionada, 4).toString();
+
+            Window ventanaPadre = SwingUtilities.getWindowAncestor(this);
+            if (ventanaPadre instanceof Frame) {
+                modf = new frm_ModificarUsuario((Frame) ventanaPadre);
+                modf.SetPanelModif(this);
+                modf.RecibirDatos(nombre, rol, correo, est, ID);
+                modf.setVisible(true);
+            } else 
+                JOptionPane.showMessageDialog(this, "No se pudo identificar la ventana principal.");
+            
         } else 
-            JOptionPane.showMessageDialog(null, "La ventana ya está abierta, ciérrela antes de abrirla nuevamente.");
+            JOptionPane.showMessageDialog(this, "La ventana ya está abierta, ciérrela antes de abrirla nuevamente.");
         
-          //ID = "";
     }//GEN-LAST:event_btnModifActionPerformed
 
     private void tablaUserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaUserKeyReleased

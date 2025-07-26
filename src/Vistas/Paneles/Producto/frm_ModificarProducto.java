@@ -10,6 +10,7 @@ import Formatos.formato_Precio;
 import Modelos.clsProducto;
 import Vistas.Paneles.jpanelProductos;
 import Formatos.formato_NumerosNaturales;
+import java.awt.Frame;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,7 +22,7 @@ import javax.swing.text.AbstractDocument;
  *
  * @author JManu
  */
-public class frm_ModificarProducto extends javax.swing.JFrame {
+public class frm_ModificarProducto extends javax.swing.JDialog {
 
     /**
      * Creates new form frm_ModificarProducto
@@ -29,13 +30,13 @@ public class frm_ModificarProducto extends javax.swing.JFrame {
     private static jpanelProductos panelprodc;
     private String NombreInicial;
 
-    public frm_ModificarProducto() {
+    public frm_ModificarProducto(Frame parent) {
+        super(parent, "Modificar Producto", true);
         initComponents();
+        setLocationRelativeTo(parent);
         CargarCMB();
-        this.setLocationRelativeTo(null);
-        this.setTitle("Modificar Producto");
-         ((AbstractDocument) txtCant.getDocument()).setDocumentFilter(new formato_NumerosNaturales());
-          ((AbstractDocument) txtPrec.getDocument()).setDocumentFilter(new formato_Precio());
+        ((AbstractDocument) txtCant.getDocument()).setDocumentFilter(new formato_NumerosNaturales());
+        ((AbstractDocument) txtPrec.getDocument()).setDocumentFilter(new formato_Precio());
     }
 
     public static void SetPanelmodf(jpanelProductos panel) {
@@ -81,12 +82,12 @@ public class frm_ModificarProducto extends javax.swing.JFrame {
         txtDesc = new javax.swing.JTextField();
         cmbCategoria = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         cmbEstado = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         fondo.setBackground(new java.awt.Color(51, 136, 191));
         fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -165,13 +166,13 @@ public class frm_ModificarProducto extends javax.swing.JFrame {
         jLabel6.setText("Nombre de Categoria");
         fondo.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 246, -1, -1));
 
-        jButton1.setText("Modificar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
-        fondo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, -1, -1));
+        fondo.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, -1, -1));
 
         jLabel8.setText("Estado");
         fondo.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, -1, -1));
@@ -179,13 +180,13 @@ public class frm_ModificarProducto extends javax.swing.JFrame {
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Desactivado" }));
         fondo.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, -1, -1));
 
-        jButton2.setText("Regresar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnRegresarActionPerformed(evt);
             }
         });
-        fondo.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 340, -1, -1));
+        fondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 340, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -201,7 +202,7 @@ public class frm_ModificarProducto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         if (txtCant.getText().isEmpty() || txtPrec.getText().isEmpty() || cmbCategoria.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Rellene todos los campos");
         } else {
@@ -233,7 +234,7 @@ public class frm_ModificarProducto extends javax.swing.JFrame {
         this.dispose();
 
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtPrecKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecKeyReleased
   
@@ -244,9 +245,9 @@ public class frm_ModificarProducto extends javax.swing.JFrame {
        
     }//GEN-LAST:event_txtCantKeyReleased
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void txtCodKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodKeyTyped
         // TODO add your handling code here:
@@ -331,19 +332,14 @@ public class frm_ModificarProducto extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frm_ModificarProducto().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> cmbCategoria;
     private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JPanel fondo;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

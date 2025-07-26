@@ -10,6 +10,9 @@ import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import Formatos.formato_Identidad;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
 import javax.swing.text.AbstractDocument;
 
 public class Login extends javax.swing.JFrame {
@@ -18,7 +21,29 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         this.setSize(new Dimension(1020, 640));
         this.setLocationRelativeTo(null);
-        this.setFocusable(true);//para que no me haga focus a los txt
+        this.setFocusable(true);//Para que al inicio no haga focus en los textfield
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Evita cierre automático
+
+        //Confirmar salida
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                int respuesta = JOptionPane.showConfirmDialog(
+                    Login.this,
+                    "¿Seguro que quieres salir?",
+                    "Confirmar salida",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE
+                );
+
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    dispose(); // Cierra la ventana
+                    System.exit(0); // Finaliza el programa
+                }
+            }
+        });
+        setVisible(true);
+        
         System.out.println("" + clsConexion.conectar()); //Validamos si se conecta a la base
         ((AbstractDocument) txtIdentidad.getDocument()).setDocumentFilter(new formato_Identidad(txtIdentidad));
     }
@@ -215,7 +240,7 @@ public class Login extends javax.swing.JFrame {
     private void txtPasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusLost
 
         if (txtPassword.getText().isEmpty())
-            placeholderPassword.setText("Password");
+            placeholderPassword.setText("Contraseña");
     }//GEN-LAST:event_txtPasswordFocusLost
 
     private void txtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusGained

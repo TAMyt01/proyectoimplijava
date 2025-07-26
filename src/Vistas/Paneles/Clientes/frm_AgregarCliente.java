@@ -9,6 +9,7 @@ import Modelos.clsClientes;
 import Formatos.formato_Identidad;
 import Formatos.formato_Telefono;
 import Vistas.Paneles.jpanelClientes;
+import java.awt.Frame;
 
 import javax.swing.JOptionPane;
 import javax.swing.text.AbstractDocument;
@@ -17,7 +18,7 @@ import javax.swing.text.AbstractDocument;
  *
  * @author JManu
  */
-public class frm_AgregarCliente extends javax.swing.JFrame {
+public class frm_AgregarCliente extends javax.swing.JDialog {
 
     private static jpanelClientes panelcliente;
 
@@ -25,10 +26,10 @@ public class frm_AgregarCliente extends javax.swing.JFrame {
         panelcliente = panel; // Asignar la referencia del panel
     }
 
-    public frm_AgregarCliente() {
+    public frm_AgregarCliente(Frame parent) {
+        super(parent, "Agregar cliente", true);
         initComponents();
-        this.setLocationRelativeTo(null);
-        this.setTitle("Agregar Cliente");
+        this.setLocationRelativeTo(parent);
 
         ((AbstractDocument) txtIdentidad.getDocument()).setDocumentFilter(new formato_Identidad(txtIdentidad));
         ((AbstractDocument) txtTelefono.getDocument()).setDocumentFilter(new formato_Telefono(txtTelefono));
@@ -55,7 +56,7 @@ public class frm_AgregarCliente extends javax.swing.JFrame {
         jLabel54 = new javax.swing.JLabel();
         txtDirec = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
-        btnSalir = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -122,13 +123,13 @@ public class frm_AgregarCliente extends javax.swing.JFrame {
         });
         fondo7.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, -1, -1));
 
-        btnSalir.setText("Salir");
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
+                btnRegresarActionPerformed(evt);
             }
         });
-        fondo7.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, -1, -1));
+        fondo7.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -200,9 +201,9 @@ public class frm_AgregarCliente extends javax.swing.JFrame {
     }
 
 
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         this.dispose();
-    }//GEN-LAST:event_btnSalirActionPerformed
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void txtIdentidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdentidadKeyReleased
 
@@ -210,28 +211,28 @@ public class frm_AgregarCliente extends javax.swing.JFrame {
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         // TODO add your handling code here:
-        if (txtNombre.getText().length() >= 100) {
+        if (txtNombre.getText().length() >= 50) {
             evt.consume();
         }
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtIdentidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdentidadKeyTyped
         // TODO add your handling code here:
-        if (txtIdentidad.getText().length() >= 13) {
+        if (txtIdentidad.getText().length() >= 16) {
             evt.consume();
         }
     }//GEN-LAST:event_txtIdentidadKeyTyped
 
     private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
         // TODO add your handling code here:
-        if (txtTelefono.getText().length() >= 50) {
+        if (txtTelefono.getText().length() >= 20) {
             evt.consume();
         }
     }//GEN-LAST:event_txtTelefonoKeyTyped
 
     private void txtDirecKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDirecKeyTyped
         // TODO add your handling code here:
-        if (txtDirec.getText().length() >= 100) {
+        if (txtDirec.getText().length() >= 50) {
             evt.consume();
         }
     }//GEN-LAST:event_txtDirecKeyTyped
@@ -265,15 +266,10 @@ public class frm_AgregarCliente extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frm_AgregarCliente().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSalir;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JPanel fondo7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel50;

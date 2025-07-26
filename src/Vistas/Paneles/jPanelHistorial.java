@@ -6,6 +6,8 @@ package Vistas.Paneles;
 
 import Conexion.clsConexion;
 import Vistas.Paneles.Historial.frm_Historial;
+import java.awt.Frame;
+import java.awt.Window;
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -18,6 +20,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 
@@ -283,19 +286,20 @@ public class jPanelHistorial extends javax.swing.JPanel {
     private frm_Historial histo;
     
     private void btnDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetallesActionPerformed
-        
-        
-        if (id==0) {
-              JOptionPane.showMessageDialog(null, "No hay registro seleccionado, seleccione uno");
-        } else {
+        if (id == 0) 
+            JOptionPane.showMessageDialog(this, "No hay registro seleccionado, seleccione uno");
+        else {
             if (histo == null || !histo.isVisible()) {
-            histo = new frm_Historial(id); //Se declara el objeto
+                Window ventanaPadre = SwingUtilities.getWindowAncestor(this);
+                if (ventanaPadre instanceof Frame) {
+                    histo = new frm_Historial((Frame) ventanaPadre, id);
+                    histo.setVisible(true);
+                } else 
+                    JOptionPane.showMessageDialog(this, "No se encontró la ventana principal.");
+                
+            } else 
+                JOptionPane.showMessageDialog(this, "La ventana ya está abierta, ciérrela antes de abrirla nuevamente.");
             
-            histo.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "La ventana ya está abierta, ciérrela antes de abrirla nuevamente.");
-        }
-        
         }
     }//GEN-LAST:event_btnDetallesActionPerformed
 

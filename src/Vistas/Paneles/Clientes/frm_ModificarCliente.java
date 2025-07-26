@@ -9,6 +9,7 @@ import Modelos.clsClientes;
 import Formatos.formato_Telefono;
 
 import Vistas.Paneles.jpanelClientes;
+import java.awt.Frame;
 
 
 import javax.swing.JOptionPane;
@@ -18,7 +19,7 @@ import javax.swing.text.AbstractDocument;
  *
  * @author JManu
  */
-public class frm_ModificarCliente extends javax.swing.JFrame {
+public class frm_ModificarCliente extends javax.swing.JDialog {
 
     /**
      * Creates new form frm_ModificarCliente
@@ -29,16 +30,15 @@ public class frm_ModificarCliente extends javax.swing.JFrame {
         panelcliente = panel; // Asignar la referencia del panel
     }
 
-    public frm_ModificarCliente() {
+    public frm_ModificarCliente(Frame parent) {
+        super(parent, "Modificar Cliente", true);
         initComponents();
-        this.setLocationRelativeTo(null);
-        this.setTitle("Modificar Cliente");
+        setLocationRelativeTo(parent);
         ((AbstractDocument) txtTelefono.getDocument()).setDocumentFilter(new formato_Telefono(txtTelefono));
 
     }
 
     public void RecibirDatos(String nomb, String tel, String direc, String est, String id) {
-        txtIdentidad.setText(id);
         txtNombre.setText(nomb);
         txtTelefono.setText(tel);
         txtDirec.setText(direc);
@@ -47,8 +47,8 @@ public class frm_ModificarCliente extends javax.swing.JFrame {
             cmbEstado.setSelectedIndex(0);
         else 
             cmbEstado.setSelectedIndex(1);
-    
-
+        
+        txtIdentidad.setText(id);
 
     }
 
@@ -64,8 +64,8 @@ public class frm_ModificarCliente extends javax.swing.JFrame {
         txtTelefono = new javax.swing.JTextField();
         jLabel54 = new javax.swing.JLabel();
         txtDirec = new javax.swing.JTextField();
-        jButton8 = new javax.swing.JButton();
-        btnSalir = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtIdentidad = new javax.swing.JTextField();
         jLabel55 = new javax.swing.JLabel();
@@ -114,21 +114,21 @@ public class frm_ModificarCliente extends javax.swing.JFrame {
         });
         cmbEstadi.add(txtDirec, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 206, -1));
 
-        jButton8.setText("Guardar");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
-        cmbEstadi.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, -1, -1));
+        cmbEstadi.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, -1, -1));
 
-        btnSalir.setText("Salir");
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
+                btnRegresarActionPerformed(evt);
             }
         });
-        cmbEstadi.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, -1, -1));
+        cmbEstadi.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Identidad");
@@ -163,7 +163,7 @@ public class frm_ModificarCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         if (txtNombre.getText().isEmpty() || txtIdentidad.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Complete todos los campos necesarios");
         } else {
@@ -193,7 +193,7 @@ public class frm_ModificarCliente extends javax.swing.JFrame {
         }
 
 
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_btnGuardarActionPerformed
     public boolean validarTelefono(String telefono) {
         if (telefono == null) {
             return false;
@@ -202,9 +202,9 @@ public class frm_ModificarCliente extends javax.swing.JFrame {
         // Verifica el patrón: 8 dígitos en formato XXXX-XXXX
         return telefono.matches("^\\d{4}-\\d{4}$");
     }
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         this.dispose();
-    }//GEN-LAST:event_btnSalirActionPerformed
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void txtIdentidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdentidadKeyReleased
         String texto = txtIdentidad.getText();
@@ -273,18 +273,13 @@ public class frm_ModificarCliente extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frm_ModificarCliente().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSalir;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JPanel cmbEstadi;
     private javax.swing.JComboBox<String> cmbEstado;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;

@@ -14,20 +14,21 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 import javax.swing.text.AbstractDocument;
 import Formatos.formato_NumerosNaturales;
+import java.awt.Frame;
 
 
 /**
  *
  * @author JManu
  */
-public class frm_AgregarProducto extends javax.swing.JFrame {
+public class frm_AgregarProducto extends javax.swing.JDialog {
 
     private static jpanelProductos panelprodc;
 
-    public frm_AgregarProducto() {
+    public frm_AgregarProducto(Frame parent) {
+        super(parent, "Agregar Producto", true);
         initComponents();
-        this.setLocationRelativeTo(null);
-        this.setTitle("Agregar Producto");
+        setLocationRelativeTo(parent);
         CargarCMB();
         AutoCompleteDecorator.decorate(cmbCategoria);
         
@@ -58,8 +59,8 @@ public class frm_AgregarProducto extends javax.swing.JFrame {
         txtDesc = new javax.swing.JTextField();
         cmbCategoria = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        btnSalir = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -148,21 +149,21 @@ public class frm_AgregarProducto extends javax.swing.JFrame {
         jLabel6.setText("Nombre de Categoria");
         fondo.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 246, -1, -1));
 
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
-        fondo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, -1, -1));
+        fondo.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, -1, -1));
 
-        btnSalir.setText("Salir");
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
+                btnRegresarActionPerformed(evt);
             }
         });
-        fondo.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, -1, -1));
+        fondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -178,7 +179,7 @@ public class frm_AgregarProducto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         if (txtCantidad.getText().isEmpty() || txtCod.getText().isEmpty() || txtPrec.getText().isEmpty() || cmbCategoria.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Complete todos los campos necesarios");
         } else {
@@ -205,11 +206,11 @@ public class frm_AgregarProducto extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, ctrlprod.mens);
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         this.dispose();
-    }//GEN-LAST:event_btnSalirActionPerformed
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void txtCantidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyReleased
        
@@ -307,19 +308,14 @@ public class frm_AgregarProducto extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frm_AgregarProducto().setVisible(true);
-            }
-        });
     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSalir;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> cmbCategoria;
     private javax.swing.JPanel fondo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -18,6 +18,9 @@ import Controladores.ctrlUsuarios;
 
 import Formatos.seguridad_InactividadManager;
 import Vistas.Login;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
 
 
 import javax.swing.JOptionPane;
@@ -39,7 +42,27 @@ public class Menu_Gerente extends javax.swing.JFrame {
         //Abrir el panel del inicio
         jpanelInicio inicio = new jpanelInicio();
         abrirPanel(inicio); //Funcion para abrir los paneles
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Evita cierre automático
 
+        //Confirmar salida
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                int respuesta = JOptionPane.showConfirmDialog(
+                    Menu_Gerente.this,
+                    "¿Seguro que quieres salir?",
+                    "Confirmar salida",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE
+                );
+
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    dispose(); // Cierra la ventana
+                    System.exit(0); // Finaliza el programa
+                }
+            }
+        });
+        setVisible(true);
         ctrlUsuarios control = new ctrlUsuarios();
         lblnombreUsuario.setText(control.IdentificadorNombre());
         
@@ -82,9 +105,9 @@ private void cerrarSesion() {
         jLabel5 = new javax.swing.JLabel();
         Contenido = new javax.swing.JPanel();
         Encabezado = new javax.swing.JPanel();
+        lblnombreUsuario = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        lblnombreUsuario = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -379,6 +402,9 @@ private void cerrarSesion() {
 
         Encabezado.setBackground(new java.awt.Color(51, 136, 191));
 
+        lblnombreUsuario.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblnombreUsuario.setText("Nombre Usuario");
+
         jPanel3.setBackground(new java.awt.Color(48, 122, 169));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -405,9 +431,6 @@ private void cerrarSesion() {
                 .addComponent(jLabel9)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        lblnombreUsuario.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblnombreUsuario.setText("Nombre Usuario");
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cerrar-sesion.png"))); // NOI18N
         jLabel7.setText("Cerrar Sesión");

@@ -6,16 +6,17 @@ import Modelos.clsCategoria;
 import javax.swing.JOptionPane;
 
 import Vistas.Paneles.jpanelCategoria;
+import java.awt.Frame;
 
-public class frm_ModificarCategoria extends javax.swing.JFrame {
+public class frm_ModificarCategoria extends javax.swing.JDialog {
 
     private static jpanelCategoria panelcategoria;
     private String NombreInicial;
 
-    public frm_ModificarCategoria() {
+    public frm_ModificarCategoria(Frame parent) {
+        super(parent, "Modificar Categoría", true);
         initComponents();
-        this.setTitle("Modificar Categoria");
-        this.setLocationRelativeTo(null);
+        setLocationRelativeTo(parent);
     }
 
     public void RecibirDatos(String Id, String nom, String desc, String est) {
@@ -51,12 +52,12 @@ public class frm_ModificarCategoria extends javax.swing.JFrame {
         txtDescripCategoria = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         cmbEstado = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(155, 200, 229));
+        jPanel1.setBackground(new java.awt.Color(51, 136, 191));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("ID Categoria");
@@ -108,13 +109,13 @@ public class frm_ModificarCategoria extends javax.swing.JFrame {
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Desactivado" }));
         jPanel1.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, -1, -1));
 
-        jButton2.setText("Regresar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnRegresarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, -1, -1));
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -164,9 +165,9 @@ public class frm_ModificarCategoria extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void txtNombreCategoriaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreCategoriaKeyTyped
         // TODO add your handling code here:
@@ -210,17 +211,12 @@ public class frm_ModificarCategoria extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frm_ModificarCategoria().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> cmbEstado;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -8,6 +8,7 @@ package Vistas.Paneles;
 import java.sql.*;
 import Conexion.clsConexion;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,8 +82,8 @@ public class jpanelInicio extends javax.swing.JPanel {
         //FIN DEL BLOQUE
 
         ChartPanel panel = new ChartPanel(grafico_vent);
-        panel.setMouseWheelEnabled(true);
-        //panel.setPreferredSize(new Dimension(810, 460));
+        panel.setMouseWheelEnabled(false);
+        panel.setPreferredSize(new Dimension(810, 460));
 
         graf.setLayout(new BorderLayout());
         graf.removeAll();
@@ -129,6 +130,8 @@ public class jpanelInicio extends javax.swing.JPanel {
         graf = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+
+        graf.setEnabled(false);
 
         javax.swing.GroupLayout grafLayout = new javax.swing.GroupLayout(graf);
         graf.setLayout(grafLayout);
