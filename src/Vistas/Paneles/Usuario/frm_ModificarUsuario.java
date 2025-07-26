@@ -55,11 +55,11 @@ public class frm_ModificarUsuario extends javax.swing.JDialog {
 
         // Aplicar filtro para contraseña
         ((AbstractDocument) txtPassword.getDocument()).setDocumentFilter(new formato_Password());
-         ((AbstractDocument) txtPasswordRepet.getDocument()).setDocumentFilter(new formato_Password());
+        ((AbstractDocument) txtPasswordRepet.getDocument()).setDocumentFilter(new formato_Password());
         
         imgAdvertencia.setVisible(false);
 
-        btnCambio.addActionListener(new ActionListener() {
+        btnCambioContra.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 activarValidacionDePassword(); // Activa el DocumentListener
@@ -114,7 +114,6 @@ public class frm_ModificarUsuario extends javax.swing.JDialog {
      *
      * @param nom
      * @param rol
-     * @param correo
      * @param est
      * @param ID
      */
@@ -142,8 +141,6 @@ public class frm_ModificarUsuario extends javax.swing.JDialog {
             cmbEstado.setSelectedIndex(1);
 
         txtPassword.setText(ctrlUser.obtenerPasswordModif(ID));
-        txtPasswordRepet.setText(ctrlUser.obtenerPasswordModif(ID));
-
     }
 
     @SuppressWarnings("unchecked")
@@ -166,7 +163,7 @@ public class frm_ModificarUsuario extends javax.swing.JDialog {
         txtPasswordRepet = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
         imgAdvertencia = new javax.swing.JLabel();
-        btnCambio = new javax.swing.JButton();
+        btnCambioContra = new javax.swing.JButton();
         lbl_Correo = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
         cmb_Rol = new javax.swing.JComboBox<>();
@@ -227,6 +224,7 @@ public class frm_ModificarUsuario extends javax.swing.JDialog {
         jLabel8.setText("Estado");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
 
+        txtIdentidad.setEditable(false);
         txtIdentidad.setEnabled(false);
         jPanel1.add(txtIdentidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 270, -1));
 
@@ -264,13 +262,13 @@ public class frm_ModificarUsuario extends javax.swing.JDialog {
         imgAdvertencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/advertencia.png"))); // NOI18N
         jPanel1.add(imgAdvertencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 170, -1, -1));
 
-        btnCambio.setText("Cambiar Contraseña");
-        btnCambio.addActionListener(new java.awt.event.ActionListener() {
+        btnCambioContra.setText("Cambiar Contraseña");
+        btnCambioContra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCambioActionPerformed(evt);
+                btnCambioContraActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 310, -1, -1));
+        jPanel1.add(btnCambioContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 310, -1, -1));
 
         lbl_Correo.setText("Correo Electrónico:");
         jPanel1.add(lbl_Correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
@@ -306,44 +304,51 @@ public class frm_ModificarUsuario extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        if (txtNombre.getText().isEmpty() || txtPassword.getText().isEmpty()) 
-            JOptionPane.showMessageDialog(null, "Rellene todos los campos");
-        else {
-
-            String password = new String(txtPassword.getPassword());
-
-            if (ModifContra) {
-                if (!validarPassword(password)) {
-                    JOptionPane.showMessageDialog(this, "La contraseña no cumple con los requisitos.");
-                    return;
-                }
-            }
-
-            if (txtPassword.getText().equals(txtPasswordRepet.getText()) || !ModifContra) {
-                ctrlUsuarios controlUsuario = new ctrlUsuarios();
-
-                clsUsuario user = new clsUsuario();
-                user.setIdUsuario(txtIdentidad.getText());
-                user.setNombre(txtNombre.getText());
-                user.setCorreo(txtCorreo.getText());
-                
-                user.setContrasenia(txtPassword.getText());
-                user.setEstado(cmbEstado.getSelectedItem().toString());
-
-                if (controlUsuario.modificar()) {
-                    JOptionPane.showMessageDialog(null, "Registro modificado");
-                    paneluser.cargaTablaUser();//Actualizamos tabla del panel principal de la categoria
-                } else 
-                    JOptionPane.showMessageDialog(null, "Error al Modificar");
-
-                this.dispose();
-
-            }else
-                JOptionPane.showMessageDialog(null, "La contraseña no coenciden");
-            
+        if (txtNombre.getText().isEmpty() || txtCorreo.getText().isEmpty() || txtPassword.getPassword().length == 0 || txtPasswordRepet.getPassword().length == 0) {
+            JOptionPane.showMessageDialog(this, "Rellene todos los campos requeridos.");
+            return;
         }
 
+        String password = new String(txtPassword.getPassword());
+        String repetirPassword = new String(txtPasswordRepet.getPassword());
 
+        // Si se activó el cambio de contraseña, se valida
+        if (ModifContra && !validarPassword(password)) {
+            JOptionPane.showMessageDialog(this, "La contraseña no cumple con los requisitos.");
+            return;
+        }
+
+        // Validar que las contraseñas coincidan
+        if (!password.equals(repetirPassword) && ModifContra) {
+            JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden.");
+            return;
+        }
+
+        // Crear el usuario
+        clsUsuario user = new clsUsuario();
+        user.setIdUsuario(txtIdentidad.getText());
+        user.setNombre(txtNombre.getText());
+        user.setCorreo(txtCorreo.getText());
+        user.setContrasenia(password); // ya validado
+        user.setRol(cmb_Rol.getSelectedItem().toString());
+        user.setEstado(cmbEstado.getSelectedItem().toString());
+
+        ctrlUsuarios control = new ctrlUsuarios();
+        control.setIdUsuario(txtIdentidad.getText());
+        control.setNombre(txtNombre.getText());
+        control.setCorreo(txtCorreo.getText());
+        control.setContrasenia(txtPassword.getText());
+        control.setRol(cmb_Rol.getSelectedItem().toString());
+        control.setEstado(cmbEstado.getSelectedItem().toString());
+
+
+        if (control.modificar()) {
+            JOptionPane.showMessageDialog(this, "Usuario modificado correctamente.");
+            paneluser.cargaTablaUser(); // Recarga la tabla principal
+            this.dispose(); // Cierra el formulario
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al modificar el usuario.");
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
     public boolean validarPassword(String password) {
         if (password == null) 
@@ -367,7 +372,7 @@ public class frm_ModificarUsuario extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
-    private void btnCambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambioActionPerformed
+    private void btnCambioContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambioContraActionPerformed
         JPasswordField passwordField = new JPasswordField();
         Object[] message = {
             "Ingresa la contraseña de usuario para continuar:", passwordField
@@ -376,22 +381,27 @@ public class frm_ModificarUsuario extends javax.swing.JDialog {
         int option = JOptionPane.showConfirmDialog(
                 null,
                 message,
-                "Confirmar cierre de sesión",
+                "Confirmar cambio de contraseña",
                 JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE
         );
 
         if (option == JOptionPane.OK_OPTION) {
-            String codigoIngresado = new String(passwordField.getPassword());
+            String codigoIngresado = new String(passwordField.getPassword()).trim();
 
-            if (cont.obtenerPassword().equals(codigoIngresado)) {
-                System.out.println("Contraseña valida");
+            ctrlUsuarios cont = new ctrlUsuarios();
+            cont.setEnUso(txtIdentidad.getText()); // Asegura que el ID esté asignado
+
+            String passwordBD = cont.obtenerPassword().trim();
+
+            if (codigoIngresado.equals(passwordBD)) {
+                System.out.println("Contraseña válida");
                 ModifContra = true;
+
                 txtPassword.setEnabled(true);
                 txtPasswordRepet.setEnabled(true);
                 chkMostrar.setEnabled(true);
-                btnCambio.setVisible(false);
-
+                btnCambioContra.setVisible(false);
             } else {
                 JOptionPane.showMessageDialog(
                         null,
@@ -403,9 +413,7 @@ public class frm_ModificarUsuario extends javax.swing.JDialog {
         } else 
             System.out.println("Cancelado por el usuario.");
         
-
-
-    }//GEN-LAST:event_btnCambioActionPerformed
+    }//GEN-LAST:event_btnCambioContraActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         // TODO add your handling code here:
@@ -434,7 +442,7 @@ public class frm_ModificarUsuario extends javax.swing.JDialog {
             evt.consume();
         }
     }//GEN-LAST:event_txtPasswordRepetKeyTyped
-
+    
     private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbEstadoActionPerformed
@@ -475,7 +483,7 @@ public class frm_ModificarUsuario extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCambio;
+    private javax.swing.JButton btnCambioContra;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JCheckBox chkMostrar;

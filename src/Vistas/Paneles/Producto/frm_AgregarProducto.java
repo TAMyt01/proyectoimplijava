@@ -33,7 +33,7 @@ public class frm_AgregarProducto extends javax.swing.JDialog {
         AutoCompleteDecorator.decorate(cmbCategoria);
         
         ((AbstractDocument) txtCantidad.getDocument()).setDocumentFilter(new formato_NumerosNaturales());
-         ((AbstractDocument) txtPrec.getDocument()).setDocumentFilter(new formato_Precio());
+        ((AbstractDocument) txtPrec.getDocument()).setDocumentFilter(new formato_Precio());
 
     }
 
@@ -137,7 +137,6 @@ public class frm_AgregarProducto extends javax.swing.JDialog {
         });
         fondo.add(txtDesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 202, 206, -1));
 
-        cmbCategoria.setEditable(true);
         cmbCategoria.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 cmbCategoriaKeyTyped(evt);
@@ -197,14 +196,12 @@ public class frm_AgregarProducto extends javax.swing.JDialog {
                 if (ctrlprod.guardar()) {
                     JOptionPane.showMessageDialog(null, "Se guardo exitosamente");
                     panelprodc.cargaTablaCategoria();
-                } else {
+                    this.dispose();
+                } else 
                     JOptionPane.showMessageDialog(null, "Hubo un error al guardar Producto");
-                }
 
-            } else {
-
+            } else 
                 JOptionPane.showMessageDialog(null, ctrlprod.mens);
-            }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
