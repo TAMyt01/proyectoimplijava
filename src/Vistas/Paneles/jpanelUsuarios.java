@@ -5,6 +5,7 @@
 package Vistas.Paneles;
 
 import Conexion.clsConexion;
+import Controladores.ctrlUsuarios;
 
 import Vistas.Paneles.Usuario.frm_AgregarUsuario;
 import Vistas.Paneles.Usuario.frm_ModificarUsuario;
@@ -210,18 +211,18 @@ public class jpanelUsuarios extends javax.swing.JPanel {
         int filaSeleccionada = tablaUser.getSelectedRow();
         if (filaSeleccionada == -1) 
             JOptionPane.showMessageDialog(this, "Debe seleccionar una fila para modificar");
-         else if (modf == null || !modf.isVisible()) {
+        else if (modf == null || !modf.isVisible()) {
             ID = tablaUser.getValueAt(filaSeleccionada, 0).toString();
             nombre = tablaUser.getValueAt(filaSeleccionada, 1).toString();
+            correo = new ctrlUsuarios().obtenerCorreoPorID(ID);
             rol = tablaUser.getValueAt(filaSeleccionada, 2).toString();
-            correo = tablaUser.getValueAt(filaSeleccionada, 3).toString();
-            est = tablaUser.getValueAt(filaSeleccionada, 4).toString();
+            est = tablaUser.getValueAt(filaSeleccionada, 3).toString();
 
             Window ventanaPadre = SwingUtilities.getWindowAncestor(this);
             if (ventanaPadre instanceof Frame) {
                 modf = new frm_ModificarUsuario((Frame) ventanaPadre);
                 modf.SetPanelModif(this);
-                modf.RecibirDatos(nombre, rol, correo, est, ID);
+                modf.RecibirDatos(nombre, rol, est, ID);
                 modf.setVisible(true);
             } else 
                 JOptionPane.showMessageDialog(this, "No se pudo identificar la ventana principal.");

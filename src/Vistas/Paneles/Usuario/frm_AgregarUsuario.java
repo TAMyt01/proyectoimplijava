@@ -355,7 +355,7 @@ public class frm_AgregarUsuario extends javax.swing.JDialog {
                 user.setRol(cmbRol.getSelectedItem().toString());
                 user.setContrasenia(txtPassword.getText());
 
-                if (controlUsuario.guardar()) {
+                if (controlUsuario.guardar(user)) {
                     JOptionPane.showMessageDialog(null, "Registro guardado");
 
                     paneluser.cargaTablaUser();//Actualizamos tabla del panel principal de la categoria

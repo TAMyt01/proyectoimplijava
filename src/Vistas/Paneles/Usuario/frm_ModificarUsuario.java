@@ -118,7 +118,7 @@ public class frm_ModificarUsuario extends javax.swing.JDialog {
      * @param est
      * @param ID
      */
-    public void RecibirDatos(String nom, String rol, String correo, String est, String ID) {
+    public void RecibirDatos(String nom, String rol, String est, String ID) {
         txtNombre.setText(nom);
         
         if ("Gerente".equalsIgnoreCase(rol)) {
@@ -129,17 +129,20 @@ public class frm_ModificarUsuario extends javax.swing.JDialog {
             cmb_Rol.addItem("Gerente");
         }
         cmb_Rol.setSelectedItem(rol);
-        txt_Correo.setText(correo);
-        if ("Activo".equals(est)) 
-            cmbEstado.setSelectedIndex(1);
-        else 
-            cmbEstado.setSelectedIndex(0);
-        
+
         txtIdentidad.setText(ID);
 
         ctrlUsuarios ctrlUser = new ctrlUsuarios();
 
-        txtPassword.setText(cont.obtenerPasswordModif(txtIdentidad.getText()));
+        txtCorreo.setText(ctrlUser.obtenerCorreoPorID(ID));
+
+        if ("Activo".equals(est)) 
+            cmbEstado.setSelectedIndex(0);
+        else 
+            cmbEstado.setSelectedIndex(1);
+
+        txtPassword.setText(ctrlUser.obtenerPasswordModif(ID));
+        txtPasswordRepet.setText(ctrlUser.obtenerPasswordModif(ID));
 
     }
 
@@ -165,7 +168,7 @@ public class frm_ModificarUsuario extends javax.swing.JDialog {
         imgAdvertencia = new javax.swing.JLabel();
         btnCambio = new javax.swing.JButton();
         lbl_Correo = new javax.swing.JLabel();
-        txt_Correo = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
         cmb_Rol = new javax.swing.JComboBox<>();
         lbl_Rol = new javax.swing.JLabel();
 
@@ -272,12 +275,12 @@ public class frm_ModificarUsuario extends javax.swing.JDialog {
         lbl_Correo.setText("Correo Electrónico:");
         jPanel1.add(lbl_Correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
 
-        txt_Correo.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_CorreoKeyTyped(evt);
+                txtCorreoKeyTyped(evt);
             }
         });
-        jPanel1.add(txt_Correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 270, -1));
+        jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 270, -1));
 
         cmb_Rol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gerente", "Vendedor" }));
         cmb_Rol.setEnabled(false);
@@ -322,7 +325,7 @@ public class frm_ModificarUsuario extends javax.swing.JDialog {
                 clsUsuario user = new clsUsuario();
                 user.setIdUsuario(txtIdentidad.getText());
                 user.setNombre(txtNombre.getText());
-                user.setCorreo(txt_Correo.getText());
+                user.setCorreo(txtCorreo.getText());
                 
                 user.setContrasenia(txtPassword.getText());
                 user.setEstado(cmbEstado.getSelectedItem().toString());
@@ -332,11 +335,7 @@ public class frm_ModificarUsuario extends javax.swing.JDialog {
                     paneluser.cargaTablaUser();//Actualizamos tabla del panel principal de la categoria
                 } else 
                     JOptionPane.showMessageDialog(null, "Error al Modificar");
-                
 
-                txtNombre.setText("");
-                txtPassword.setText("");
-                
                 this.dispose();
 
             }else
@@ -415,12 +414,12 @@ public class frm_ModificarUsuario extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtNombreKeyTyped
 
-    private void txt_CorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_CorreoKeyTyped
+    private void txtCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyTyped
         // TODO add your handling code here:
-        if (txt_Correo.getText().length() >= 100) {
+        if (txtCorreo.getText().length() >= 100) {
             evt.consume();
         }
-    }//GEN-LAST:event_txt_CorreoKeyTyped
+    }//GEN-LAST:event_txtCorreoKeyTyped
 
     private void txtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyTyped
         // TODO add your handling code here:
@@ -492,11 +491,11 @@ public class frm_ModificarUsuario extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbl_Correo;
     private javax.swing.JLabel lbl_Rol;
+    private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtIdentidad;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JPasswordField txtPasswordRepet;
-    private javax.swing.JTextField txt_Correo;
     // End of variables declaration//GEN-END:variables
 
 

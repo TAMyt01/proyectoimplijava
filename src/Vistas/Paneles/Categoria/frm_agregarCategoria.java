@@ -50,7 +50,7 @@ public class frm_AgregarCategoria extends javax.swing.JDialog {
         jPanel1.setBackground(new java.awt.Color(51, 136, 191));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Nueva Categoria");
+        jLabel1.setText("Nueva Categoría");
 
         jLabel3.setText("Nombre:");
 

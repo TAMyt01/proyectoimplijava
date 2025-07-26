@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.sql.SQLException;
 
 import java.sql.ResultSet;
+import java.util.List;
 /**
  *
  * @author JManu
@@ -52,29 +53,22 @@ public class ctrlUsuarios extends clsUsuario{
     
     //CRUD
     
-    public boolean guardar(){
+    public boolean guardar(clsUsuario user){
         boolean resp = false;
         Connection cn = clsConexion.conectar();
-        final String SQL= "insert into tb_usuario (idUsuario,nombre,correo,password,rol,estado) values (?,?,?,?,?,'Activo')";
+        final String SQL= "INSERT INTO tb_usuario (idUsuario,nombre,correo,password,rol,estado) VALUES (?,?,?,?,?,'Activo')";
         try {
-            
             PreparedStatement consulta = cn.prepareStatement(SQL);
-            consulta.setString(1, idUsuario);
-            consulta.setString(2, nombre);
-            consulta.setString(3, correo);
-            consulta.setString(4, contrasenia);
-            consulta.setString(5, rol);
-            if (consulta.executeUpdate()>0) {
-                resp=true;
-            }
+            consulta.setString(1, user.getIdUsuario());
+            consulta.setString(2, user.getNombre());
+            consulta.setString(3, user.getCorreo());
+            consulta.setString(4, user.getContrasenia());
+            consulta.setString(5, user.getRol());
+            resp = consulta.executeUpdate() > 0;
             cn.close();
-            
         } catch (SQLException ex) {
-            System.out.println("Error al guardar usuario: "+ex);
-            
+            System.out.println("Error al guardar usuario: " + ex);
         }
-        
-        
         return resp;
     }
     
@@ -268,6 +262,38 @@ public class ctrlUsuarios extends clsUsuario{
         }
 
         return existe;
+    }
+    
+    public String obtenerCorreoPorID(String idBuscado) {
+        String Correo = "";
+        final String SQL = "SELECT correo FROM tb_usuario WHERE idUsuario = ?";
+
+        Connection cn = clsConexion.conectar();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        try {
+            pst = cn.prepareStatement(SQL);
+            pst.setString(1, idBuscado);
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                Correo = rs.getString("correo");
+            }
+            cn.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar correo: " + ex.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pst != null) pst.close();
+                if (cn != null) cn.close();
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar recursos: " + e.getMessage());
+            }
+        }
+
+        return Correo;
     }
 
     
