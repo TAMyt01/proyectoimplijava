@@ -58,7 +58,7 @@ public class Recuperar_Password extends javax.swing.JFrame {
         }
     
         public static boolean enviarCorreo(String destinatario, String codigo) {
-            final String remitente = "recuperardecontrasena.com";
+            final String remitente = "recuperardecontrasena@gmail.com";
             final String clave = "tkrs diqd qfph cbjm";//Clave de Aplicacion
 
             Properties props = new Properties();
